@@ -12,7 +12,6 @@ export default function VerificationCenterPage() {
 
   useEffect(() => {
     import('@tinfoilsh/verification-center-ui').then(() => {
-      console.log('Tinfoil verification center UI loaded')
     }).catch(err => {
       console.error('Failed to load verification center UI:', err)
     })
