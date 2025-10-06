@@ -9,7 +9,7 @@ Embeddable Tinfoil verification center for iframe integration.
 ```html
 <iframe
   id="verification-center"
-  src="https://your-vercel-url.vercel.app?darkMode=false&mode=modal&showVerificationFlow=true&open=true"
+  src="https://verification-center.tinfoil.sh?darkMode=false&showVerificationFlow=true&open=true"
   width="100%"
   height="100%"
   frameborder="0"
@@ -21,7 +21,6 @@ Embeddable Tinfoil verification center for iframe integration.
 ### URL Parameters
 
 - `darkMode` - `true` or `false` (default: `false`)
-- `mode` - `embedded`, `sidebar`, or `modal` (default: `modal`)
 - `showVerificationFlow` - `true` or `false` (default: `true`)
 - `open` - `true` or `false` (default: `true`)
 
@@ -77,8 +76,4 @@ Visit http://localhost:3001
 
 ## Deployment
 
-Deploy to Vercel:
-
-```bash
-vercel
-```
+Deployed at: https://verification-center.tinfoil.sh
