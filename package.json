@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
-    "@tinfoilsh/verification-center-ui": "^0.0.13",
+    "@tinfoilsh/verification-center-ui": "^0.0.14",
     "next": "^15.3.3",
     "react": "^18",
     "react-dom": "^18",
