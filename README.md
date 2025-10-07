@@ -22,6 +22,7 @@ Embeddable Tinfoil verification center for iframe integration.
 
 - `darkMode` - `true` or `false` (default: `false`)
 - `showVerificationFlow` - `true` or `false` (default: `true`)
+- `compact` - `true` or `false` (default: `false`) - hides process step descriptions for a more compact view
 - `open` - `true` or `false` (default: `true`)
 
 ### postMessage API
