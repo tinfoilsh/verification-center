@@ -70,13 +70,7 @@ export default function VerificationCenterPage() {
   }, [])
 
   return (
-    <div
-      className="h-screen w-full"
-      style={{
-        backgroundColor: isDarkMode ? '#1a1a1a' : '#ffffff',
-        colorScheme: isDarkMode ? 'dark' : 'light',
-      }}
-    >
+    <div className="h-screen w-full">
       <tinfoil-verification-center
         ref={centerRef as any}
         open={isOpen ? 'true' : undefined}
