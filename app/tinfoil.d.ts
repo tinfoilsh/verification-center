@@ -6,6 +6,7 @@ declare namespace JSX {
         open?: string
         'is-dark-mode'?: string
         mode?: string
+        compact?: string
         'show-verification-flow'?: string
       },
       HTMLElement
