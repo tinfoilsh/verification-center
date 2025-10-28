@@ -76,6 +76,7 @@ export default function VerificationCenterPage() {
         open={isOpen ? 'true' : undefined}
         is-dark-mode={isDarkMode ? 'true' : 'false'}
         mode="embedded"
+        compact="true"
         show-verification-flow={showVerificationFlow ? 'true' : 'false'}
         style={{ display: 'block', width: '100%', height: '100%' }}
       />
