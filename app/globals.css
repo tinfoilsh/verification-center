@@ -1,3 +1,183 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/fonts/aeonik-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik Fono';
+  src: url('/fonts/aeonikfono-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  .tinfoil-verification-theme {
+    color-scheme: light;
+
+    --color-brand-dark: 198 68.4% 7.5%;
+    --color-brand-light: 180 17.2% 94.3%;
+    --color-accent-dark: 180 100% 13.3%;
+    --color-accent-dark-darker: 180 100% 10%;
+    --color-accent-light: 163 45.9% 59.4%;
+    --color-accent-light-darker: 163 37% 53%;
+
+    --surface-background: 0 0% 100%;
+    --surface-chat-background: 0 0% 100%;
+    --surface-chat: 240 23.8% 95.9%;
+    --surface-card: 0 0% 100%;
+    --surface-sidebar: 0 0% 100%;
+    --surface-sidebar-button: 0 0% 100%;
+    --surface-sidebar-button-hover: 218 12% 92%;
+    --surface-settings: 240 23.8% 95.9%;
+    --surface-input: 240 23.8% 95.9%;
+    --surface-thinking: 240 23.8% 95.9%;
+    --surface-message-user: 240 23.8% 95.9%;
+    --surface-message-assistant: 0 0% 100%;
+
+    --border-subtle: 220 13% 91%;
+    --border-strong: 217 19.1% 26.7%;
+
+    --content-primary: 221 39.3% 11%;
+    --content-secondary: 221 20% 20%;
+    --content-muted: 221 14% 34%;
+    --content-inverse: 0 0% 100%;
+
+    --button-send-background: var(--color-brand-dark);
+    --button-send-foreground: 0 0% 100%;
+
+    --gray-950: var(--color-brand-dark);
+    --gray-900: 221 39.3% 11%;
+    --gray-800: 217 19.1% 26.7%;
+    --gray-700: 221 20% 20%;
+    --gray-600: 221 16% 28%;
+    --gray-500: 221 12% 40%;
+    --gray-400: 221 10% 52%;
+    --gray-300: 220 13% 88%;
+    --gray-200: 220 14% 95%;
+    --gray-100: var(--surface-card);
+    --gray-50: var(--surface-settings);
+
+    --background: var(--surface-chat-background);
+    --foreground: var(--content-primary);
+    --card: var(--surface-card);
+    --card-foreground: var(--content-primary);
+    --popover: var(--surface-card);
+    --popover-foreground: var(--content-primary);
+    --primary: var(--color-brand-dark);
+    --primary-foreground: 0 0% 100%;
+    --secondary: var(--surface-sidebar-button);
+    --secondary-foreground: var(--content-primary);
+    --muted: var(--surface-chat);
+    --muted-foreground: var(--content-secondary);
+    --accent: var(--color-accent-light);
+    --accent-foreground: var(--color-accent-dark);
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: var(--border-subtle);
+    --input: var(--border-subtle);
+    --ring: var(--color-accent-light);
+    --chart-1: 163 45.9% 59.4%;
+    --chart-2: 180 100% 28%;
+    --chart-3: 198 68.4% 40%;
+    --chart-4: 210 34% 18%;
+    --chart-5: 221 39.3% 11%;
+    --radius: 0.5rem;
+  }
+
+  .tinfoil-verification-theme[data-theme='dark'],
+  .tinfoil-verification-theme.dark {
+    color-scheme: dark;
+
+    --surface-background: 0 0% 7.1%;
+    --surface-chat-background: 0 0% 7.1%;
+    --surface-chat: 240 2.2% 17.6%;
+    --surface-card: 240 3.4% 11.4%;
+    --surface-sidebar: 0 0% 7.1%;
+    --surface-sidebar-button: 240 2.2% 17.6%;
+    --surface-sidebar-button-hover: 240 2.2% 22%;
+    --surface-settings: 0 0% 7.1%;
+    --surface-input: 240 2.2% 17.6%;
+    --surface-thinking: 240 2.2% 17.6%;
+    --surface-message-user: 240 2.2% 17.6%;
+    --surface-message-assistant: 0 0% 7.1%;
+
+    --border-subtle: 240 3.7% 26%;
+    --border-strong: 240 3.7% 40%;
+
+    --content-primary: 0 0% 98%;
+    --content-secondary: 218 10.6% 85%;
+    --content-muted: 218 10.6% 72%;
+    --content-inverse: var(--color-brand-dark);
+
+    --button-send-background: 0 0% 100%;
+    --button-send-foreground: var(--color-brand-dark);
+
+    --color-accent-light-darker: 163 37% 53%;
+
+    --gray-950: var(--color-brand-dark);
+    --gray-900: 0 0% 7.1%;
+    --gray-800: 240 2.2% 17.6%;
+    --gray-700: 240 2.2% 24%;
+    --gray-600: 218 10.6% 50%;
+    --gray-500: 218 10.6% 64.9%;
+    --gray-400: 218 10.6% 55%;
+    --gray-300: 240 3.7% 26%;
+    --gray-200: 240 3.7% 20%;
+    --gray-100: var(--surface-card);
+    --gray-50: var(--surface-chat);
+
+    --background: var(--surface-chat-background);
+    --foreground: var(--content-primary);
+    --card: var(--surface-card);
+    --card-foreground: var(--content-primary);
+    --popover: var(--surface-card);
+    --popover-foreground: var(--content-primary);
+    --primary: var(--color-accent-light);
+    --primary-foreground: var(--color-brand-dark);
+    --secondary: var(--surface-sidebar-button);
+    --secondary-foreground: var(--content-primary);
+    --muted: var(--surface-chat);
+    --muted-foreground: var(--content-secondary);
+    --accent: var(--color-accent-light);
+    --accent-foreground: var(--color-brand-dark);
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: var(--border-subtle);
+    --input: var(--border-subtle);
+    --ring: var(--color-accent-light);
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  .tinfoil-verification-theme * {
+    @apply border-border;
+  }
+
+  .tinfoil-verification-theme {
+    @apply bg-background text-foreground;
+    font-family: 'Aeonik Fono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .tinfoil-verification-theme h1,
+  .tinfoil-verification-theme h2,
+  .tinfoil-verification-theme h3 {
+    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .tinfoil-verification-theme .font-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445 445">
+  <rect x="66.89" y="82.7" width="311.34" height="281.42" rx="36.45" ry="36.45" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 20px;"/>
+  <rect x="401.43" y="123.26" width="43.98" height="20"/>
+  <rect x="401.43" y="165.12" width="43.98" height="20"/>
+  <rect x="401.43" y="208.97" width="43.98" height="20"/>
+  <rect x="400.92" y="250.82" width="43.98" height="20"/>
+  <rect x="400.92" y="292.68" width="43.98" height="20"/>
+  <rect x="101.82" y="123.41" width="91.67" height="66.33" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 10px;"/>
+  <rect x="252.92" y="123.41" width="89.9" height="64.41" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 10px;"/>
+  <rect x="196.52" y="136.76" width="52.78" height="15"/>
+  <rect x="216.51" y="207.81" width="15" height="72.14"/>
+  <rect x="234.59" y="260.75" width="15" height="23.4" transform="translate(514.54 30.37) rotate(90)"/>
+  <rect x="216.07" y="262.42" width="15" height="112.27" transform="translate(542.12 94.98) rotate(90)"/>
+  <rect x="279.7" y="296.05" width="15" height="15" transform="translate(590.75 16.35) rotate(90)"/>
+  <rect x="152.43" y="296.05" width="15" height="15" transform="translate(463.48 143.62) rotate(90)"/>
+  <rect x="280.89" y="18.71" width="56.41" height="20.29" transform="translate(337.95 -280.23) rotate(90)"/>
+  <rect x="239.03" y="18.71" width="56.41" height="20.29" transform="translate(296.09 -238.38) rotate(90)"/>
+  <rect x="195.18" y="18.71" width="56.41" height="20.29" transform="translate(252.24 -194.53) rotate(90)"/>
+  <rect x="153.33" y="18.06" width="56.41" height="20.29" transform="translate(209.73 -153.33) rotate(90)"/>
+  <rect x="111.47" y="18.06" width="56.41" height="20.29" transform="translate(167.88 -111.47) rotate(90)"/>
+  <rect x="112.35" y="406.25" width="55.91" height="20.29" transform="translate(-276.1 556.7) rotate(-90)"/>
+  <rect x="154.2" y="406.25" width="55.91" height="20.29" transform="translate(-234.25 598.55) rotate(-90)"/>
+  <rect x="198.05" y="406.25" width="55.91" height="20.29" transform="translate(-190.39 642.41) rotate(-90)"/>
+  <rect x="239.91" y="406.9" width="55.91" height="20.29" transform="translate(-149.19 684.91) rotate(-90)"/>
+  <rect x="281.76" y="406.9" width="55.91" height="20.29" transform="translate(-107.33 726.76) rotate(-90)"/>
+  <rect x="-.41" y="293.68" width="43.98" height="20" transform="translate(43.16 607.36) rotate(180)"/>
+  <rect x="-.41" y="251.82" width="43.98" height="20" transform="translate(43.16 523.65) rotate(180)"/>
+  <rect x="-.41" y="207.97" width="43.98" height="20" transform="translate(43.16 435.94) rotate(180)"/>
+  <rect x=".1" y="166.12" width="43.98" height="20" transform="translate(44.18 352.24) rotate(180)"/>
+  <rect x=".1" y="124.26" width="43.98" height="20" transform="translate(44.18 268.53) rotate(180)"/>
+  <rect x="120.91" y="146.58" width="28.68" height="20" transform="translate(291.83 21.33) rotate(90)"/>
+  <rect x="344.71" y="138.29" width="34.75" height="15"/>
+  <rect x="62.94" y="138.93" width="40.8" height="15"/>
+  <rect x="256.96" y="146.58" width="28.68" height="20" transform="translate(427.87 -114.72) rotate(90)"/>
+</svg>
