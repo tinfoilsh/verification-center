@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { LuBug } from 'react-icons/lu'
 import { PiSpinner } from 'react-icons/pi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from './constants'
 import type { VerificationDocument } from './types/verification'
 import { TextureGrid } from './texture-grid'
-import { ShieldXIcon, ShieldCheckIcon, LockIcon, TerminalIcon, CpuCheckIcon } from './icons'
+import { ShieldXIcon, ShieldCheckIcon, LockIcon, TerminalIcon, CpuCheckIcon, WarningIcon } from './icons'
 import { VerifierHeader } from './verifier-header'
 import { KeyTab, CodeTab, ChipTab, OtherTab, type StepStatus } from './tabs'
 
@@ -35,7 +34,8 @@ export function VerificationInitialState({
   errorMessage,
   stepStatuses
 }: VerificationInitialStateProps) {
-  const [selectedTab, setSelectedTab] = useState<TabType>(null)
+  const hasOtherError = stepStatuses?.other === 'error'
+  const [selectedTab, setSelectedTab] = useState<TabType>(hasOtherError ? 'other' : null)
 
   const getStepStatus = (tabId: TabType): StepStatus => {
     if (status === 'verifying') return 'pending'
@@ -55,8 +55,6 @@ export function VerificationInitialState({
         return 'success'
     }
   }
-
-  const hasOtherError = stepStatuses?.other === 'error'
 
   const tabs = [
     {
@@ -79,9 +77,9 @@ export function VerificationInitialState({
     },
     {
       id: 'other' as const,
-      prefix: '',
+      prefix: 'Unexpected',
       label: 'Error',
-      icon: <LuBug className="h-7 w-7" />,
+      icon: <WarningIcon size={16} />,
       showOnlyOnError: true
     }
   ]
