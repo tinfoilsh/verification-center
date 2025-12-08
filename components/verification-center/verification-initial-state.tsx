@@ -37,7 +37,9 @@ export function VerificationInitialState({
   stepStatuses
 }: VerificationInitialStateProps) {
   const [selectedTab, setSelectedTab] = useState<TabType>(null)
-  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false)
+  const [showAdditionalInfoKey, setShowAdditionalInfoKey] = useState(false)
+  const [showAdditionalInfoCode, setShowAdditionalInfoCode] = useState(false)
+  const [showAdditionalInfoChip, setShowAdditionalInfoChip] = useState(false)
 
   const getStepStatus = (tabId: TabType): StepStatus => {
     if (status === 'verifying') return 'pending'
@@ -140,6 +142,86 @@ export function VerificationInitialState({
                 </div>
               </div>
             </div>
+
+            <button
+              onClick={() => setShowAdditionalInfoKey(!showAdditionalInfoKey)}
+              className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
+                isDarkMode
+                  ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
+                  : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
+              }`}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            >
+              {showAdditionalInfoKey ? 'Hide additional info' : 'Show additional info'}
+            </button>
+
+            <AnimatePresence>
+              {showAdditionalInfoKey && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{
+                    height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+                    opacity: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                  }}
+                  className="overflow-hidden space-y-3"
+                >
+                  <div
+                    className={`rounded-xl border p-3 ${
+                      isDarkMode
+                        ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                        : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                    }`}
+                  >
+                    <div className="mb-2 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                      Encryption Protocol
+                    </div>
+                    <p
+                      className={`text-xs mb-3 ${
+                        isDarkMode ? 'text-content-secondary' : 'text-gray-600'
+                      }`}
+                      style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                    >
+                      EHBP (Encrypted HTTP Body Protocol) encrypts HTTP message bodies end-to-end using HPKE (RFC 9180), ensuring only the intended recipient can decrypt the payload.
+                    </p>
+                    <a
+                      href="https://docs.tinfoil.sh/resources/ehbp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                        isDarkMode
+                          ? 'text-emerald-400 hover:text-emerald-300'
+                          : 'text-emerald-600 hover:text-emerald-700'
+                      }`}
+                      style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                    >
+                      Learn more about EHBP
+                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
+
+                  {verificationDocument?.hpkePublicKey && (
+                    <div
+                      className={`rounded-xl border p-3 ${
+                        isDarkMode
+                          ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                          : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                      }`}
+                    >
+                      <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                        Full HPKE Public Key
+                      </div>
+                      <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                        {verificationDocument.hpkePublicKey}
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )
 
@@ -189,44 +271,137 @@ export function VerificationInitialState({
                 </div>
               </div>
             </div>
-            <div className="flex gap-3">
-              <a
-                href={`https://github.com/${verificationDocument?.configRepo || 'tinfoilsh'}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
-                  isDarkMode
-                    ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
-                    : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
-                }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
-              >
-                <FaGithub className="h-4 w-4 flex-shrink-0" />
-                <span className="leading-none">See the code</span>
-              </a>
-              <a
-                href="https://search.sigstore.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex-1 inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
-                  isDarkMode
-                    ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
-                    : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
-                }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
-              >
-                <img
-                  src={isDarkMode ? '/icons/sigstore.svg' : '/icons/sigstore-light.svg'}
-                  alt="Sigstore"
-                  className="h-4 w-4 flex-shrink-0"
-                />
-                <span className="leading-none">Sigstore Entry</span>
-              </a>
-            </div>
+
+            <button
+              onClick={() => setShowAdditionalInfoCode(!showAdditionalInfoCode)}
+              className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
+                isDarkMode
+                  ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
+                  : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
+              }`}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            >
+              {showAdditionalInfoCode ? 'Hide additional info' : 'Show additional info'}
+            </button>
+
+            <AnimatePresence>
+              {showAdditionalInfoCode && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{
+                    height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+                    opacity: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                  }}
+                  className="overflow-hidden space-y-3"
+                >
+                  {verificationDocument?.codeFingerprint && (
+                    <div
+                      className={`rounded-xl border p-3 ${
+                        isDarkMode
+                          ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                          : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                      }`}
+                    >
+                      <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                        Full Code Fingerprint
+                      </div>
+                      <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                        {verificationDocument.codeFingerprint}
+                      </div>
+                    </div>
+                  )}
+                  {verificationDocument?.configRepo && (
+                    <div
+                      className={`relative rounded-xl border p-3 ${
+                        isDarkMode
+                          ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                          : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                      }`}
+                    >
+                      <FaGithub className={`absolute top-3 right-3 h-6 w-6 ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} />
+                      <div className="mb-2 text-xs font-medium opacity-70 pr-8" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                        Configuration Repository
+                      </div>
+                      <p
+                        className={`text-xs mb-3 pr-8 ${
+                          isDarkMode ? 'text-content-secondary' : 'text-gray-600'
+                        }`}
+                        style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                      >
+                        The configuration repository specifies exactly what code is running inside the secure enclave, including dependencies and build instructions.
+                      </p>
+                      <a
+                        href={`https://github.com/${verificationDocument.configRepo}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                          isDarkMode
+                            ? 'text-emerald-400 hover:text-emerald-300'
+                            : 'text-emerald-600 hover:text-emerald-700'
+                        }`}
+                        style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                      >
+                        {verificationDocument.configRepo}
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
+
+                  <div
+                    className={`relative rounded-xl border p-3 ${
+                      isDarkMode
+                        ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                        : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                    }`}
+                  >
+                    <img
+                      src={isDarkMode ? '/icons/sigstore.svg' : '/icons/sigstore-light.svg'}
+                      alt="Sigstore"
+                      className="absolute top-3 right-3 h-6 w-6"
+                    />
+                    <div className="mb-2 text-xs font-medium opacity-70 pr-8" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                      Sigstore Transparency Log
+                    </div>
+                    <p
+                      className={`text-xs mb-3 pr-8 ${
+                        isDarkMode ? 'text-content-secondary' : 'text-gray-600'
+                      }`}
+                      style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                    >
+                      Verifies that the source code published on GitHub was correctly built through GitHub Actions and that the resulting binary is available on the Sigstore transparency log.
+                    </p>
+                    <a
+                      href="https://search.sigstore.dev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                        isDarkMode
+                          ? 'text-emerald-400 hover:text-emerald-300'
+                          : 'text-emerald-600 hover:text-emerald-700'
+                      }`}
+                      style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                    >
+                      View on Sigstore
+                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )
 
-      case 'chip':
+      case 'chip': {
+        const typeString = verificationDocument?.enclaveMeasurement?.measurement?.type?.toLowerCase() || ''
+        const isSEV = /sev/.test(typeString)
+        const isTDX = /tdx/.test(typeString)
+
         return (
           <div className="space-y-4">
             <div>
@@ -244,7 +419,7 @@ export function VerificationInitialState({
                 }`}
                 style={{ fontFamily: FONT_FAMILIES.AEONIK }}
               >
-                The secure hardware enclave that processes your data has been attested and is verified. 
+                The secure hardware enclave that processes your data has been attested and is verified.
                 The code it is running matches the auditable open-source repository.
               </p>
             </div>
@@ -264,7 +439,7 @@ export function VerificationInitialState({
               />
               <div className="flex-1 overflow-hidden">
                 <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                  Enclave fingerprint
+                  Enclave code fingerprint
                 </div>
                 <div
                   className={`font-mono text-xs truncate ${
@@ -278,7 +453,7 @@ export function VerificationInitialState({
 
             {/* Show Additional Info Button */}
             <button
-              onClick={() => setShowAdditionalInfo(!showAdditionalInfo)}
+              onClick={() => setShowAdditionalInfoChip(!showAdditionalInfoChip)}
               className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
                 isDarkMode
                   ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
@@ -286,12 +461,12 @@ export function VerificationInitialState({
               }`}
               style={{ fontFamily: FONT_FAMILIES.AEONIK }}
             >
-              {showAdditionalInfo ? 'Hide additional info' : 'Show additional info'}
+              {showAdditionalInfoChip ? 'Hide additional info' : 'Show additional info'}
             </button>
 
             {/* Additional Info */}
             <AnimatePresence>
-              {showAdditionalInfo && (
+              {showAdditionalInfoChip && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
@@ -302,6 +477,81 @@ export function VerificationInitialState({
                   }}
                   className="overflow-hidden space-y-3"
                 >
+                  {/* Hardware Attestation */}
+                  <div
+                    className={`rounded-xl border p-3 ${
+                      isDarkMode
+                        ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                        : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+                    }`}
+                  >
+                    <div className="mb-2 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                      Hardware Attestation
+                    </div>
+                    <p
+                      className={`text-xs mb-3 ${
+                        isDarkMode ? 'text-content-secondary' : 'text-gray-600'
+                      }`}
+                      style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                    >
+                      The verifier receives a signed measurement from NVIDIA{isSEV ? ', AMD' : ''}{isTDX ? ', Intel' : ''} certifying the enclave environment and the digest of the binary actively running inside it.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href="https://docs.nvidia.com/attestation/index.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                          isDarkMode
+                            ? 'text-emerald-400 hover:text-emerald-300'
+                            : 'text-emerald-600 hover:text-emerald-700'
+                        }`}
+                        style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                      >
+                        NVIDIA Attestation
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                      {isSEV && (
+                        <a
+                          href="https://www.amd.com/en/developer/sev.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                            isDarkMode
+                              ? 'text-emerald-400 hover:text-emerald-300'
+                              : 'text-emerald-600 hover:text-emerald-700'
+                          }`}
+                          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                        >
+                          AMD SEV
+                          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+                      {isTDX && (
+                        <a
+                          href="https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
+                            isDarkMode
+                              ? 'text-emerald-400 hover:text-emerald-300'
+                              : 'text-emerald-600 hover:text-emerald-700'
+                          }`}
+                          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                        >
+                          Intel TDX
+                          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
                   {/* Router Endpoint */}
                   {verificationDocument?.selectedRouterEndpoint && (
                     <div
@@ -348,24 +598,24 @@ export function VerificationInitialState({
                       }`}
                     >
                       <div className="mb-3 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                        Enclave Measurements
+                        Hardware Measurements
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {verificationDocument.enclaveMeasurement.measurement.type && (
                           <div>
                             <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>Type</div>
-                            <div className={`rounded border p-2 font-mono text-xs ${isDarkMode ? 'bg-surface-background border-border-subtle text-content-primary' : 'bg-white border-gray-200 text-gray-900'}`}>
+                            <div className={`font-mono text-xs ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
                               {verificationDocument.enclaveMeasurement.measurement.type}
                             </div>
                           </div>
                         )}
                         {verificationDocument.enclaveMeasurement.measurement.registers &&
                          verificationDocument.enclaveMeasurement.measurement.registers.length > 0 && (
-                          <div className="space-y-2">
+                          <div className="space-y-3">
                             {verificationDocument.enclaveMeasurement.measurement.registers.map((reg: any, idx: number) => (
                               <div key={idx}>
                                 <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>Register {idx}</div>
-                                <div className={`rounded border p-2 font-mono text-xs break-all ${isDarkMode ? 'bg-surface-background border-border-subtle text-content-primary' : 'bg-white border-gray-200 text-gray-900'}`}>
+                                <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
                                   {typeof reg === 'object' ? JSON.stringify(reg) : reg}
                                 </div>
                               </div>
@@ -388,11 +638,11 @@ export function VerificationInitialState({
                       <div className="mb-3 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
                         Hardware Measurements
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {verificationDocument.hardwareMeasurement.ID && (
                           <div>
                             <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>Platform ID</div>
-                            <div className={`rounded border p-2 font-mono text-xs break-all ${isDarkMode ? 'bg-surface-background border-border-subtle text-content-primary' : 'bg-white border-gray-200 text-gray-900'}`}>
+                            <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
                               {verificationDocument.hardwareMeasurement.ID}
                             </div>
                           </div>
@@ -400,7 +650,7 @@ export function VerificationInitialState({
                         {verificationDocument.hardwareMeasurement.MRTD && (
                           <div>
                             <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>MRTD</div>
-                            <div className={`rounded border p-2 font-mono text-xs break-all ${isDarkMode ? 'bg-surface-background border-border-subtle text-content-primary' : 'bg-white border-gray-200 text-gray-900'}`}>
+                            <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
                               {verificationDocument.hardwareMeasurement.MRTD}
                             </div>
                           </div>
@@ -408,7 +658,7 @@ export function VerificationInitialState({
                         {verificationDocument.hardwareMeasurement.RTMR0 && (
                           <div>
                             <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>RTMR0</div>
-                            <div className={`rounded border p-2 font-mono text-xs break-all ${isDarkMode ? 'bg-surface-background border-border-subtle text-content-primary' : 'bg-white border-gray-200 text-gray-900'}`}>
+                            <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
                               {verificationDocument.hardwareMeasurement.RTMR0}
                             </div>
                           </div>
@@ -421,6 +671,7 @@ export function VerificationInitialState({
             </AnimatePresence>
           </div>
         )
+      }
 
       case 'other':
         return (
