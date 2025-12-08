@@ -5,6 +5,7 @@ type VerifierHeaderProps = {
   isDarkMode?: boolean
   onClose?: () => void
   className?: string
+  status?: 'idle' | 'verifying' | 'success' | 'error'
 }
 
 /**
@@ -17,6 +18,7 @@ export function VerifierHeader({
   isDarkMode = true,
   onClose,
   className = '',
+  status = 'success',
 }: VerifierHeaderProps) {
   return (
     <div
@@ -31,7 +33,7 @@ export function VerifierHeader({
       {/* Left side - Tin icon */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
         <img
-          src="/icons/tin.svg"
+          src={status === 'error' ? '/icons/tin-sad.svg' : '/icons/tin.svg'}
           alt="Tinfoil"
           className={`h-10 w-10 ${isDarkMode ? 'brightness-0 invert' : ''}`}
         />

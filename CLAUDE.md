@@ -18,6 +18,14 @@ When in doubt, look at how similar code in the project handles the same situatio
 - Don't describe what changed from previous versions
 - Focus on explaining complex logic or business rules
 
+## Icons and SVG Assets
+
+**Never define SVG inline in component code.**
+
+- Always use SVG files from `/public/icons/` directory
+- Use `<img>` tag with `src="/icons/icon-name.svg"` or mask-based approach
+- Keep SVG definitions separate from component logic for maintainability
+
 ## Performance
 
 **Prioritize initial load and perceived speed.**
