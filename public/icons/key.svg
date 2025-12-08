@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 833.4 499.8">
-  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->
-  <defs>
-    <style>
-      .st0 {
-        fill: #005050;
-      }
-    </style>
-  </defs>
-  <rect class="st0" x=".4" y="249.8" width="83.3" height="83.5" transform="translate(-249.5 333.6) rotate(-90)"/>
-  <rect class="st0" x=".4" y="166.5" width="83.3" height="83.5" transform="translate(-166.2 250.3) rotate(-90)"/>
-  <rect class="st0" x="83.8" y="83.2" width="83.3" height="83.5" transform="translate(.5 250.4) rotate(-90)"/>
-  <rect class="st0" x="83.8" y="333.1" width="83.3" height="83.5" transform="translate(-249.4 500.4) rotate(-90)"/>
-  <rect class="st0" x="167.3" y="0" width="83.3" height="83.5" transform="translate(167.3 250.6) rotate(-90)"/>
-  <rect class="st0" x="167.3" y="416.5" width="83.3" height="83.5" transform="translate(-249.2 667.1) rotate(-90)"/>
-  <rect class="st0" x="250.1" y="83.2" width="83.3" height="83.5" transform="translate(166.8 416.8) rotate(-90)"/>
-  <rect class="st0" x="250" y="333.1" width="83.3" height="83.5" transform="translate(-83.2 666.5) rotate(-90)"/>
-  <rect class="st0" x="333.4" y="166.5" width="83.3" height="83.5" transform="translate(166.8 583.4) rotate(-90)"/>
-  <rect class="st0" x="479.4" y="312.3" width="125" height="83.5" transform="translate(187.8 895.9) rotate(-90)"/>
-  <rect class="st0" x="646" y="312.3" width="125" height="83.5" transform="translate(354.4 1062.5) rotate(-90)"/>
-  <rect class="st0" x="583.4" y="41.6" width="83.3" height="416.7" transform="translate(375.1 874.9) rotate(-90)"/>
-  <rect class="st0" x="333.6" y="249.8" width="83.3" height="83.5" transform="translate(83.7 666.8) rotate(-90)"/>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445 445">
+  <rect x="310.54" y="78.08" width="20.29" height="248.62" transform="translate(523.08 -118.3) rotate(90)"/>
+  <rect x="318.01" y="212.53" width="20.29" height="60.14"/>
+  <circle cx="99.6" cy="202.39" r="88.17" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 20px;"/>
+  <rect x="407.51" y="212.53" width="20.29" height="60.14"/>
+  <rect x="362.76" y="227.93" width="20.29" height="69.21" transform="translate(635.43 -110.37) rotate(90)"/>
 </svg>

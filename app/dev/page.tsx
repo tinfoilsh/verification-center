@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { VerificationCenter } from '@/components/verification-center/verifier'
+import { TinfoilBadge } from '@/components/verification-center/tinfoil-badge'
 import {
   mockFailureDocument,
   mockSuccessDocument,
@@ -221,7 +222,17 @@ export default function DevPage() {
 
       <main className="app__main">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-start' }}>
-          <p>Development page for testing verification center</p>
+          <div>
+            <h3 style={{ marginBottom: '8px', fontSize: '14px', fontWeight: 600 }}>Tinfoil Badge</h3>
+            <div style={{ width: '200px', height: '45px' }}>
+              <TinfoilBadge
+                verificationDocument={verificationDocument}
+                isDarkMode={isDarkMode}
+                compact={compact}
+                onClick={handleToggleVerifier}
+              />
+            </div>
+          </div>
         </div>
       </main>
 

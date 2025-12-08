@@ -6,6 +6,7 @@ import { PiSpinner } from 'react-icons/pi'
 import { FONT_FAMILIES } from './constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { VerificationDocument } from './types/verification'
+import { TextureGrid } from './texture-grid'
 
 type VerificationStatus = 'idle' | 'verifying' | 'success' | 'error'
 
@@ -64,19 +65,19 @@ export function VerificationInitialState({
       id: 'key' as const,
       prefix: 'Data is',
       label: 'Encrypted',
-      icon: <img src="/icons/key.svg" alt="Key" className="h-8 w-8" style={{ fill: 'currentColor' }} />
+      icon: <img src="/icons/lock.svg" alt="Lock" className="h-8 w-8" style={{ fill: 'currentColor' }} />
     },
     {
       id: 'code' as const,
       prefix: 'Code is',
       label: 'Auditable',
-      icon: <img src="/icons/code.svg" alt="Code" className="h-8 w-8" style={{ fill: 'currentColor' }} />
+      icon: <img src="/icons/terminal.svg" alt="Terminal" className="h-8 w-8" style={{ fill: 'currentColor' }} />
     },
     {
       id: 'chip' as const,
       prefix: 'Runtime is',
       label: 'Isolated',
-      icon: <img src="/icons/cpu.svg" alt="CPU" className="h-8 w-8" style={{ fill: 'currentColor' }} />
+      icon: <img src="/icons/cpu-check.svg" alt="CPU Check" className="h-8 w-8" style={{ fill: 'currentColor' }} />
     },
     {
       id: 'other' as const,
@@ -450,26 +451,66 @@ export function VerificationInitialState({
     }
   }
 
-  const gridLineColor = isDarkMode ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)'
   const lineColor = isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)'
 
   return (
-    <div className="relative w-full flex-1 overflow-y-auto bg-surface-background">
-      {/* Dense Grid Background Pattern - z-0 */}
+    <div className="relative flex h-full w-full flex-col bg-surface-background">
+      {/* Header */}
       <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, ${gridLineColor} 1px, transparent 1px),
-            linear-gradient(to bottom, ${gridLineColor} 1px, transparent 1px)
-          `,
-          backgroundSize: '4px 4px',
-        }}
-      />
+        className="relative flex items-center justify-center px-4 bg-surface-card"
+        style={{ minHeight: '72px', paddingTop: '12px', paddingBottom: '12px' }}
+      >
+        {/* Left side - Tin icon */}
+        <div className="absolute left-4 top-1/2 -translate-y-1/2">
+          <img
+            src="/icons/tin.svg"
+            alt="Tinfoil"
+            className={`h-10 w-10 ${isDarkMode ? 'brightness-0 invert' : ''}`}
+          />
+        </div>
+
+        {/* Center - Title and Powered by */}
+        <div className="flex flex-col items-center">
+          <span
+            className={`text-xl font-medium ${
+              isDarkMode ? 'text-white' : 'text-content-primary'
+            }`}
+            style={{
+              fontFamily: FONT_FAMILIES.AEONIK,
+            }}
+          >
+            Verification Center
+          </span>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span
+              className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            >
+              Powered by
+            </span>
+            <a
+              href="https://tinfoil.sh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={isDarkMode ? '/icons/logo-white.svg' : '/icons/logo-green.svg'}
+                alt="Tinfoil"
+                width={45}
+                height={20}
+                className={`${isDarkMode ? '' : 'opacity-80'} hover:opacity-70 transition-opacity`}
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative w-full flex-1 overflow-y-auto">
+        <TextureGrid className="z-0" />
 
 
-      {/* Main content - z-10, above circuit lines */}
-      <div className="relative z-10 space-y-3 px-3 pb-6 pt-3 sm:space-y-4 sm:px-4 sm:pt-4">
+        {/* Main content - z-10, above circuit lines */}
+        <div className="relative z-10 space-y-3 px-3 pb-6 pt-3 sm:space-y-4 sm:px-4 sm:pt-4">
         {/* Status Banner */}
         <motion.div
           className={`flex min-h-16 flex-col gap-3 rounded-xl border p-4 ${
@@ -530,7 +571,7 @@ export function VerificationInitialState({
           {/* Horizontal line through cards center */}
           <div
             className="absolute left-6 right-6 pointer-events-none"
-            style={{ top: '50%', height: '1px', background: lineColor }}
+            style={{ top: '50%', height: '2px', background: lineColor }}
           />
 
           {/* Vertical lines from each card up to status banner - dynamically positioned */}
@@ -550,7 +591,7 @@ export function VerificationInitialState({
                 style={{
                   left: position,
                   top: '-16px',
-                  width: '1px',
+                  width: '2px',
                   height: 'calc(50% + 16px)',
                   background: lineColor,
                   transform: 'translateX(-50%)'
@@ -581,7 +622,7 @@ export function VerificationInitialState({
                 style={{
                   left: position,
                   top: '50%',
-                  width: '1px',
+                  width: '2px',
                   height: 'calc(50% + 20px)',
                   background: lineColor,
                   transform: 'translateX(-50%)'
@@ -713,7 +754,7 @@ export function VerificationInitialState({
                 height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
                 opacity: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
               }}
-              className="overflow-hidden"
+              className="relative z-10 overflow-hidden"
             >
               <div
                 className={`rounded-xl border p-4 ${
@@ -727,6 +768,7 @@ export function VerificationInitialState({
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </div>
     </div>
   )

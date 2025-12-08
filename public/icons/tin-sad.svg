@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445 445">
-  <rect x="66.89" y="82.7" width="311.34" height="281.42" rx="36.45" ry="36.45" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 20px;"/>
-  <rect x="401.43" y="123.26" width="43.98" height="20"/>
-  <rect x="401.43" y="165.12" width="43.98" height="20"/>
-  <rect x="401.43" y="208.97" width="43.98" height="20"/>
-  <rect x="400.92" y="250.82" width="43.98" height="20"/>
-  <rect x="400.92" y="292.68" width="43.98" height="20"/>
-  <rect x="101.82" y="123.41" width="91.67" height="66.33" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 10px;"/>
-  <rect x="252.92" y="123.41" width="89.9" height="64.41" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 10px;"/>
-  <rect x="196.52" y="136.76" width="52.78" height="15"/>
-  <rect x="216.51" y="197.81" width="15" height="72.14"/>
-  <rect x="234.59" y="250.75" width="15" height="23.4" transform="translate(504.54 20.37) rotate(90)"/>
-  <rect x="216.07" y="252.42" width="15" height="112.27" transform="translate(532.12 84.98) rotate(90)"/>
-  <rect x="279.7" y="316.05" width="15" height="15" transform="translate(610.75 36.35) rotate(90)"/>
-  <rect x="152.43" y="316.05" width="15" height="15" transform="translate(483.48 163.62) rotate(90)"/>
-  <rect x="280.89" y="18.71" width="56.41" height="20.29" transform="translate(337.95 -280.23) rotate(90)"/>
-  <rect x="239.03" y="18.71" width="56.41" height="20.29" transform="translate(296.09 -238.38) rotate(90)"/>
-  <rect x="195.18" y="18.71" width="56.41" height="20.29" transform="translate(252.24 -194.53) rotate(90)"/>
-  <rect x="153.33" y="18.06" width="56.41" height="20.29" transform="translate(209.73 -153.33) rotate(90)"/>
-  <rect x="111.47" y="18.06" width="56.41" height="20.29" transform="translate(167.88 -111.47) rotate(90)"/>
-  <rect x="112.35" y="406.25" width="55.91" height="20.29" transform="translate(-276.1 556.7) rotate(-90)"/>
-  <rect x="154.2" y="406.25" width="55.91" height="20.29" transform="translate(-234.25 598.55) rotate(-90)"/>
-  <rect x="198.05" y="406.25" width="55.91" height="20.29" transform="translate(-190.39 642.41) rotate(-90)"/>
-  <rect x="239.91" y="406.9" width="55.91" height="20.29" transform="translate(-149.19 684.91) rotate(-90)"/>
-  <rect x="281.76" y="406.9" width="55.91" height="20.29" transform="translate(-107.33 726.76) rotate(-90)"/>
-  <rect x="-.41" y="293.68" width="43.98" height="20" transform="translate(43.16 607.36) rotate(180)"/>
-  <rect x="-.41" y="251.82" width="43.98" height="20" transform="translate(43.16 523.65) rotate(180)"/>
-  <rect x="-.41" y="207.97" width="43.98" height="20" transform="translate(43.16 435.94) rotate(180)"/>
-  <rect x=".1" y="166.12" width="43.98" height="20" transform="translate(44.18 352.24) rotate(180)"/>
-  <rect x=".1" y="124.26" width="43.98" height="20" transform="translate(44.18 268.53) rotate(180)"/>
-  <rect x="150.91" y="166.58" width="28.68" height="20" transform="translate(341.83 11.33) rotate(90)"/>
-  <rect x="344.71" y="138.29" width="34.75" height="15"/>
-  <rect x="62.94" y="138.93" width="40.8" height="15"/>
-  <rect x="266.96" y="166.58" width="28.68" height="20" transform="translate(457.87 -104.72) rotate(90)"/>
-  <rect x="137.43" y="331.05" width="15" height="15" transform="translate(483.48 193.62) rotate(90)"/>
-  <rect x="294.7" y="331.05" width="15" height="15" transform="translate(640.75 36.35) rotate(90)"/>
+  <rect x="125.25" y="146.58" width="60" height="20" transform="translate(375.74 157.51) rotate(135)"/>
+  <rect x="261.3" y="146.58" width="60" height="20" transform="translate(607.99 61.31) rotate(135)"/>
+  <rect x="260.52" y="146.58" width="60" height="20" transform="translate(195.81 -159.57) rotate(45)"/>
+  <rect x="124.48" y="146.58" width="60" height="20" transform="translate(155.96 -63.37) rotate(45)"/>
+  <rect x="71.78" y="72.61" width="301.58" height="301.58" rx="36.45" ry="36.45" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 20px;"/>
+  <rect x="414.5" y="123.87" width="29.66" height="20"/>
+  <rect x="414.5" y="165.73" width="29.66" height="20"/>
+  <rect x="414.5" y="209.58" width="29.66" height="20"/>
+  <rect x="414.16" y="251.43" width="29.66" height="20"/>
+  <rect x="414.16" y="293.29" width="29.66" height="20"/>
+  <rect x=".99" y="293.29" width="29.66" height="20" transform="translate(31.64 606.58) rotate(180)"/>
+  <rect x=".99" y="251.43" width="29.66" height="20" transform="translate(31.64 522.87) rotate(180)"/>
+  <rect x=".99" y="207.58" width="29.66" height="20" transform="translate(31.64 435.16) rotate(180)"/>
+  <rect x="1.33" y="165.73" width="29.66" height="20" transform="translate(32.32 351.45) rotate(180)"/>
+  <rect x="1.33" y="123.87" width="29.66" height="20" transform="translate(32.32 267.75) rotate(180)"/>
+  <rect x="172.03" y="294.55" width="105" height="20.29"/>
+  <rect x="277.03" y="314.26" width="20.29" height="20.29"/>
+  <rect x="151.74" y="314.26" width="20.29" height="20.29"/>
+  <rect x="234.68" y="243.97" width="20.29" height="20.29"/>
+  <rect x="163.83" y="193.4" width="121.42" height="20.29" transform="translate(428.09 -20.98) rotate(90)"/>
+  <rect x="122.96" y="6.91" width="29.66" height="20" transform="translate(120.88 154.7) rotate(-90)"/>
+  <rect x="164.81" y="6.91" width="29.66" height="20" transform="translate(162.73 196.55) rotate(-90)"/>
+  <rect x="208.67" y="6.91" width="29.66" height="20" transform="translate(206.59 240.41) rotate(-90)"/>
+  <rect x="250.52" y="7.25" width="29.66" height="20" transform="translate(248.1 282.6) rotate(-90)"/>
+  <rect x="292.37" y="7.25" width="29.66" height="20" transform="translate(289.95 324.46) rotate(-90)"/>
+  <rect x="124" y="419.55" width="29.66" height="20" transform="translate(-290.72 568.37) rotate(-90)"/>
+  <rect x="165.85" y="419.55" width="29.66" height="20" transform="translate(-248.86 610.23) rotate(-90)"/>
+  <rect x="209.71" y="419.55" width="29.66" height="20" transform="translate(-205.01 654.08) rotate(-90)"/>
+  <rect x="251.56" y="419.89" width="29.66" height="20" transform="translate(-163.5 696.28) rotate(-90)"/>
+  <rect x="293.41" y="419.89" width="29.66" height="20" transform="translate(-121.65 738.13) rotate(-90)"/>
+  <rect x="297.33" y="334.55" width="20.29" height="20.29"/>
+  <rect x="131.45" y="334.55" width="20.29" height="20.29"/>
 </svg>

@@ -3,7 +3,6 @@ import type { VerificationDocument } from './types/verification'
 export type { VerificationDocument } from './types/verification'
 import { MeasurementDiff, ProcessStep } from './steps'
 import VerificationStatus from './verification-status'
-import { VerifierFooter } from './verifier-footer'
 import { VerificationInitialState } from './verification-initial-state'
 import { getVerificationStatus } from './utils/verification-status'
 
@@ -348,11 +347,6 @@ export function VerificationCenter({
 
         </div>
         {isSafari && <div className="h-[30px]" aria-hidden="true" />}
-      </div>
-
-      {/* Footer */}
-      <div className="flex-none">
-        <VerifierFooter isDarkMode={isDarkMode} />
       </div>
     </div>
   )
