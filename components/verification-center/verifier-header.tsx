@@ -3,7 +3,7 @@ import { FONT_FAMILIES } from './constants'
 
 type VerifierHeaderProps = {
   isDarkMode?: boolean
-  onClose: () => void
+  onClose?: () => void
   className?: string
 }
 
@@ -73,19 +73,21 @@ export function VerifierHeader({
       </div>
 
       {/* Right side - Close button */}
-      <button
-        className={`absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-lg p-2 transition-colors ${
-          isDarkMode
-            ? 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
-            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-        }`}
-        onClick={onClose}
-        style={{
-          color: isDarkMode ? 'rgb(156, 163, 175)' : 'rgb(75, 85, 99)'
-        }}
-      >
-        <LuX className="h-5 w-5" style={{ color: 'inherit' }} />
-      </button>
+      {onClose && (
+        <button
+          className={`absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-lg p-2 transition-colors ${
+            isDarkMode
+              ? 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
+          onClick={onClose}
+          style={{
+            color: isDarkMode ? 'rgb(156, 163, 175)' : 'rgb(75, 85, 99)'
+          }}
+        >
+          <LuX className="h-5 w-5" style={{ color: 'inherit' }} />
+        </button>
+      )}
     </div>
   )
 }
