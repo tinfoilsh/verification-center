@@ -6,8 +6,8 @@
   <rect x="319.04" y="169.43" width="154.73" height="20.29" transform="translate(575.98 -216.83) rotate(90)" fill="currentColor"/>
   <rect x="294.53" y="295.45" width="132.38" height="20.29" transform="translate(816.83 181.18) rotate(124.47)" fill="currentColor"/>
   <rect x="205.35" y="382.74" width="130.92" height="20.29" transform="translate(710.88 577.35) rotate(147.32)" fill="currentColor"/>
-  <rect x="128.42" y="241.75" width="71.76" height="20.29" transform="translate(226.24 -42.4) rotate(45)" fill="currentColor"/>
-  <rect x="148.75" y="202.47" width="182.87" height="20.29" transform="translate(-79.99 232.11) rotate(-45)" fill="currentColor"/>
+  <rect x="128.42" y="202.47" width="142" height="20.29" transform="translate(-79.99 232.11) rotate(-45)" fill="currentColor"/>
+  <rect x="148.75" y="202.47" width="142" height="20.29" transform="translate(226.24 -42.4) rotate(45)" fill="currentColor"/>
   <rect x="98.48" y="61.51" width="61.37" height="20.29" transform="translate(258.34 143.3) rotate(180)" fill="currentColor"/>
   <rect x="281.61" y="61.51" width="64.06" height="20.29" transform="translate(627.29 143.3) rotate(180)" fill="currentColor"/>
   <rect x="200.44" y=".63" width="20.29" height="20.29" transform="translate(421.18 21.55) rotate(180)" fill="currentColor"/>

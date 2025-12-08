@@ -1,8 +1,8 @@
-import { LuShieldAlert } from 'react-icons/lu'
 import { PiSpinner } from 'react-icons/pi'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { VerificationSummaryStatus, VerificationDocument } from './types/verification'
 import { FONT_FAMILIES } from './constants'
+import { TinSadIcon } from '../icons/tin-sad'
 
 type VerificationStatusProps = {
   summary: {
@@ -76,7 +76,7 @@ function VerificationStatus({ summary, isDarkMode = true, verificationDocument }
             transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
             className="flex items-center gap-2 w-full"
           >
-            <LuShieldAlert className="h-5 w-5 flex-shrink-0" />
+            <TinSadIcon size={20} className="flex-shrink-0" />
             <p className="overflow-hidden break-words break-all text-sm" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
               {resolvedMessage}
             </p>

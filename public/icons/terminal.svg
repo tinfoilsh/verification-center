@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445 445">
-  <rect x="175.73" y="188.61" width="120" height="20.29"/>
-  <rect x="82.26" y="109.11" width="20.29" height="20.29"/>
-  <rect x="100.88" y="127.73" width="20.29" height="20.29"/>
-  <rect x="121.17" y="148.02" width="20.29" height="20.29"/>
-  <rect x="80.58" y="188.61" width="20.29" height="20.29"/>
-  <rect x="100.88" y="168.32" width="20.29" height="20.29"/>
-  <path d="M47.52,32h349.95c20.12,0,36.45,16.33,36.45,36.45v308.09c0,20.12-16.33,36.45-36.45,36.45H47.53c-20.12,0-36.45-16.33-36.45-36.45V68.45c0-20.12,16.33-36.45,36.45-36.45Z" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 20px;"/>
-  <rect x="60.29" y="208.54" width="20.29" height="20.29"/>
-  <rect x="61.96" y="88.82" width="20.29" height="20.29"/>
+  <rect x="175.73" y="188.61" width="120" height="20.29" fill="currentColor"/>
+  <rect x="82.26" y="109.11" width="20.29" height="20.29" fill="currentColor"/>
+  <rect x="100.88" y="127.73" width="20.29" height="20.29" fill="currentColor"/>
+  <rect x="121.17" y="148.02" width="20.29" height="20.29" fill="currentColor"/>
+  <rect x="80.58" y="188.61" width="20.29" height="20.29" fill="currentColor"/>
+  <rect x="100.88" y="168.32" width="20.29" height="20.29" fill="currentColor"/>
+  <path d="M47.52,32h349.95c20.12,0,36.45,16.33,36.45,36.45v308.09c0,20.12-16.33,36.45-36.45,36.45H47.53c-20.12,0-36.45-16.33-36.45-36.45V68.45c0-20.12,16.33-36.45,36.45-36.45Z" style="fill: none; stroke: currentColor; stroke-miterlimit: 10; stroke-width: 20px;"/>
+  <rect x="60.29" y="208.54" width="20.29" height="20.29" fill="currentColor"/>
+  <rect x="61.96" y="88.82" width="20.29" height="20.29" fill="currentColor"/>
 </svg>

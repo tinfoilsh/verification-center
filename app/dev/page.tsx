@@ -297,7 +297,7 @@ export default function DevPage() {
           <div
             style={{
               position: 'relative',
-              width: 'min(720px, 90vw)',
+              width: 'min(540px, 90vw)',
               height: 'min(80vh, 680px)',
               borderRadius: 8,
               overflow: 'hidden',
