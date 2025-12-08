@@ -111,7 +111,7 @@ export function VerificationInitialState({
 
   return (
     <div className="relative flex h-full w-full flex-col bg-surface-background">
-      <VerifierHeader isDarkMode={isDarkMode} />
+      <VerifierHeader isDarkMode={isDarkMode} status={status} />
 
       <div className="relative w-full flex-1 overflow-y-auto">
         <TextureGrid className="z-0" />
