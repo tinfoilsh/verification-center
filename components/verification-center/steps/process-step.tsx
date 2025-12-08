@@ -4,14 +4,6 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { StatusIcon } from './status-icon'
 import { parseMeasurement, type MeasurementData } from '../utils/measurement'
 import type { VerificationDocument } from '../types/verification'
-import {
-  amdIcon,
-  githubIcon,
-  intelIcon,
-  nvidiaIcon,
-  sigstoreIcon,
-  sigstoreLightIcon,
-} from '../assets/base64'
 import { FONT_FAMILIES } from '../constants'
 import {
   getCardClasses,
@@ -319,7 +311,7 @@ export function ProcessStep({
                         className={`flex h-10 w-20 items-center justify-center rounded-lg p-2 transition-colors ${getAttestationCardClasses(isDarkMode)}`}
                       >
                         <img
-                          src={nvidiaIcon}
+                          src="/icons/nvidia.svg"
                           alt="NVIDIA"
                           width={60}
                           height={18}
@@ -334,7 +326,7 @@ export function ProcessStep({
                           className={`flex h-10 w-20 items-center justify-center rounded-lg p-2 transition-colors ${getAttestationCardClasses(isDarkMode)}`}
                         >
                           <img
-                            src={amdIcon}
+                            src="/icons/amd.svg"
                             alt="AMD"
                             width={40}
                             height={30}
@@ -350,7 +342,7 @@ export function ProcessStep({
                           className={`flex h-10 w-20 items-center justify-center rounded-lg p-2 transition-colors ${getAttestationCardClasses(isDarkMode)}`}
                         >
                           <img
-                            src={intelIcon}
+                            src="/icons/intel.svg"
                             alt="Intel"
                             width={36}
                             height={18}
@@ -379,7 +371,7 @@ export function ProcessStep({
                       >
                         <div className="flex items-center">
                           <img
-                            src={githubIcon}
+                            src="/icons/github.svg"
                             alt="GitHub"
                             width={20}
                             height={20}
@@ -399,7 +391,7 @@ export function ProcessStep({
                       >
                         <div className="flex items-center">
                           <img
-                            src={isDarkMode ? sigstoreIcon : sigstoreLightIcon}
+                            src={isDarkMode ? '/icons/sigstore.svg' : '/icons/sigstore-light.svg'}
                             alt="Sigstore"
                             width={20}
                             height={20}
