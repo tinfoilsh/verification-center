@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LuKey, LuShieldAlert, LuBug } from 'react-icons/lu'
+import { LuBug } from 'react-icons/lu'
 import { FaGithub } from 'react-icons/fa'
 import { IoMdFingerPrint } from 'react-icons/io'
 import { PiSpinner } from 'react-icons/pi'
@@ -7,6 +7,7 @@ import { FONT_FAMILIES } from './constants'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { VerificationDocument } from './types/verification'
 import { TextureGrid } from './texture-grid'
+import { ShieldXIcon, ShieldCheckIcon, LockIcon, TerminalIcon, CpuCheckIcon, KeyIcon } from './icons'
 
 type VerificationStatus = 'idle' | 'verifying' | 'success' | 'error'
 
@@ -67,19 +68,19 @@ export function VerificationInitialState({
       id: 'key' as const,
       prefix: 'Data is',
       label: 'Encrypted',
-      icon: <img src="/icons/lock.svg" alt="Lock" className="h-8 w-8" style={{ fill: 'currentColor' }} />
+      icon: <LockIcon size={16} />
     },
     {
       id: 'code' as const,
       prefix: 'Code is',
       label: 'Auditable',
-      icon: <img src="/icons/terminal.svg" alt="Terminal" className="h-8 w-8" style={{ fill: 'currentColor' }} />
+      icon: <TerminalIcon size={16} />
     },
     {
       id: 'chip' as const,
       prefix: 'Runtime is',
       label: 'Isolated',
-      icon: <img src="/icons/cpu-check.svg" alt="CPU Check" className="h-8 w-8" style={{ fill: 'currentColor' }} />
+      icon: <CpuCheckIcon size={18} />
     },
     {
       id: 'other' as const,
@@ -118,18 +119,29 @@ export function VerificationInitialState({
               </p>
             </div>
             <div
-              className={`flex items-center gap-3 rounded-xl border p-3 ${
+              className={`relative flex items-center gap-3 rounded-xl border p-3 ${
                 isDarkMode
                   ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
               }`}
             >
-              <LuKey
-                className={`h-5 w-5 flex-shrink-0 ${
+              {getStepStatus('key') === 'success' && (
+                <div
+                  className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+                    isDarkMode ? 'text-emerald-400' : 'text-emerald-600'
+                  }`}
+                  style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                >
+                  Attested <span>✓</span>
+                </div>
+              )}
+              <KeyIcon
+                size={20}
+                className={`flex-shrink-0 ${
                   isDarkMode ? 'text-content-secondary' : 'text-gray-400'
                 }`}
               />
-              <div className="flex-1 overflow-hidden">
+              <div className="flex-1 overflow-hidden pr-20">
                 <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
                   Your unique encryption key
                 </div>
@@ -183,7 +195,7 @@ export function VerificationInitialState({
                       }`}
                       style={{ fontFamily: FONT_FAMILIES.AEONIK }}
                     >
-                      EHBP (Encrypted HTTP Body Protocol) encrypts HTTP message bodies end-to-end using HPKE (RFC 9180), ensuring only the intended recipient can decrypt the payload.
+                      EHBP (Encrypted HTTP Body Protocol) encrypts HTTP message bodies end-to-end using HPKE, ensuring only the intended recipient can decrypt the payload.
                     </p>
                     <a
                       href="https://docs.tinfoil.sh/resources/ehbp"
@@ -247,18 +259,28 @@ export function VerificationInitialState({
               </p>
             </div>
             <div
-              className={`flex items-center gap-3 rounded-xl border p-3 ${
+              className={`relative flex items-center gap-3 rounded-xl border p-3 ${
                 isDarkMode
                   ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
               }`}
             >
+              {getStepStatus('code') === 'success' && (
+                <div
+                  className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+                    isDarkMode ? 'text-emerald-400' : 'text-emerald-600'
+                  }`}
+                  style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                >
+                  Verified <span>✓</span>
+                </div>
+              )}
               <IoMdFingerPrint
                 className={`h-5 w-5 flex-shrink-0 ${
                   isDarkMode ? 'text-content-secondary' : 'text-gray-400'
                 }`}
               />
-              <div className="flex-1 overflow-hidden">
+              <div className="flex-1 overflow-hidden pr-20">
                 <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
                   Source code fingerprint
                 </div>
@@ -426,18 +448,28 @@ export function VerificationInitialState({
 
             {/* Enclave Fingerprint - always visible */}
             <div
-              className={`flex items-center gap-3 rounded-xl border p-3 ${
+              className={`relative flex items-center gap-3 rounded-xl border p-3 ${
                 isDarkMode
                   ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
               }`}
             >
+              {getStepStatus('chip') === 'success' && (
+                <div
+                  className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+                    isDarkMode ? 'text-emerald-400' : 'text-emerald-600'
+                  }`}
+                  style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                >
+                  Attested <span>✓</span>
+                </div>
+              )}
               <IoMdFingerPrint
                 className={`h-5 w-5 flex-shrink-0 ${
                   isDarkMode ? 'text-content-secondary' : 'text-gray-400'
                 }`}
               />
-              <div className="flex-1 overflow-hidden">
+              <div className="flex-1 overflow-hidden pr-20">
                 <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
                   Enclave code fingerprint
                 </div>
@@ -709,7 +741,12 @@ export function VerificationInitialState({
       {/* Header */}
       <div
         className="relative flex items-center justify-center px-4 bg-surface-card"
-        style={{ minHeight: '72px', paddingTop: '12px', paddingBottom: '12px' }}
+        style={{
+          minHeight: '72px',
+          paddingTop: '12px',
+          paddingBottom: '12px',
+          borderBottom: `1px solid ${lineColor}`,
+        }}
       >
         {/* Left side - Tin icon */}
         <div className="absolute left-4 top-1/2 -translate-y-1/2">
@@ -792,11 +829,11 @@ export function VerificationInitialState({
               }`}
             >
               {status === 'error' ? (
-                <LuShieldAlert className="h-5 w-5" />
+                <ShieldXIcon size={20} />
               ) : status === 'verifying' ? (
                 <PiSpinner className="h-5 w-5 animate-spin" />
               ) : (
-                <img src="/icons/shield-check.svg" alt="Shield Check" className="h-5 w-5" />
+                <ShieldCheckIcon size={20} />
               )}
             </div>
             <p
@@ -979,7 +1016,7 @@ export function VerificationInitialState({
                   </span>
                 </div>
 
-                <div className={`${
+                <div className={`flex items-center justify-center ${
                   selectedTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode ? 'text-red-400' : 'text-red-600'

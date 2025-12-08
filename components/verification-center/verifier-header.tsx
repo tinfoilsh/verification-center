@@ -21,7 +21,12 @@ export function VerifierHeader({
   return (
     <div
       className={`relative flex items-center justify-center px-4 bg-surface-card ${className}`}
-      style={{ minHeight: '72px', paddingTop: '12px', paddingBottom: '12px' }}
+      style={{
+        minHeight: '72px',
+        paddingTop: '12px',
+        paddingBottom: '12px',
+        borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+      }}
     >
       {/* Left side - Tin icon */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
