@@ -61,7 +61,7 @@ export function TinfoilBadge({
   compact = false,
   onClick,
 }: TinfoilBadgeProps) {
-  const { computedState, label } = useMemo(() => {
+  const { state: computedState, label } = useMemo(() => {
     return getBadgeStatus(verificationDocument)
   }, [verificationDocument])
 
@@ -233,20 +233,22 @@ export function TinfoilBadge({
             }}
           />
         ) : (
-          <LockIcon
-            size={24}
-            color={
-              computedState === 'success'
-                ? isDarkMode
-                  ? '#10b981'
-                  : '#059669'
-                : computedState === 'error'
-                ? '#ef4444'
-                : isDarkMode
-                ? '#9ca3af'
-                : '#6b7280'
-            }
-          />
+          <div
+            style={{
+              color:
+                computedState === 'success'
+                  ? isDarkMode
+                    ? '#10b981'
+                    : '#059669'
+                  : computedState === 'error'
+                  ? '#ef4444'
+                  : isDarkMode
+                  ? '#9ca3af'
+                  : '#6b7280',
+            }}
+          >
+            <LockIcon size={24} />
+          </div>
         )}
       </div>
       <div

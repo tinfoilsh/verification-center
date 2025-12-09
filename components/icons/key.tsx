@@ -5,17 +5,28 @@ interface IconProps {
   className?: string;
 }
 
-export const KeyIcon: React.FC<IconProps> = ({ size, className = '' }) => {
+export const KeyIcon: React.FC<IconProps> = ({ size = 28, className = '' }) => {
+  const sizeValue = typeof size === 'number' ? `${size}px` : size;
+
   return (
-    <img
-      src="/icons/key.svg"
-      alt="Key"
-      {...(size && {
-        width: typeof size === 'number' ? `${size}px` : size,
-        height: typeof size === 'number' ? `${size}px` : size,
-      })}
+    <div
       className={className}
-      style={{ display: 'inline-block', aspectRatio: '1', color: 'inherit' }}
+      style={{
+        display: 'inline-block',
+        width: sizeValue,
+        height: sizeValue,
+        backgroundColor: 'currentColor',
+        maskImage: 'url(/icons/key.svg)',
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: 'url(/icons/key.svg)',
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+      }}
+      role="img"
+      aria-label="Key"
     />
   );
 };

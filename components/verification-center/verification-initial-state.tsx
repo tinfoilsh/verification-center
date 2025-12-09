@@ -35,14 +35,23 @@ export function VerificationInitialState({
   errorMessage,
   stepStatuses
 }: VerificationInitialStateProps) {
-  const hasOtherError = stepStatuses?.other === 'error'
-  const [selectedTab, setSelectedTab] = useState<TabType>(hasOtherError ? 'other' : null)
+  const getFirstErrorTab = (): TabType => {
+    if (!stepStatuses) return null
+    if (stepStatuses.encryption === 'error') return 'key'
+    if (stepStatuses.code === 'error') return 'code'
+    if (stepStatuses.hardware === 'error') return 'chip'
+    if (stepStatuses.other === 'error') return 'other'
+    return null
+  }
+
+  const [selectedTab, setSelectedTab] = useState<TabType>(getFirstErrorTab())
 
   useEffect(() => {
-    if (hasOtherError && selectedTab !== 'other') {
-      setSelectedTab('other')
+    const errorTab = getFirstErrorTab()
+    if (errorTab) {
+      setSelectedTab(errorTab)
     }
-  }, [hasOtherError, selectedTab])
+  }, [stepStatuses?.encryption, stepStatuses?.code, stepStatuses?.hardware, stepStatuses?.other])
 
   const getStepStatus = (tabId: TabType): StepStatus => {
     if (status === 'verifying') return 'pending'
@@ -91,6 +100,7 @@ export function VerificationInitialState({
     }
   ]
 
+  const hasOtherError = stepStatuses?.other === 'error'
   const visibleTabs = tabs.filter(tab => !tab.showOnlyOnError || hasOtherError)
 
   const renderTabContent = (tabId: TabType) => {
@@ -100,11 +110,11 @@ export function VerificationInitialState({
 
     switch (tabId) {
       case 'key':
-        return <KeyTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} />
+        return <KeyTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
       case 'code':
-        return <CodeTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} />
+        return <CodeTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
       case 'chip':
-        return <ChipTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} />
+        return <ChipTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
       case 'other':
         return <OtherTab isDarkMode={isDarkMode} errorMessage={errorMessage} />
       default:
@@ -277,7 +287,7 @@ export function VerificationInitialState({
                   className={`absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full ${
                     getStepStatus(tab.id) === 'error'
                       ? isDarkMode
-                        ? 'bg-red-500/40 text-red-400'
+                        ? 'bg-red-500 text-white'
                         : 'bg-red-100 text-red-600'
                       : getStepStatus(tab.id) === 'pending'
                         ? isDarkMode

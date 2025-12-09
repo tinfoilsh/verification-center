@@ -19,8 +19,6 @@ type MockOutcome = 'success' | 'failure' | 'transport-failure' | 'hpke-failure' 
 export default function DevPage() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showFlow, setShowFlow] = useState(true)
-  const [compact, setCompact] = useState(false)
-  const [showInitialState, setShowInitialState] = useState(true)
   const [displayMode, setDisplayMode] = useState<DisplayMode>('sidebar')
   const [isVerifierOpen, setIsVerifierOpen] = useState(true)
   const [mockOutcome, setMockOutcome] = useState<MockOutcome>('success')
@@ -58,11 +56,6 @@ export default function DevPage() {
     setIsVerifierOpen((current) => !current)
   }, [])
 
-  const handleRequestVerificationDocument = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    return verificationDocument
-  }
-
   const appClassName = isDarkMode ? 'app app--dark' : 'app'
 
   return (
@@ -92,23 +85,6 @@ export default function DevPage() {
             Show verification flow
           </label>
 
-          <label>
-            <input
-              type="checkbox"
-              checked={compact}
-              onChange={(event) => setCompact(event.target.checked)}
-            />
-            Compact mode
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              checked={showInitialState}
-              onChange={(event) => setShowInitialState(event.target.checked)}
-            />
-            Show initial state
-          </label>
 
           <div className="app__group">
             <p>Mock outcome</p>
@@ -228,7 +204,7 @@ export default function DevPage() {
               <TinfoilBadge
                 verificationDocument={verificationDocument}
                 isDarkMode={isDarkMode}
-                compact={compact}
+                compact={false}
                 onClick={handleToggleVerifier}
               />
             </div>
@@ -260,11 +236,8 @@ export default function DevPage() {
             {isVerifierOpen && (
               <VerificationCenter
                 verificationDocument={verificationDocument}
-                onRequestVerificationDocument={handleRequestVerificationDocument}
                 isDarkMode={isDarkMode}
                 fillContainer={true}
-                compact={compact}
-                showInitialState={showInitialState}
               />
             )}
           </div>
@@ -311,11 +284,8 @@ export default function DevPage() {
             {isVerifierOpen && (
               <VerificationCenter
                 verificationDocument={verificationDocument}
-                onRequestVerificationDocument={handleRequestVerificationDocument}
                 isDarkMode={isDarkMode}
                 fillContainer={true}
-                compact={compact}
-                showInitialState={showInitialState}
               />
             )}
           </div>
@@ -326,11 +296,8 @@ export default function DevPage() {
         <div style={{ width: 'min(720px, 100%)', height: '100%', borderRadius: 8, overflow: 'hidden' }}>
           <VerificationCenter
             verificationDocument={verificationDocument}
-            onRequestVerificationDocument={handleRequestVerificationDocument}
             isDarkMode={isDarkMode}
             fillContainer={true}
-            compact={compact}
-            showInitialState={showInitialState}
           />
         </div>
       )}
