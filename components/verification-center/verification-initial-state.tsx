@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { PiSpinner } from 'react-icons/pi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from './constants'
@@ -36,6 +36,12 @@ export function VerificationInitialState({
 }: VerificationInitialStateProps) {
   const hasOtherError = stepStatuses?.other === 'error'
   const [selectedTab, setSelectedTab] = useState<TabType>(hasOtherError ? 'other' : null)
+
+  useEffect(() => {
+    if (hasOtherError && selectedTab !== 'other') {
+      setSelectedTab('other')
+    }
+  }, [hasOtherError, selectedTab])
 
   const getStepStatus = (tabId: TabType): StepStatus => {
     if (status === 'verifying') return 'pending'
