@@ -18,7 +18,6 @@ type MockOutcome = 'success' | 'failure' | 'transport-failure' | 'hpke-failure' 
 
 export default function DevPage() {
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [showFlow, setShowFlow] = useState(true)
   const [displayMode, setDisplayMode] = useState<DisplayMode>('sidebar')
   const [isVerifierOpen, setIsVerifierOpen] = useState(true)
   const [mockOutcome, setMockOutcome] = useState<MockOutcome>('success')
@@ -74,15 +73,6 @@ export default function DevPage() {
               onChange={(event) => setIsDarkMode(event.target.checked)}
             />
             Dark mode
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              checked={showFlow}
-              onChange={(event) => setShowFlow(event.target.checked)}
-            />
-            Show verification flow
           </label>
 
 
