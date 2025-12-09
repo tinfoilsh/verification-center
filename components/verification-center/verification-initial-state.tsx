@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PiSpinner } from 'react-icons/pi'
+import { SpinnerIcon } from '../icons/spinner'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from './constants'
 import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from './colors'
@@ -166,7 +166,7 @@ export function VerificationInitialState({
               {status === 'error' ? (
                 <ShieldXIcon size={20} />
               ) : status === 'verifying' ? (
-                <PiSpinner className="h-5 w-5 animate-spin" />
+                <SpinnerIcon size={20} className="animate-spin" />
               ) : (
                 <ShieldCheckIcon size={20} />
               )}
@@ -313,7 +313,7 @@ export function VerificationInitialState({
                       />
                     </svg>
                   ) : getStepStatus(tab.id) === 'pending' ? (
-                    <PiSpinner className="h-3 w-3 animate-spin" />
+                    <SpinnerIcon size={12} className="animate-spin" />
                   ) : (
                     <svg
                       className="h-3 w-3"

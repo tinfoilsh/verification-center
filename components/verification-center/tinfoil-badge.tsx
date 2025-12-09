@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { PiSpinner } from 'react-icons/pi'
+import { SpinnerIcon } from '../icons/spinner'
 import { LockIcon } from './icons'
 import type { VerificationDocument } from './types/verification'
 
@@ -223,15 +223,14 @@ export function TinfoilBadge({
         }}
       >
         {computedState === 'loading' ? (
-          <PiSpinner
-            className="animate-spin"
+          <div
             style={{
-              width: '24px',
-              height: '24px',
               opacity: isDarkMode ? 0.6 : 1,
               color: 'currentColor',
             }}
-          />
+          >
+            <SpinnerIcon size={24} className="animate-spin" />
+          </div>
         ) : (
           <div
             style={{

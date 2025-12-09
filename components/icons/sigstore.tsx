@@ -9,13 +9,24 @@ export const SigstoreIcon: React.FC<IconProps> = ({ size = 28, className = '' })
   const sizeValue = typeof size === 'number' ? `${size}px` : size;
 
   return (
-    <img
-      src="/icons/sigstore.svg"
-      alt="Sigstore"
-      width={sizeValue}
-      height={sizeValue}
+    <div
       className={className}
-      style={{ display: 'inline-block', aspectRatio: '1', color: 'inherit' }}
+      style={{
+        display: 'inline-block',
+        width: sizeValue,
+        height: sizeValue,
+        backgroundColor: 'currentColor',
+        maskImage: 'url(/icons/sigstore.svg)',
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: 'url(/icons/sigstore.svg)',
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+      }}
+      role="img"
+      aria-label="Sigstore"
     />
   );
 };
