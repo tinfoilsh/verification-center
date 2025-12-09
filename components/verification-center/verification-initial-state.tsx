@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { PiSpinner } from 'react-icons/pi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from './constants'
+import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from './colors'
 import type { VerificationDocument } from './types/verification'
 import { TextureGrid } from './texture-grid'
 import { ShieldXIcon, ShieldCheckIcon, LockIcon, TerminalIcon, CpuCheckIcon, WarningIcon } from './icons'
@@ -135,8 +136,8 @@ export function VerificationInitialState({
                   ? 'border-border-subtle bg-gray-800/50 text-white'
                   : 'border-border-subtle bg-gray-100 text-gray-700'
                 : isDarkMode
-                  ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
-                  : 'border-emerald-300 bg-emerald-50 text-emerald-600'
+                  ? `border-[${TINFOIL_ACCENT_LIGHT}]/30 bg-[${TINFOIL_ACCENT_LIGHT}]/10 text-[${TINFOIL_ACCENT_LIGHT}]`
+                  : `border-[${TINFOIL_ACCENT_LIGHT}]/30 bg-[${TINFOIL_ACCENT_LIGHT}]/10 text-[${TINFOIL_ACCENT_LIGHT_DARKER}]`
           }`}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,7 +150,7 @@ export function VerificationInitialState({
                   ? isDarkMode ? 'bg-red-500/20' : 'bg-red-100'
                   : status === 'verifying'
                     ? isDarkMode ? 'bg-gray-700/50' : 'bg-gray-200'
-                    : isDarkMode ? 'bg-emerald-500/20' : 'bg-emerald-100'
+                    : isDarkMode ? `bg-[${TINFOIL_ACCENT_LIGHT}]/20` : `bg-[${TINFOIL_ACCENT_LIGHT}]/20`
               }`}
             >
               {status === 'error' ? (
@@ -253,11 +254,11 @@ export function VerificationInitialState({
                   selectedTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode
-                        ? 'border-red-500/50 bg-surface-card'
+                        ? 'border-red-500 bg-surface-card'
                         : 'border-red-300 bg-red-50'
                       : isDarkMode
-                        ? 'border-emerald-500/50 bg-surface-card'
-                        : 'border-emerald-300 bg-emerald-50'
+                        ? `border-[${TINFOIL_ACCENT_LIGHT}] bg-surface-card`
+                        : `border-[${TINFOIL_ACCENT_LIGHT}] bg-white`
                     : isDarkMode
                       ? 'border-border-subtle bg-surface-card hover:border-border-subtle hover:bg-surface-card/80'
                       : 'border-border-subtle bg-surface-card hover:bg-gray-50'
@@ -283,8 +284,8 @@ export function VerificationInitialState({
                           ? 'bg-gray-700/50 text-gray-400'
                           : 'bg-gray-200 text-gray-500'
                         : isDarkMode
-                          ? 'bg-emerald-500/40 text-emerald-400'
-                          : 'bg-emerald-100 text-emerald-600'
+                          ? `bg-[${TINFOIL_ACCENT_LIGHT}] text-white`
+                          : `bg-[${TINFOIL_ACCENT_LIGHT}] text-white`
                   }`}
                 >
                   {getStepStatus(tab.id) === 'error' ? (
@@ -332,7 +333,7 @@ export function VerificationInitialState({
                       selectedTab === tab.id
                         ? getStepStatus(tab.id) === 'error'
                           ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                          : isDarkMode ? 'text-emerald-400' : 'text-emerald-600'
+                          : isDarkMode ? `text-[${TINFOIL_ACCENT_LIGHT}]` : `text-[${TINFOIL_ACCENT_LIGHT_DARKER}]`
                         : isDarkMode ? 'text-content-secondary' : 'text-gray-500'
                     } transition-colors`}
                   >
@@ -344,7 +345,7 @@ export function VerificationInitialState({
                   selectedTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                      : isDarkMode ? 'text-emerald-400' : 'text-emerald-600'
+                      : isDarkMode ? `text-[${TINFOIL_ACCENT_LIGHT}]` : `text-[${TINFOIL_ACCENT_LIGHT_DARKER}]`
                     : isDarkMode ? 'text-content-secondary' : 'text-gray-400'
                 } transition-colors`}>
                   {tab.icon}
