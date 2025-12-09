@@ -1,19 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import type { VerificationDocument } from 'tinfoil'
-import { VerificationCenter } from '@/components/verification-center/verifier'
+import { VerificationCenter, type VerificationDocument } from '@/components/verification-center/verifier'
 
 export default function VerificationCenterPage() {
   const [verificationDocument, setVerificationDocument] = useState<VerificationDocument | null>(null)
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [showVerificationFlow, setShowVerificationFlow] = useState(true)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
 
     setIsDarkMode(params.get('darkMode') === 'true')
-    setShowVerificationFlow(params.get('showVerificationFlow') !== 'false')
 
     const handleMessage = (event: MessageEvent) => {
       if (event.data.type === 'TINFOIL_VERIFICATION_DOCUMENT') {
@@ -31,20 +28,12 @@ export default function VerificationCenterPage() {
     }
   }, [])
 
-  const handleRequestVerificationDocument = async () => {
-    window.parent.postMessage({ type: 'TINFOIL_REQUEST_VERIFICATION_DOCUMENT' }, '*')
-    return verificationDocument
-  }
-
   return (
     <div className="h-screen w-full">
       <VerificationCenter
         verificationDocument={verificationDocument ?? undefined}
-        onRequestVerificationDocument={handleRequestVerificationDocument}
         isDarkMode={isDarkMode}
         fillContainer={true}
-        compact={true}
-        showInitialState={showVerificationFlow}
       />
     </div>
   )

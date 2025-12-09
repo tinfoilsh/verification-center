@@ -14,7 +14,7 @@ export function OtherTab({
       <div>
         <h3
           className={`mb-2 text-lg font-semibold ${
-            isDarkMode ? 'text-content-primary' : 'text-gray-900'
+            isDarkMode ? 'text-red-400' : 'text-red-600'
           }`}
           style={{ fontFamily: FONT_FAMILIES.AEONIK }}
         >
@@ -22,7 +22,7 @@ export function OtherTab({
         </h3>
         <p
           className={`text-sm ${
-            isDarkMode ? 'text-content-secondary' : 'text-gray-600'
+            isDarkMode ? 'text-red-400' : 'text-red-600'
           }`}
           style={{ fontFamily: FONT_FAMILIES.AEONIK }}
         >

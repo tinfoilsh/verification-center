@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { IoMdFingerPrint } from 'react-icons/io'
 import { FaGithub } from 'react-icons/fa'
 import { FONT_FAMILIES } from '../constants'
+import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '../colors'
 import type { VerificationDocument } from '../types/verification'
 import type { StepStatus } from './types'
 
@@ -10,14 +11,75 @@ type CodeTabProps = {
   isDarkMode?: boolean
   verificationDocument?: VerificationDocument
   stepStatus: StepStatus
+  errorMessage?: string
 }
 
 export function CodeTab({
   isDarkMode = true,
   verificationDocument,
   stepStatus,
+  errorMessage,
 }: CodeTabProps) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false)
+
+  if (stepStatus === 'error') {
+    return (
+      <div className="space-y-4">
+        <div>
+          <h3
+            className={`mb-2 text-lg font-semibold ${
+              isDarkMode ? 'text-red-400' : 'text-red-600'
+            }`}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          >
+            An error occurred
+          </h3>
+          <p
+            className={`text-sm ${
+              isDarkMode ? 'text-red-400' : 'text-red-600'
+            }`}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          >
+            {errorMessage || 'Failed to verify code.'}
+          </p>
+        </div>
+
+        <div
+          className={`relative flex items-center gap-3 rounded-xl border p-3 ${
+            isDarkMode
+              ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+              : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
+          }`}
+        >
+          <div
+            className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+              isDarkMode ? 'text-red-400' : 'text-red-600'
+            }`}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          >
+            Unverified <span>✗</span>
+          </div>
+          <IoMdFingerPrint
+            className={`h-5 w-5 flex-shrink-0 ${
+              isDarkMode ? 'text-content-secondary' : 'text-gray-400'
+            }`}
+          />
+          <div className="flex-1 overflow-hidden pr-20">
+            <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+              Source code fingerprint
+            </div>
+            <div
+              className={`font-mono text-xs truncate ${
+                isDarkMode ? 'text-content-primary' : 'text-gray-900'
+              }`}
+            >
+              {verificationDocument?.codeFingerprint || 'No fingerprint available'}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-4">
@@ -48,10 +110,11 @@ export function CodeTab({
       >
         {stepStatus === 'success' && (
           <div
-            className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
-              isDarkMode ? 'text-emerald-400' : 'text-emerald-600'
-            }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            className="absolute top-2 right-2 flex items-center gap-1 text-xs font-medium"
+            style={{
+              fontFamily: FONT_FAMILIES.AEONIK,
+              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
+            }}
           >
             Verified <span>✓</span>
           </div>
@@ -139,12 +202,11 @@ export function CodeTab({
                   href={`https://github.com/${verificationDocument.configRepo}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
-                    isDarkMode
-                      ? 'text-emerald-400 hover:text-emerald-300'
-                      : 'text-emerald-600 hover:text-emerald-700'
-                  }`}
-                  style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors"
+                  style={{
+                    color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
+                    fontFamily: FONT_FAMILIES.AEONIK
+                  }}
                 >
                   {verificationDocument.configRepo}
                   <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
