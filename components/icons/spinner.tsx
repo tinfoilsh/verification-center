@@ -5,28 +5,29 @@ interface IconProps {
   className?: string;
 }
 
-export const GpuNoFanIcon: React.FC<IconProps> = ({ size = 28, className = '' }) => {
+export const SpinnerIcon: React.FC<IconProps> = ({ size = 28, className = '' }) => {
   const sizeValue = typeof size === 'number' ? `${size}px` : size;
 
   return (
     <div
       className={className}
       style={{
-        display: 'inline-block',
+        display: 'flex',
+        flexShrink: 0,
         width: sizeValue,
         height: sizeValue,
         backgroundColor: 'currentColor',
-        maskImage: 'url(/icons/gpu-no-fan.svg)',
+        maskImage: 'url(/icons/spinner.svg)',
         maskSize: 'contain',
         maskRepeat: 'no-repeat',
         maskPosition: 'center',
-        WebkitMaskImage: 'url(/icons/gpu-no-fan.svg)',
+        WebkitMaskImage: 'url(/icons/spinner.svg)',
         WebkitMaskSize: 'contain',
         WebkitMaskRepeat: 'no-repeat',
         WebkitMaskPosition: 'center',
       }}
       role="img"
-      aria-label="GPU (No Fan)"
+      aria-label="Spinner"
     />
   );
 };

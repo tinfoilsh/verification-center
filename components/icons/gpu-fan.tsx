@@ -3,20 +3,30 @@ import React from 'react';
 interface IconProps {
   size?: number | string;
   className?: string;
-  style?: React.CSSProperties;
 }
 
-export const GpuFanIcon: React.FC<IconProps> = ({ size = 28, className = '', style }) => {
+export const GpuFanIcon: React.FC<IconProps> = ({ size = 28, className = '' }) => {
   const sizeValue = typeof size === 'number' ? `${size}px` : size;
 
   return (
-    <img
-      src="/icons/gpu-fan.svg"
-      alt="GPU Fan"
-      width={sizeValue}
-      height={sizeValue}
+    <div
       className={className}
-      style={{ display: 'inline-block', ...style }}
+      style={{
+        display: 'inline-block',
+        width: sizeValue,
+        height: sizeValue,
+        backgroundColor: 'currentColor',
+        maskImage: 'url(/icons/gpu-fan.svg)',
+        maskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskImage: 'url(/icons/gpu-fan.svg)',
+        WebkitMaskSize: 'contain',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskPosition: 'center',
+      }}
+      role="img"
+      aria-label="GPU Fan"
     />
   );
 };
