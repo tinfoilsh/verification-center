@@ -267,13 +267,22 @@ export function VerificationInitialState({
                         ? 'border-red-500 bg-surface-card'
                         : 'border-red-300 bg-red-50'
                       : isDarkMode
-                        ? `border-[${TINFOIL_ACCENT_LIGHT}] bg-surface-card`
-                        : `border-[${TINFOIL_ACCENT_LIGHT}] bg-white`
+                        ? 'bg-surface-card'
+                        : 'bg-white'
                     : isDarkMode
                       ? 'border-border-subtle bg-surface-card hover:border-border-subtle hover:bg-surface-card/80'
                       : 'border-border-subtle bg-surface-card hover:bg-gray-50'
                 }`}
-                style={{ width: visibleTabs.length > 3 ? '70px' : '80px', height: visibleTabs.length > 3 ? '70px' : '80px' }}
+                style={{
+                  width: visibleTabs.length > 3 ? '70px' : '80px',
+                  height: visibleTabs.length > 3 ? '70px' : '80px',
+                  ...(selectedTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
+                    borderColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
+                    background: isDarkMode
+                      ? `linear-gradient(${TINFOIL_ACCENT_LIGHT}20, ${TINFOIL_ACCENT_LIGHT}20), rgb(26, 26, 26)`
+                      : `linear-gradient(${TINFOIL_ACCENT_LIGHT}10, ${TINFOIL_ACCENT_LIGHT}10), rgb(255, 255, 255)`
+                  } : {})
+                }}
                 initial={tab.id === 'other' ? { opacity: 0, x: 20 } : { opacity: 0 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -293,10 +302,11 @@ export function VerificationInitialState({
                         ? isDarkMode
                           ? 'bg-gray-700/50 text-gray-400'
                           : 'bg-gray-200 text-gray-500'
-                        : isDarkMode
-                          ? `bg-[${TINFOIL_ACCENT_LIGHT}] text-white`
-                          : `bg-[${TINFOIL_ACCENT_LIGHT}] text-white`
+                        : 'text-white'
                   }`}
+                  style={getStepStatus(tab.id) === 'success' ? {
+                    backgroundColor: TINFOIL_ACCENT_LIGHT
+                  } : {}}
                 >
                   {getStepStatus(tab.id) === 'error' ? (
                     <svg
