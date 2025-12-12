@@ -284,8 +284,8 @@ export function VerificationInitialState({
                   height: visibleTabs.length > 3 ? '70px' : '80px',
                   ...(selectedTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
                     background: isDarkMode
-                      ? 'rgba(104, 199, 172, 0.1)'
-                      : 'rgba(104, 199, 172, 0.05)'
+                      ? 'linear-gradient(rgba(104, 199, 172, 0.1), rgba(104, 199, 172, 0.1)), hsl(240, 3.4%, 11.4%)'
+                      : 'linear-gradient(rgba(104, 199, 172, 0.05), rgba(104, 199, 172, 0.05)), hsl(0, 0%, 100%)'
                   } : {})
                 }}
                 initial={tab.id === 'other' ? { opacity: 0, x: 20 } : { opacity: 0 }}
