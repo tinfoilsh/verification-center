@@ -148,7 +148,7 @@ export function VerificationInitialState({
         <div className="relative z-10 space-y-3 px-3 pb-6 pt-3 sm:space-y-4 sm:px-4 sm:pt-4">
         {/* Status Banner */}
         <motion.div
-          className={`flex min-h-16 flex-col gap-3 rounded-xl border p-4 ${
+          className={`flex min-h-[88px] flex-col justify-center gap-3 rounded-xl border p-4 ${
             status === 'error'
               ? isDarkMode
                 ? 'text-red-400'
@@ -199,8 +199,7 @@ export function VerificationInitialState({
               )}
             </div>
             <p
-              className="text-sm"
-              style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
             >
               {status === 'error'
                 ? 'An error occurred during initialization.'
@@ -367,7 +366,7 @@ export function VerificationInitialState({
 
                 <div
                   className="flex flex-col items-center mb-1"
-                  style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '10px' }}
+                  style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
                 >
                   <span className={isDarkMode ? 'text-content-muted' : 'text-gray-400'}>
                     {tab.prefix}

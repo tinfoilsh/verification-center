@@ -26,18 +26,16 @@ export function KeyTab({
       <div className="space-y-4">
         <div>
           <h3
-            className={`mb-2 text-lg font-semibold ${
+            className={`mb-2 font-semibold ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             An error occurred
           </h3>
           <p
-            className={`text-sm ${
-              isDarkMode ? 'text-red-400' : 'text-red-600'
-            }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            className={isDarkMode ? 'text-red-400' : 'text-red-600'}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             {errorMessage || 'Failed to verify encryption.'}
           </p>
@@ -51,10 +49,10 @@ export function KeyTab({
           }`}
         >
           <div
-            className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+            className={`absolute top-2 right-2 flex items-center gap-1 font-medium ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
           >
             Unverified <span>✗</span>
           </div>
@@ -65,13 +63,14 @@ export function KeyTab({
             }`}
           />
           <div className="flex-1 overflow-hidden pr-20">
-            <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+            <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
               Your unique encryption key
             </div>
             <div
-              className={`font-mono text-xs truncate ${
+              className={`font-mono truncate ${
                 isDarkMode ? 'text-content-primary' : 'text-gray-900'
               }`}
+              style={{ fontSize: '12px' }}
             >
               {verificationDocument?.hpkePublicKey || 'No key available'}
             </div>
@@ -85,18 +84,16 @@ export function KeyTab({
     <div className="space-y-4">
       <div>
         <h3
-          className={`mb-2 text-lg font-semibold ${
+          className={`mb-2 font-semibold ${
             isDarkMode ? 'text-content-primary' : 'text-gray-900'
           }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
           Data is encrypted
         </h3>
         <p
-          className={`text-sm ${
-            isDarkMode ? 'text-content-secondary' : 'text-gray-600'
-          }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
           Your data is encrypted using a unique key generated inside the secure hardware enclave and verified on your device.
         </p>
@@ -110,9 +107,10 @@ export function KeyTab({
       >
         {stepStatus === 'success' && (
           <div
-            className="absolute top-2 right-2 flex items-center gap-1 text-xs font-medium"
+            className="absolute top-2 right-2 flex items-center gap-1 font-medium"
             style={{
               fontFamily: FONT_FAMILIES.AEONIK,
+              fontSize: '12px',
               color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
             }}
           >
@@ -126,13 +124,14 @@ export function KeyTab({
           }`}
         />
         <div className="flex-1 overflow-hidden pr-20">
-          <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
             Your unique encryption key
           </div>
           <div
-            className={`font-mono text-xs truncate ${
+            className={`font-mono truncate ${
               isDarkMode ? 'text-content-primary' : 'text-gray-900'
             }`}
+            style={{ fontSize: '12px' }}
           >
             {verificationDocument?.hpkePublicKey || 'No key available'}
           </div>
@@ -141,12 +140,12 @@ export function KeyTab({
 
       <button
         onClick={() => setShowAdditionalInfo(!showAdditionalInfo)}
-        className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
+        className={`w-full rounded-xl border px-4 py-2.5 font-medium transition-all ${
           isDarkMode
             ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
             : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
         }`}
-        style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+        style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
       >
         {showAdditionalInfo ? 'Hide additional info' : 'Show additional info'}
       </button>
@@ -170,14 +169,14 @@ export function KeyTab({
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
               }`}
             >
-              <div className="mb-2 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+              <div className="mb-2 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
                 Encryption Protocol
               </div>
               <p
-                className={`text-xs mb-3 ${
+                className={`mb-3 ${
                   isDarkMode ? 'text-content-secondary' : 'text-gray-600'
                 }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
               >
                 EHBP (Encrypted HTTP Body Protocol) encrypts HTTP message bodies end-to-end using HPKE, ensuring only the intended recipient can decrypt the payload.
               </p>
@@ -185,10 +184,11 @@ export function KeyTab({
                 href="https://docs.tinfoil.sh/resources/ehbp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 font-medium transition-colors"
                 style={{
                   color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-                  fontFamily: FONT_FAMILIES.AEONIK
+                  fontFamily: FONT_FAMILIES.AEONIK,
+                  fontSize: '12px'
                 }}
               >
                 Learn more about EHBP
@@ -206,10 +206,10 @@ export function KeyTab({
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
-                <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                <div className="mb-1.5 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
                   Full HPKE Public Key
                 </div>
-                <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                <div className={`font-mono break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                   {verificationDocument.hpkePublicKey}
                 </div>
               </div>

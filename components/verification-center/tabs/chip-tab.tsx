@@ -30,18 +30,16 @@ export function ChipTab({
       <div className="space-y-4">
         <div>
           <h3
-            className={`mb-2 text-lg font-semibold ${
+            className={`mb-2 font-semibold ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             An error occurred
           </h3>
           <p
-            className={`text-sm ${
-              isDarkMode ? 'text-red-400' : 'text-red-600'
-            }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            className={isDarkMode ? 'text-red-400' : 'text-red-600'}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             {errorMessage || 'Failed to verify runtime isolation.'}
           </p>
@@ -68,13 +66,14 @@ export function ChipTab({
             }`}
           />
           <div className="flex-1 overflow-hidden pr-20">
-            <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+            <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
               Enclave code fingerprint
             </div>
             <div
-              className={`font-mono text-xs truncate ${
+              className={`font-mono truncate ${
                 isDarkMode ? 'text-content-primary' : 'text-gray-900'
               }`}
+              style={{ fontSize: '12px' }}
             >
               {verificationDocument?.enclaveFingerprint || 'No fingerprint available'}
             </div>
@@ -88,18 +87,16 @@ export function ChipTab({
     <div className="space-y-4">
       <div>
         <h3
-          className={`mb-2 text-lg font-semibold ${
+          className={`mb-2 font-semibold ${
             isDarkMode ? 'text-content-primary' : 'text-gray-900'
           }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
           Runtime is isolated
         </h3>
         <p
-          className={`text-sm ${
-            isDarkMode ? 'text-content-secondary' : 'text-gray-600'
-          }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
           The secure hardware enclave that processes your data has been attested and is verified.
           The code it is running matches the auditable open-source repository.
@@ -130,13 +127,14 @@ export function ChipTab({
           }`}
         />
         <div className="flex-1 overflow-hidden pr-20">
-          <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
             Enclave code fingerprint
           </div>
           <div
-            className={`font-mono text-xs truncate ${
+            className={`font-mono truncate ${
               isDarkMode ? 'text-content-primary' : 'text-gray-900'
             }`}
+            style={{ fontSize: '12px' }}
           >
             {verificationDocument?.enclaveFingerprint || 'No fingerprint available'}
           </div>

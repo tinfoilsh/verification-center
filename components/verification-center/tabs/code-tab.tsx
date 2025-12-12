@@ -27,18 +27,16 @@ export function CodeTab({
       <div className="space-y-4">
         <div>
           <h3
-            className={`mb-2 text-lg font-semibold ${
+            className={`mb-2 font-semibold ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             An error occurred
           </h3>
           <p
-            className={`text-sm ${
-              isDarkMode ? 'text-red-400' : 'text-red-600'
-            }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            className={isDarkMode ? 'text-red-400' : 'text-red-600'}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             {errorMessage || 'Failed to verify code.'}
           </p>
@@ -65,13 +63,14 @@ export function CodeTab({
             }`}
           />
           <div className="flex-1 overflow-hidden pr-20">
-            <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+            <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
               Source code fingerprint
             </div>
             <div
-              className={`font-mono text-xs truncate ${
+              className={`font-mono truncate ${
                 isDarkMode ? 'text-content-primary' : 'text-gray-900'
               }`}
+              style={{ fontSize: '12px' }}
             >
               {verificationDocument?.codeFingerprint || 'No fingerprint available'}
             </div>
@@ -85,18 +84,16 @@ export function CodeTab({
     <div className="space-y-4">
       <div>
         <h3
-          className={`mb-2 text-lg font-semibold ${
+          className={`mb-2 font-semibold ${
             isDarkMode ? 'text-content-primary' : 'text-gray-900'
           }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
           Code is auditable
         </h3>
         <p
-          className={`text-sm ${
-            isDarkMode ? 'text-content-secondary' : 'text-gray-600'
-          }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
           All the code that is processing your data comes from a trusted open-source repository and is auditable through the Sigstore transparency log.
         </p>
@@ -125,13 +122,14 @@ export function CodeTab({
           }`}
         />
         <div className="flex-1 overflow-hidden pr-20">
-          <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
             Source code fingerprint
           </div>
           <div
-            className={`font-mono text-xs truncate ${
+            className={`font-mono truncate ${
               isDarkMode ? 'text-content-primary' : 'text-gray-900'
             }`}
+            style={{ fontSize: '12px' }}
           >
             {verificationDocument?.codeFingerprint || 'No fingerprint available'}
           </div>

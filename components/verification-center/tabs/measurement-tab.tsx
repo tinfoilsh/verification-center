@@ -21,18 +21,16 @@ export function MeasurementTab({
       <div className="space-y-4">
         <div>
           <h3
-            className={`mb-2 text-lg font-semibold ${
+            className={`mb-2 font-semibold ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             Fingerprint Mismatch
           </h3>
           <p
-            className={`text-sm ${
-              isDarkMode ? 'text-red-400' : 'text-red-600'
-            }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            className={isDarkMode ? 'text-red-400' : 'text-red-600'}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
           >
             {errorMessage || 'Runtime and source measurements do not match.'}
           </p>
@@ -47,10 +45,10 @@ export function MeasurementTab({
             }`}
           >
             <div
-              className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+              className={`absolute top-2 right-2 flex items-center gap-1 font-medium ${
                 isDarkMode ? 'text-red-400' : 'text-red-600'
               }`}
-              style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
             >
               Mismatch <span>✗</span>
             </div>
@@ -60,13 +58,14 @@ export function MeasurementTab({
               }`}
             />
             <div className="flex-1 overflow-hidden pr-20">
-              <div className="text-xs font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+              <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
                 Source code fingerprint
               </div>
               <div
-                className={`font-mono text-xs truncate ${
+                className={`font-mono truncate ${
                   isDarkMode ? 'text-content-primary' : 'text-gray-900'
                 }`}
+                style={{ fontSize: '12px' }}
               >
                 {verificationDocument?.codeFingerprint || 'No fingerprint available'}
               </div>
@@ -81,10 +80,10 @@ export function MeasurementTab({
             }`}
           >
             <div
-              className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+              className={`absolute top-2 right-2 flex items-center gap-1 font-medium ${
                 isDarkMode ? 'text-red-400' : 'text-red-600'
               }`}
-              style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
             >
               Mismatch <span>✗</span>
             </div>
@@ -95,17 +94,18 @@ export function MeasurementTab({
             />
             <div className="flex-1 overflow-hidden pr-20">
               <div
-                className={`text-xs font-medium opacity-70 mb-1 ${
+                className={`font-medium opacity-70 mb-1 ${
                   isDarkMode ? 'text-red-300' : 'text-red-700'
                 }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
               >
                 Enclave code fingerprint
               </div>
               <div
-                className={`font-mono text-xs truncate ${
+                className={`font-mono truncate ${
                   isDarkMode ? 'text-red-300' : 'text-red-700'
                 }`}
+                style={{ fontSize: '12px' }}
               >
                 {verificationDocument?.enclaveFingerprint || 'No fingerprint available'}
               </div>
@@ -121,10 +121,8 @@ export function MeasurementTab({
           }`}
         >
           <p
-            className={`text-xs ${
-              isDarkMode ? 'text-content-secondary' : 'text-gray-600'
-            }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
           >
             The code running in the enclave does not match the auditable source code. This could indicate a security issue.
           </p>

@@ -42,11 +42,12 @@ export function VerifierHeader({
       {/* Center - Title and Powered by */}
       <div className="flex flex-col items-center">
         <span
-          className={`text-xl font-medium ${
+          className={`font-medium ${
             isDarkMode ? 'text-white' : 'text-content-primary'
           }`}
           style={{
             fontFamily: FONT_FAMILIES.AEONIK,
+            fontSize: '18px'
           }}
         >
           Verification Center
