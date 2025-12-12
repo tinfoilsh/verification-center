@@ -1,5 +1,5 @@
 import { LuX } from 'react-icons/lu'
-import { FONT_FAMILIES } from './constants'
+import { FONT_FAMILIES } from '@/lib/constants/verification'
 
 type VerifierHeaderProps = {
   isDarkMode?: boolean
