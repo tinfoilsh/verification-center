@@ -1,9 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
-import { SpinnerIcon } from '../icons/spinner'
-import { LockIcon } from './icons'
-import type { VerificationDocument } from './types/verification'
+import { SpinnerIcon } from '@/components/icons/spinner'
+import { LockIcon } from '@/components/icons'
+import type { VerificationDocument } from '@/lib/types/verification'
 
 type BadgeState = 'idle' | 'loading' | 'success' | 'error'
 

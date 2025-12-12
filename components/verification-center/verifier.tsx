@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import type { VerificationDocument } from './types/verification'
-export type { VerificationDocument } from './types/verification'
+import type { VerificationDocument } from '@/lib/types/verification'
+export type { VerificationDocument } from '@/lib/types/verification'
 import { VerificationInitialState } from './verification-initial-state'
-import { getVerificationStatus } from './utils/verification-status'
+import { getVerificationStatus } from '@/lib/utils/verification-status'
 
 export type VerificationCenterProps = {
   /** The verification document to display */

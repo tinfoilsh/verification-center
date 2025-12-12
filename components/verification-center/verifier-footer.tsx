@@ -1,4 +1,4 @@
-import { FONT_FAMILIES } from './constants'
+import { FONT_FAMILIES } from '@/lib/constants/verification'
 
 /**
  * VerifierFooter - Footer component for the Verification Center

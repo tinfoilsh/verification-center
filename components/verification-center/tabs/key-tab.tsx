@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FONT_FAMILIES } from '../constants'
-import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '../colors'
-import { KeyIcon } from '../icons'
-import type { VerificationDocument } from '../types/verification'
+import { FONT_FAMILIES } from '@/lib/constants/verification'
+import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
+import { KeyIcon } from '@/components/icons'
+import type { VerificationDocument } from '@/lib/types/verification'
 import type { StepStatus } from './types'
 
 type KeyTabProps = {

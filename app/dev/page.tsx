@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { VerificationCenter } from '@/components/verification-center/verifier'
-import { TinfoilBadge } from '@/components/verification-center/tinfoil-badge'
+import { TinfoilBadge } from '@/components/tinfoil-badge'
 import {
   mockFailureDocument,
   mockSuccessDocument,
