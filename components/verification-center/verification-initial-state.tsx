@@ -149,9 +149,7 @@ export function VerificationInitialState({
           }`}
           style={status === 'success' ? {
             borderColor: 'rgba(104, 199, 172, 0.3)',
-            backgroundColor: isDarkMode
-              ? 'linear-gradient(rgba(104, 199, 172, 0.1), rgba(104, 199, 172, 0.1)), hsl(240, 3.4%, 11.4%)'
-              : 'linear-gradient(rgba(104, 199, 172, 0.1), rgba(104, 199, 172, 0.1)), hsl(0, 0%, 100%)',
+            backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
             color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
           } : {}}
           initial={{ opacity: 0, y: -8 }}
@@ -285,9 +283,7 @@ export function VerificationInitialState({
                   width: visibleTabs.length > 3 ? '70px' : '80px',
                   height: visibleTabs.length > 3 ? '70px' : '80px',
                   ...(selectedTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
-                    background: isDarkMode
-                      ? 'linear-gradient(rgba(104, 199, 172, 0.1), rgba(104, 199, 172, 0.1)), hsl(240, 3.4%, 11.4%)'
-                      : 'linear-gradient(rgba(104, 199, 172, 0.05), rgba(104, 199, 172, 0.05)), hsl(0, 0%, 100%)'
+                    backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)'
                   } : {})
                 }}
                 initial={tab.id === 'other' ? { opacity: 0, x: 20 } : { opacity: 0 }}
