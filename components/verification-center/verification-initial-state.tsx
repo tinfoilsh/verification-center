@@ -145,10 +145,13 @@ export function VerificationInitialState({
                 ? isDarkMode
                   ? 'border-border-subtle bg-gray-800/50 text-white'
                   : 'border-border-subtle bg-gray-100 text-gray-700'
-                : isDarkMode
-                  ? `border-[${TINFOIL_ACCENT_LIGHT}]/30 bg-[${TINFOIL_ACCENT_LIGHT}]/10 text-[${TINFOIL_ACCENT_LIGHT}]`
-                  : `border-[${TINFOIL_ACCENT_LIGHT}]/30 bg-[${TINFOIL_ACCENT_LIGHT}]/10 text-[${TINFOIL_ACCENT_LIGHT_DARKER}]`
+                : ''
           }`}
+          style={status === 'success' ? {
+            borderColor: isDarkMode ? `${TINFOIL_ACCENT_LIGHT}30` : `${TINFOIL_ACCENT_LIGHT}30`,
+            backgroundColor: isDarkMode ? `${TINFOIL_ACCENT_LIGHT}10` : `${TINFOIL_ACCENT_LIGHT}10`,
+            color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
+          } : {}}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
@@ -160,8 +163,11 @@ export function VerificationInitialState({
                   ? isDarkMode ? 'bg-red-500/20' : 'bg-red-100'
                   : status === 'verifying'
                     ? isDarkMode ? 'bg-gray-700/50' : 'bg-gray-200'
-                    : isDarkMode ? `bg-[${TINFOIL_ACCENT_LIGHT}]/20` : `bg-[${TINFOIL_ACCENT_LIGHT}]/20`
+                    : ''
               }`}
+              style={status === 'success' ? {
+                backgroundColor: `${TINFOIL_ACCENT_LIGHT}20`
+              } : {}}
             >
               {status === 'error' ? (
                 <ShieldXIcon size={20} />
@@ -193,7 +199,7 @@ export function VerificationInitialState({
         >
           {/* Horizontal line through cards center */}
           <div
-            className="absolute left-6 right-6 pointer-events-none"
+            className="absolute left-6 right-6 pointer-events-none -z-10"
             style={{ top: '50%', height: '2px', background: lineColor }}
           />
 
@@ -210,7 +216,7 @@ export function VerificationInitialState({
             return (
               <div
                 key={`line-${index}`}
-                className="absolute pointer-events-none"
+                className="absolute pointer-events-none -z-10"
                 style={{
                   left: position,
                   top: '-16px',
@@ -241,7 +247,7 @@ export function VerificationInitialState({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="absolute pointer-events-none z-0"
+                className="absolute pointer-events-none -z-10"
                 style={{
                   left: position,
                   top: '50%',
@@ -267,8 +273,8 @@ export function VerificationInitialState({
                         ? 'border-red-500 bg-surface-card'
                         : 'border-red-300 bg-red-50'
                       : isDarkMode
-                        ? 'bg-surface-card'
-                        : 'bg-white'
+                        ? 'border-[#68C7AC] bg-surface-card'
+                        : 'border-[#5AB39A] bg-white'
                     : isDarkMode
                       ? 'border-border-subtle bg-surface-card hover:border-border-subtle hover:bg-surface-card/80'
                       : 'border-border-subtle bg-surface-card hover:bg-gray-50'
@@ -277,10 +283,9 @@ export function VerificationInitialState({
                   width: visibleTabs.length > 3 ? '70px' : '80px',
                   height: visibleTabs.length > 3 ? '70px' : '80px',
                   ...(selectedTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
-                    borderColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
                     background: isDarkMode
-                      ? `linear-gradient(${TINFOIL_ACCENT_LIGHT}20, ${TINFOIL_ACCENT_LIGHT}20), rgb(26, 26, 26)`
-                      : `linear-gradient(${TINFOIL_ACCENT_LIGHT}10, ${TINFOIL_ACCENT_LIGHT}10), rgb(255, 255, 255)`
+                      ? 'rgba(104, 199, 172, 0.1)'
+                      : 'rgba(104, 199, 172, 0.05)'
                   } : {})
                 }}
                 initial={tab.id === 'other' ? { opacity: 0, x: 20 } : { opacity: 0 }}
@@ -353,7 +358,7 @@ export function VerificationInitialState({
                       selectedTab === tab.id
                         ? getStepStatus(tab.id) === 'error'
                           ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                          : isDarkMode ? `text-[${TINFOIL_ACCENT_LIGHT}]` : `text-[${TINFOIL_ACCENT_LIGHT_DARKER}]`
+                          : isDarkMode ? 'text-[#68C7AC]' : 'text-[#5AB39A]'
                         : isDarkMode ? 'text-content-secondary' : 'text-gray-500'
                     } transition-colors`}
                   >
@@ -365,7 +370,7 @@ export function VerificationInitialState({
                   selectedTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                      : isDarkMode ? `text-[${TINFOIL_ACCENT_LIGHT}]` : `text-[${TINFOIL_ACCENT_LIGHT_DARKER}]`
+                      : isDarkMode ? 'text-[#68C7AC]' : 'text-[#5AB39A]'
                     : isDarkMode ? 'text-content-secondary' : 'text-gray-400'
                 } transition-colors`}>
                   {tab.icon}
