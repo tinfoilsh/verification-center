@@ -7,7 +7,7 @@ import type { VerificationDocument } from '@/lib/types/verification'
 import { TextureGrid } from './texture-grid'
 import { ShieldXIcon, ShieldCheckIcon, LockIcon, TerminalIcon, CpuCheckIcon, WarningIcon } from '@/components/icons'
 import { VerifierHeader } from './verifier-header'
-import { KeyTab, CodeTab, ChipTab, OtherTab, type StepStatus } from './tabs'
+import { KeyTab, CodeTab, ChipTab, MeasurementTab, OtherTab, type StepStatus } from './tabs'
 
 type VerificationStatus = 'idle' | 'verifying' | 'success' | 'error'
 
@@ -21,11 +21,12 @@ type VerificationInitialStateProps = {
     encryption: StepStatus
     code: StepStatus
     hardware: StepStatus
+    measurement?: StepStatus
     other?: StepStatus
   }
 }
 
-type TabType = 'key' | 'code' | 'chip' | 'other' | null
+type TabType = 'key' | 'code' | 'chip' | 'measurement' | 'other' | null
 
 export function VerificationInitialState({
   isDarkMode = true,
@@ -40,6 +41,7 @@ export function VerificationInitialState({
     if (stepStatuses.encryption === 'error') return 'key'
     if (stepStatuses.code === 'error') return 'code'
     if (stepStatuses.hardware === 'error') return 'chip'
+    if (stepStatuses.measurement === 'error') return 'measurement'
     if (stepStatuses.other === 'error') return 'other'
     return null
   }
@@ -51,7 +53,7 @@ export function VerificationInitialState({
     if (errorTab) {
       setSelectedTab(errorTab)
     }
-  }, [stepStatuses?.encryption, stepStatuses?.code, stepStatuses?.hardware, stepStatuses?.other])
+  }, [stepStatuses?.encryption, stepStatuses?.code, stepStatuses?.hardware, stepStatuses?.measurement, stepStatuses?.other])
 
   const getStepStatus = (tabId: TabType): StepStatus => {
     if (status === 'verifying') return 'pending'
@@ -65,6 +67,8 @@ export function VerificationInitialState({
         return stepStatuses.code
       case 'chip':
         return stepStatuses.hardware
+      case 'measurement':
+        return stepStatuses.measurement || 'success'
       case 'other':
         return stepStatuses.other || 'success'
       default:
@@ -92,6 +96,13 @@ export function VerificationInitialState({
       icon: <CpuCheckIcon size={18} />
     },
     {
+      id: 'measurement' as const,
+      prefix: 'Fingerprint',
+      label: 'Mismatch',
+      icon: <ShieldXIcon size={16} />,
+      showOnlyOnError: true
+    },
+    {
       id: 'other' as const,
       prefix: 'Unexpected',
       label: 'Error',
@@ -100,8 +111,9 @@ export function VerificationInitialState({
     }
   ]
 
+  const hasMeasurementError = stepStatuses?.measurement === 'error'
   const hasOtherError = stepStatuses?.other === 'error'
-  const visibleTabs = tabs.filter(tab => !tab.showOnlyOnError || hasOtherError)
+  const visibleTabs = tabs.filter(tab => !tab.showOnlyOnError || (tab.id === 'measurement' && hasMeasurementError) || (tab.id === 'other' && hasOtherError))
 
   const renderTabContent = (tabId: TabType) => {
     if (!tabId) return null
@@ -115,6 +127,8 @@ export function VerificationInitialState({
         return <CodeTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
       case 'chip':
         return <ChipTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
+      case 'measurement':
+        return <MeasurementTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
       case 'other':
         return <OtherTab isDarkMode={isDarkMode} errorMessage={errorMessage} />
       default:
