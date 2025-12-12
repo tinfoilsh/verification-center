@@ -1,4 +1,4 @@
-import type { VerificationDocument } from '@/components/verification-center/types/verification'
+import type { VerificationDocument } from '@/lib/types/verification'
 
 const sourceMeasurement = {
   type: 'sev-snp',
