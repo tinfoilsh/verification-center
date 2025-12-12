@@ -219,15 +219,21 @@ export function VerificationInitialState({
         >
           {/* Horizontal line through cards center */}
           <div
-            className="absolute left-6 right-6 pointer-events-none -z-10"
-            style={{ top: '50%', height: '2px', background: lineColor }}
+            className="absolute pointer-events-none -z-10"
+            style={{
+              left: visibleTabs.length > 3 ? '35px' : '40px',
+              right: visibleTabs.length > 3 ? '35px' : '40px',
+              top: '50%',
+              height: '2px',
+              background: lineColor
+            }}
           />
 
           {/* Vertical lines from each card up to status banner - dynamically positioned */}
           {visibleTabs.map((_, index) => {
             const cardWidth = visibleTabs.length > 3 ? 70 : 80
             const totalCards = visibleTabs.length
-            const padding = 24 // px-6 = 24px
+            const padding = visibleTabs.length > 3 ? 0 : 0
             // For justify-between with padding: calculate position within the padded area
             const position = totalCards === 1
               ? '50%'
@@ -255,7 +261,7 @@ export function VerificationInitialState({
             if (selectedIndex === -1) return null
             const cardWidth = visibleTabs.length > 3 ? 70 : 80
             const totalCards = visibleTabs.length
-            const padding = 24
+            const padding = visibleTabs.length > 3 ? 0 : 0
             const position = totalCards === 1
               ? '50%'
               : `calc(${padding}px + ${(selectedIndex / (totalCards - 1)) * 100}% - ${(selectedIndex / (totalCards - 1)) * padding * 2}px + ${cardWidth / 2 - (selectedIndex / (totalCards - 1)) * cardWidth}px)`
@@ -281,7 +287,7 @@ export function VerificationInitialState({
           })()}
 
           {/* Cards */}
-          <div className="relative z-10 flex w-full items-center justify-between px-6">
+          <div className="relative z-10 flex w-full items-center justify-between">
             {visibleTabs.map((tab, index) => (
               <motion.button
                 key={tab.id}
