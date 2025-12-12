@@ -151,19 +151,24 @@ export function VerificationInitialState({
           className={`flex min-h-16 flex-col gap-3 rounded-xl border p-4 ${
             status === 'error'
               ? isDarkMode
-                ? 'border-red-500/30 bg-red-500/10 text-red-400'
-                : 'border-red-300 bg-red-50 text-red-600'
+                ? 'text-red-400'
+                : 'text-red-600'
               : status === 'verifying'
                 ? isDarkMode
                   ? 'border-border-subtle bg-gray-800/50 text-white'
                   : 'border-border-subtle bg-gray-100 text-gray-700'
                 : ''
           }`}
-          style={status === 'success' ? {
-            borderColor: 'rgba(104, 199, 172, 0.3)',
-            backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
-            color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
-          } : {}}
+          style={
+            status === 'success' ? {
+              borderColor: 'rgba(104, 199, 172, 0.3)',
+              backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
+              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
+            } : status === 'error' ? {
+              borderColor: isDarkMode ? 'rgba(239, 68, 68, 0.3)' : 'rgba(239, 68, 68, 0.3)',
+              backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
+            } : {}
+          }
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
@@ -172,14 +177,18 @@ export function VerificationInitialState({
             <div
               className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full ${
                 status === 'error'
-                  ? isDarkMode ? 'bg-red-500/20' : 'bg-red-100'
+                  ? ''
                   : status === 'verifying'
                     ? isDarkMode ? 'bg-gray-700/50' : 'bg-gray-200'
                     : ''
               }`}
-              style={status === 'success' ? {
-                backgroundColor: 'rgba(104, 199, 172, 0.2)'
-              } : {}}
+              style={
+                status === 'success' ? {
+                  backgroundColor: 'rgba(104, 199, 172, 0.2)'
+                } : status === 'error' ? {
+                  backgroundColor: 'rgba(239, 68, 68, 0.2)'
+                } : {}
+              }
             >
               {status === 'error' ? (
                 <ShieldXIcon size={20} />
