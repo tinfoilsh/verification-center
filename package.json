@@ -10,7 +10,7 @@
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
     "@tinfoilsh/verification-center-ui": "^0.1.0",
-    "next": "^15.3.3",
+    "next": "15.3.8",
     "react": "^18",
     "react-dom": "^18",
     "tinfoil": "^0.9.1"
