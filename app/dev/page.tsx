@@ -22,6 +22,7 @@ export default function DevPage() {
   const [isVerifierOpen, setIsVerifierOpen] = useState(true)
   const [mockOutcome, setMockOutcome] = useState<MockOutcome>('success')
   const [verificationDocument, setVerificationDocument] = useState<typeof mockSuccessDocument | undefined>(undefined)
+  const [showHeader, setShowHeader] = useState(true)
 
   useEffect(() => {
     if (mockOutcome === 'loading') {
@@ -75,6 +76,14 @@ export default function DevPage() {
             Dark mode
           </label>
 
+          <label>
+            <input
+              type="checkbox"
+              checked={showHeader}
+              onChange={(event) => setShowHeader(event.target.checked)}
+            />
+            Show header
+          </label>
 
           <div className="app__group">
             <p>Mock outcome</p>
@@ -227,7 +236,7 @@ export default function DevPage() {
               <VerificationCenter
                 verificationDocument={verificationDocument}
                 isDarkMode={isDarkMode}
-                fillContainer={true}
+                showHeader={showHeader}
               />
             )}
           </div>
@@ -275,7 +284,7 @@ export default function DevPage() {
               <VerificationCenter
                 verificationDocument={verificationDocument}
                 isDarkMode={isDarkMode}
-                fillContainer={true}
+                showHeader={showHeader}
               />
             )}
           </div>
@@ -287,7 +296,7 @@ export default function DevPage() {
           <VerificationCenter
             verificationDocument={verificationDocument}
             isDarkMode={isDarkMode}
-            fillContainer={true}
+            showHeader={showHeader}
           />
         </div>
       )}

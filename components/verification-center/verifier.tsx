@@ -9,10 +9,8 @@ export type VerificationCenterProps = {
   verificationDocument?: VerificationDocument
   /** Dark mode toggle */
   isDarkMode?: boolean
-  /** Whether the container should fill its parent height */
-  fillContainer?: boolean
-  /** Provider name for initial state message */
-  provider?: string
+  /** Whether to show the header */
+  showHeader?: boolean
 }
 
 const placeholderDocument: VerificationDocument = {
@@ -38,8 +36,7 @@ const placeholderDocument: VerificationDocument = {
 export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
-  fillContainer = true,
-  provider = 'Tinfoil',
+  showHeader = true,
 }: VerificationCenterProps) {
   const [isLoading, setIsLoading] = useState(!verificationDocument)
   const [currentDocument, setCurrentDocument] = useState(verificationDocument || placeholderDocument)
@@ -84,9 +81,7 @@ export function VerificationCenter({
 
   return (
     <div
-      className={`tinfoil-verification-theme flex ${
-        fillContainer ? 'h-full' : ''
-      } w-full flex-col bg-background text-foreground ${
+      className={`tinfoil-verification-theme flex h-full w-full flex-col bg-background text-foreground ${
         isDarkMode ? 'dark' : ''
       }`}
       data-theme={isDarkMode ? 'dark' : 'light'}
@@ -94,11 +89,11 @@ export function VerificationCenter({
     >
       <VerificationInitialState
         isDarkMode={isDarkMode}
-        provider={provider}
         verificationDocument={currentDocument}
         status={status}
         errorMessage={errorMsg}
         stepStatuses={stepStatuses}
+        showHeader={showHeader}
       />
     </div>
   )

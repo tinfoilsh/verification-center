@@ -6,11 +6,13 @@ import { VerificationCenter, type VerificationDocument } from '@/components/veri
 export default function VerificationCenterPage() {
   const [verificationDocument, setVerificationDocument] = useState<VerificationDocument | null>(null)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [showHeader, setShowHeader] = useState(true)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
 
     setIsDarkMode(params.get('darkMode') === 'true')
+    setShowHeader(params.get('showHeader') !== 'false')
 
     const handleMessage = (event: MessageEvent) => {
       if (event.data.type === 'TINFOIL_VERIFICATION_DOCUMENT') {
@@ -33,7 +35,7 @@ export default function VerificationCenterPage() {
       <VerificationCenter
         verificationDocument={verificationDocument ?? undefined}
         isDarkMode={isDarkMode}
-        fillContainer={true}
+        showHeader={showHeader}
       />
     </div>
   )

@@ -13,7 +13,6 @@ type VerificationStatus = 'idle' | 'verifying' | 'success' | 'error'
 
 type VerificationInitialStateProps = {
   isDarkMode?: boolean
-  provider?: string
   verificationDocument?: VerificationDocument
   status?: VerificationStatus
   errorMessage?: string
@@ -24,17 +23,18 @@ type VerificationInitialStateProps = {
     measurement?: StepStatus
     other?: StepStatus
   }
+  showHeader?: boolean
 }
 
 type TabType = 'key' | 'code' | 'chip' | 'measurement' | 'other' | null
 
 export function VerificationInitialState({
   isDarkMode = true,
-  provider = 'DuckDuckGo',
   verificationDocument,
   status = 'success',
   errorMessage,
-  stepStatuses
+  stepStatuses,
+  showHeader = true
 }: VerificationInitialStateProps) {
   const getFirstErrorTab = (): TabType => {
     if (!stepStatuses) return null
@@ -138,7 +138,7 @@ export function VerificationInitialState({
 
   return (
     <div className="relative flex h-full w-full flex-col bg-surface-background">
-      <VerifierHeader isDarkMode={isDarkMode} status={status} />
+      {showHeader && <VerifierHeader isDarkMode={isDarkMode} status={status} />}
 
       <div className="relative w-full flex-1 overflow-y-auto">
         <TextureGrid className="z-0" />
@@ -206,7 +206,7 @@ export function VerificationInitialState({
                 ? 'An error occurred during initialization.'
                 : status === 'verifying'
                   ? 'Verifying secure enclave...'
-                  : `When using this chat, you have the guarantee that no-one can see your data, not even ${provider}.`}
+                  : 'When using this chat, you have the guarantee that no-one can see your data.'}
             </p>
           </div>
         </motion.div>
