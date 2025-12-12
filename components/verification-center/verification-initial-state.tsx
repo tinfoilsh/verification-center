@@ -148,8 +148,10 @@ export function VerificationInitialState({
                 : ''
           }`}
           style={status === 'success' ? {
-            borderColor: isDarkMode ? `${TINFOIL_ACCENT_LIGHT}30` : `${TINFOIL_ACCENT_LIGHT}30`,
-            backgroundColor: isDarkMode ? `${TINFOIL_ACCENT_LIGHT}10` : `${TINFOIL_ACCENT_LIGHT}10`,
+            borderColor: 'rgba(104, 199, 172, 0.3)',
+            backgroundColor: isDarkMode
+              ? 'linear-gradient(rgba(104, 199, 172, 0.1), rgba(104, 199, 172, 0.1)), hsl(240, 3.4%, 11.4%)'
+              : 'linear-gradient(rgba(104, 199, 172, 0.1), rgba(104, 199, 172, 0.1)), hsl(0, 0%, 100%)',
             color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
           } : {}}
           initial={{ opacity: 0, y: -8 }}
@@ -166,7 +168,7 @@ export function VerificationInitialState({
                     : ''
               }`}
               style={status === 'success' ? {
-                backgroundColor: `${TINFOIL_ACCENT_LIGHT}20`
+                backgroundColor: 'rgba(104, 199, 172, 0.2)'
               } : {}}
             >
               {status === 'error' ? (
