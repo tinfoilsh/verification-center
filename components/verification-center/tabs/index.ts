@@ -1,5 +1,6 @@
 export { KeyTab } from './key-tab'
 export { CodeTab } from './code-tab'
 export { ChipTab } from './chip-tab'
+export { MeasurementTab } from './measurement-tab'
 export { OtherTab } from './other-tab'
 export type { StepStatus } from './types'

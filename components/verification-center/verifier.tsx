@@ -70,6 +70,7 @@ export function VerificationCenter({
     return stepStatus === 'failed' ? 'error' : 'success'
   }
 
+  const hasMeasurementError = currentDocument.steps.compareMeasurements?.status === 'failed'
   const hasOtherError = currentDocument.steps.createTransport?.status === 'failed' ||
     currentDocument.steps.otherError?.status === 'failed'
 
@@ -77,6 +78,7 @@ export function VerificationCenter({
     encryption: getStepStatusValue(currentDocument.steps.verifyHPKEKey?.status, true),
     code: getStepStatusValue(currentDocument.steps.verifyCode.status),
     hardware: getStepStatusValue(currentDocument.steps.verifyEnclave.status),
+    measurement: hasMeasurementError ? 'error' as const : undefined,
     other: hasOtherError ? 'error' as const : undefined
   }
 
