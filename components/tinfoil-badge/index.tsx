@@ -1,8 +1,8 @@
 'use client'
 
 import { useMemo } from 'react'
-import { SpinnerIcon } from '@/components/icons/spinner'
-import { LockIcon } from '@/components/icons'
+import { PiSpinner } from 'react-icons/pi'
+import { TfLock as LockIcon } from '@tinfoilsh/tinfoil-icons'
 import type { VerificationDocument } from '@/lib/types/verification'
 
 type BadgeState = 'idle' | 'loading' | 'success' | 'error'
@@ -229,7 +229,7 @@ export function TinfoilBadge({
               color: 'currentColor',
             }}
           >
-            <SpinnerIcon size={24} className="animate-spin" />
+            <PiSpinner className="w-6 h-6 animate-spin" />
           </div>
         ) : (
           <div
@@ -246,7 +246,7 @@ export function TinfoilBadge({
                   : '#6b7280',
             }}
           >
-            <LockIcon size={24} />
+            <LockIcon className="w-6 h-6" />
           </div>
         )}
       </div>

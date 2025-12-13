@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IoMdFingerPrint } from 'react-icons/io'
-import { FaGithub } from 'react-icons/fa'
+import { FaGithub } from 'react-icons/fa6'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
 import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
 import type { VerificationDocument } from '@/lib/types/verification'

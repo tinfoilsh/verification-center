@@ -1,4 +1,5 @@
 import { LuX } from 'react-icons/lu'
+import { TfTin, TfTinSad } from '@tinfoilsh/tinfoil-icons'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
 
 type VerifierHeaderProps = {
@@ -32,11 +33,11 @@ export function VerifierHeader({
     >
       {/* Left side - Tin icon */}
       <div className="absolute left-4 top-1/2 -translate-y-1/2">
-        <img
-          src={status === 'error' ? '/icons/tin-sad.svg' : '/icons/tin.svg'}
-          alt="Tinfoil"
-          className={`h-10 w-10 ${isDarkMode ? 'brightness-0 invert' : ''}`}
-        />
+        {status === 'error' ? (
+          <TfTinSad className={`h-10 w-10 ${isDarkMode ? 'text-white' : 'text-black'}`} />
+        ) : (
+          <TfTin className={`h-10 w-10 ${isDarkMode ? 'text-white' : 'text-black'}`} />
+        )}
       </div>
 
       {/* Center - Title and Powered by */}

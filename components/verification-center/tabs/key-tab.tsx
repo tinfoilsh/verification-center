@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
 import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
-import { KeyIcon } from '@/components/icons'
+import { TfKey as KeyIcon } from '@tinfoilsh/tinfoil-icons'
 import type { VerificationDocument } from '@/lib/types/verification'
 import type { StepStatus } from './types'
 
@@ -57,8 +57,7 @@ export function KeyTab({
             Unverified <span>✗</span>
           </div>
           <KeyIcon
-            size={20}
-            className={`flex-shrink-0 ${
+            className={`w-5 h-5 flex-shrink-0 ${
               isDarkMode ? 'text-content-secondary' : 'text-gray-400'
             }`}
           />
@@ -118,8 +117,7 @@ export function KeyTab({
           </div>
         )}
         <KeyIcon
-          size={20}
-          className={`flex-shrink-0 ${
+          className={`w-5 h-5 flex-shrink-0 ${
             isDarkMode ? 'text-content-secondary' : 'text-gray-400'
           }`}
         />

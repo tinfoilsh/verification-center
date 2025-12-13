@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { SpinnerIcon } from '@/components/icons/spinner'
+import { PiSpinner } from 'react-icons/pi'
+import { TfShieldX as ShieldXIcon, TfShieldCheck as ShieldCheckIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon } from '@tinfoilsh/tinfoil-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
 import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
 import type { VerificationDocument } from '@/lib/types/verification'
 import { TextureGrid } from './texture-grid'
-import { ShieldXIcon, ShieldCheckIcon, LockIcon, TerminalIcon, CpuCheckIcon, WarningIcon } from '@/components/icons'
 import { VerifierHeader } from './verifier-header'
 import { KeyTab, CodeTab, ChipTab, MeasurementTab, OtherTab, type StepStatus } from './tabs'
 
@@ -79,32 +79,32 @@ export function VerificationInitialState({
       id: 'key' as const,
       prefix: 'Data is',
       label: 'Encrypted',
-      icon: <LockIcon size={16} />
+      icon: <LockIcon className="w-4 h-4" />
     },
     {
       id: 'code' as const,
       prefix: 'Code is',
       label: 'Auditable',
-      icon: <TerminalIcon size={16} />
+      icon: <TerminalIcon className="w-4 h-4" />
     },
     {
       id: 'chip' as const,
       prefix: 'Runtime is',
       label: 'Isolated',
-      icon: <CpuCheckIcon size={18} />
+      icon: <CpuCheckIcon className="w-[18px] h-[18px]" />
     },
     {
       id: 'measurement' as const,
       prefix: 'Fingerprint',
       label: 'Mismatch',
-      icon: <ShieldXIcon size={16} />,
+      icon: <ShieldXIcon className="w-4 h-4" />,
       showOnlyOnError: true
     },
     {
       id: 'other' as const,
       prefix: 'Unexpected',
       label: 'Error',
-      icon: <WarningIcon size={16} />,
+      icon: <WarningIcon className="w-4 h-4" />,
       showOnlyOnError: true
     }
   ]
@@ -191,11 +191,11 @@ export function VerificationInitialState({
               }
             >
               {status === 'error' ? (
-                <ShieldXIcon size={20} />
+                <ShieldXIcon className="w-5 h-5" />
               ) : status === 'verifying' ? (
-                <SpinnerIcon size={20} className="animate-spin" />
+                <PiSpinner className="w-5 h-5 animate-spin" />
               ) : (
-                <ShieldCheckIcon size={20} />
+                <ShieldCheckIcon className="w-5 h-5" />
               )}
             </div>
             <p
@@ -352,7 +352,7 @@ export function VerificationInitialState({
                       />
                     </svg>
                   ) : getStepStatus(tab.id) === 'pending' ? (
-                    <SpinnerIcon size={12} className="animate-spin" />
+                    <PiSpinner className="w-3 h-3 animate-spin" />
                   ) : (
                     <svg
                       className="h-3 w-3"
