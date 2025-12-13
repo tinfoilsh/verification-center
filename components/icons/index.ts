@@ -1,8 +1,0 @@
-export { LockIcon } from './lock'
-export { ShieldCheckIcon } from './shield-check'
-export { ShieldXIcon } from './shield-x'
-export { TinSadIcon } from './tin-sad'
-export { TerminalIcon } from './terminal'
-export { CpuCheckIcon } from './cpu-check'
-export { KeyIcon } from './key'
-export { WarningIcon } from './warning'
