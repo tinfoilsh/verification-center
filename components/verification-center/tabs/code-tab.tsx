@@ -238,7 +238,10 @@ export function CodeTab({
                 Verifies that the source code published on GitHub was correctly built through GitHub Actions and that the resulting binary is available on the Sigstore transparency log.
               </p>
               <a
-                href="https://search.sigstore.dev"
+                href={verificationDocument?.releaseDigest
+                  ? `https://search.sigstore.dev/?hash=sha256:${verificationDocument.releaseDigest}`
+                  : 'https://search.sigstore.dev'
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${
