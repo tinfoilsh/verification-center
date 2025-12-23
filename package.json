@@ -10,7 +10,7 @@
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
     "@headlessui/react": "^2.1.7",
-    "@tinfoilsh/tinfoil-icons": "^1.0.8",
+    "@tinfoilsh/tinfoil-icons": "^1.1.1",
     "framer-motion": "^11.11.17",
     "next": "^15.3.3",
     "react": "^18",
