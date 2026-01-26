@@ -88,13 +88,13 @@ export function KeyTab({
           }`}
           style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
-          Data is encrypted
+          Chat is encrypted
         </h3>
         <p
           className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
           style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
-          Your data is encrypted using a unique key generated inside the secure hardware enclave and verified on your device.
+          Your chat is encrypted using a unique key generated inside the secure hardware enclave and verified on your device.
         </p>
       </div>
       <div

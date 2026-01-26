@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { PiSpinner } from 'react-icons/pi'
-import { TfShieldX as ShieldXIcon, TfShieldCheck as ShieldCheckIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon } from '@tinfoilsh/tinfoil-icons'
+import { TfShieldX as ShieldXIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon } from '@tinfoilsh/tinfoil-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
-import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
+import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_DARK } from '@/lib/constants/colors'
 import type { VerificationDocument } from '@/lib/types/verification'
 import { TextureGrid } from './texture-grid'
 import { VerifierHeader } from './verifier-header'
@@ -77,7 +77,7 @@ export function VerificationInitialState({
   const tabs = [
     {
       id: 'key' as const,
-      prefix: 'Data is',
+      prefix: 'Chat is',
       label: 'Encrypted',
       icon: <LockIcon className="w-4 h-4" />
     },
@@ -161,9 +161,9 @@ export function VerificationInitialState({
           }`}
           style={
             status === 'success' ? {
-              borderColor: 'rgba(104, 199, 172, 0.3)',
+              borderColor: isDarkMode ? 'rgba(104, 199, 172, 0.3)' : 'rgba(0, 68, 68, 0.3)',
               backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
-              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
+              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
             } : status === 'error' ? {
               borderColor: isDarkMode ? 'rgba(239, 68, 68, 0.3)' : 'rgba(239, 68, 68, 0.3)',
               backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
@@ -174,30 +174,6 @@ export function VerificationInitialState({
           transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
           <div className="flex items-center gap-3">
-            <div
-              className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full ${
-                status === 'error'
-                  ? ''
-                  : status === 'verifying'
-                    ? isDarkMode ? 'bg-gray-700/50' : 'bg-gray-200'
-                    : ''
-              }`}
-              style={
-                status === 'success' ? {
-                  backgroundColor: 'rgba(104, 199, 172, 0.2)'
-                } : status === 'error' ? {
-                  backgroundColor: 'rgba(239, 68, 68, 0.2)'
-                } : {}
-              }
-            >
-              {status === 'error' ? (
-                <ShieldXIcon className="w-5 h-5" />
-              ) : status === 'verifying' ? (
-                <PiSpinner className="w-5 h-5 animate-spin" />
-              ) : (
-                <ShieldCheckIcon className="w-5 h-5" />
-              )}
-            </div>
             <p
               style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
             >
@@ -205,7 +181,7 @@ export function VerificationInitialState({
                 ? 'An error occurred during initialization.'
                 : status === 'verifying'
                   ? 'Verifying secure enclave...'
-                  : 'When using this chat, you have the guarantee that no-one can see your data.'}
+                  : 'Your conversations are encrypted end-to-end to an AI model running inside a secure hardware enclave.'}
             </p>
           </div>
         </motion.div>
@@ -300,7 +276,7 @@ export function VerificationInitialState({
                         : 'border-red-300 bg-red-50'
                       : isDarkMode
                         ? 'border-[#68C7AC] bg-surface-card'
-                        : 'border-[#5AB39A] bg-white'
+                        : 'border-[#004444] bg-white'
                     : isDarkMode
                       ? 'border-border-subtle bg-surface-card hover:border-border-subtle hover:bg-surface-card/80'
                       : 'border-border-subtle bg-surface-card hover:bg-gray-50'
@@ -382,7 +358,7 @@ export function VerificationInitialState({
                       selectedTab === tab.id
                         ? getStepStatus(tab.id) === 'error'
                           ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                          : isDarkMode ? 'text-[#68C7AC]' : 'text-[#5AB39A]'
+                          : isDarkMode ? 'text-[#68C7AC]' : 'text-[#004444]'
                         : isDarkMode ? 'text-content-secondary' : 'text-gray-500'
                     } transition-colors`}
                   >
@@ -394,7 +370,7 @@ export function VerificationInitialState({
                   selectedTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                      : isDarkMode ? 'text-[#68C7AC]' : 'text-[#5AB39A]'
+                      : isDarkMode ? 'text-[#68C7AC]' : 'text-[#004444]'
                     : isDarkMode ? 'text-content-secondary' : 'text-gray-400'
                 } transition-colors`}>
                   {tab.icon}
