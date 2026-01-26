@@ -46,11 +46,11 @@ export function VerificationInitialState({
     return null
   }
 
-  const [selectedTab, setSelectedTab] = useState<TabType>(getFirstErrorTab())
+  const [selectedTab, setSelectedTab] = useState<TabType>(getFirstErrorTab() ?? 'key')
 
   useEffect(() => {
     const errorTab = getFirstErrorTab()
-    setSelectedTab(errorTab)
+    setSelectedTab(errorTab ?? 'key')
   }, [stepStatuses?.encryption, stepStatuses?.code, stepStatuses?.hardware, stepStatuses?.measurement, stepStatuses?.other])
 
   const getStepStatus = (tabId: TabType): StepStatus => {
