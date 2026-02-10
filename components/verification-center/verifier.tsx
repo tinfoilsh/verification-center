@@ -1,91 +1,102 @@
-import { useEffect, useState } from 'react'
-import type { VerificationDocument } from '@/lib/types/verification'
-export type { VerificationDocument } from '@/lib/types/verification'
-import { VerificationInitialState } from './verification-initial-state'
-import { getVerificationStatus } from '@/lib/utils/verification-status'
+import { useEffect, useState } from "react";
+import type { VerificationDocument } from "@/lib/types/verification";
+export type { VerificationDocument } from "@/lib/types/verification";
+import { VerificationInitialState } from "./verification-initial-state";
+import { getVerificationStatus } from "@/lib/utils/verification-status";
 
 export type VerificationCenterProps = {
   /** The verification document to display */
-  verificationDocument?: VerificationDocument
+  verificationDocument?: VerificationDocument;
   /** Dark mode toggle */
-  isDarkMode?: boolean
+  isDarkMode?: boolean;
   /** Whether to show the header */
-  showHeader?: boolean
-}
+  showHeader?: boolean;
+};
 
 const placeholderDocument: VerificationDocument = {
-  configRepo: '',
-  enclaveHost: '',
-  releaseDigest: '',
-  codeMeasurement: { type: '', registers: [] },
-  enclaveMeasurement: { measurement: { type: '', registers: [] } },
-  tlsPublicKey: '',
-  hpkePublicKey: '',
-  codeFingerprint: '',
-  enclaveFingerprint: '',
-  selectedRouterEndpoint: '',
+  configRepo: "",
+  enclaveHost: "",
+  releaseDigest: "",
+  codeMeasurement: { type: "", registers: [] },
+  enclaveMeasurement: { measurement: { type: "", registers: [] } },
+  tlsPublicKey: "",
+  hpkePublicKey: "",
+  codeFingerprint: "",
+  enclaveFingerprint: "",
+  selectedRouterEndpoint: "",
   securityVerified: false,
   steps: {
-    fetchDigest: { status: 'pending' },
-    verifyCode: { status: 'pending' },
-    verifyEnclave: { status: 'pending' },
-    compareMeasurements: { status: 'pending' },
+    fetchDigest: { status: "pending" },
+    verifyCode: { status: "pending" },
+    verifyEnclave: { status: "pending" },
+    compareMeasurements: { status: "pending" },
   },
-}
+};
 
 export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
   showHeader = true,
 }: VerificationCenterProps) {
-  const [isLoading, setIsLoading] = useState(!verificationDocument)
-  const [currentDocument, setCurrentDocument] = useState(verificationDocument || placeholderDocument)
+  const [isLoading, setIsLoading] = useState(!verificationDocument);
+  const [currentDocument, setCurrentDocument] = useState(
+    verificationDocument || placeholderDocument,
+  );
 
   useEffect(() => {
     if (verificationDocument) {
-      setCurrentDocument(verificationDocument)
-      setIsLoading(false)
+      setCurrentDocument(verificationDocument);
+      setIsLoading(false);
     }
-  }, [verificationDocument])
+  }, [verificationDocument]);
 
-  const { allSuccess, hasError, firstErrorMessage } = getVerificationStatus(currentDocument, isLoading)
+  const { allSuccess, hasError, firstErrorMessage } = getVerificationStatus(
+    currentDocument,
+    isLoading,
+  );
 
   const status = isLoading
-    ? 'verifying'
+    ? "verifying"
     : hasError
-      ? 'error'
+      ? "error"
       : allSuccess
-        ? 'success'
-        : 'verifying'
+        ? "success"
+        : "verifying";
 
-  const errorMsg = hasError ? firstErrorMessage : undefined
+  const errorMsg = hasError ? firstErrorMessage : undefined;
 
-  const getStepStatusValue = (stepStatus: 'pending' | 'success' | 'failed' | undefined, defaultToSuccess = false): 'pending' | 'success' | 'error' => {
-    if (isLoading) return 'pending'
-    if (!stepStatus) return defaultToSuccess ? 'success' : 'pending'
-    if (stepStatus === 'pending') return 'pending'
-    return stepStatus === 'failed' ? 'error' : 'success'
-  }
+  const getStepStatusValue = (
+    stepStatus: "pending" | "success" | "failed" | undefined,
+    defaultToSuccess = false,
+  ): "pending" | "success" | "error" => {
+    if (isLoading) return "pending";
+    if (!stepStatus) return defaultToSuccess ? "success" : "pending";
+    if (stepStatus === "pending") return "pending";
+    return stepStatus === "failed" ? "error" : "success";
+  };
 
-  const hasMeasurementError = currentDocument.steps.compareMeasurements?.status === 'failed'
-  const hasOtherError = currentDocument.steps.createTransport?.status === 'failed' ||
-    currentDocument.steps.otherError?.status === 'failed'
+  const hasMeasurementError =
+    currentDocument.steps.compareMeasurements?.status === "failed";
+  const hasOtherError = currentDocument.steps.otherError?.status === "failed";
 
   const stepStatuses = {
-    encryption: getStepStatusValue(currentDocument.steps.verifyHPKEKey?.status, true),
+    encryption: getStepStatusValue(
+      currentDocument.steps.verifyCertificate?.status,
+      true,
+    ),
     code: getStepStatusValue(currentDocument.steps.verifyCode.status),
     hardware: getStepStatusValue(currentDocument.steps.verifyEnclave.status),
-    measurement: hasMeasurementError ? 'error' as const : undefined,
-    other: hasOtherError ? 'error' as const : undefined
-  }
+    measurement: hasMeasurementError ? ("error" as const) : undefined,
+    other: hasOtherError ? ("error" as const) : undefined,
+  };
 
   return (
     <div
       className={`tinfoil-verification-theme flex h-full w-full flex-col bg-background text-foreground ${
-        isDarkMode ? 'dark' : ''
+        isDarkMode ? "dark" : ""
       }`}
-      data-theme={isDarkMode ? 'dark' : 'light'}
-      style={{ fontFamily: 'inherit' }}
+      data-theme={isDarkMode ? "dark" : "light"}
+      style={{ fontFamily: "inherit" }}
     >
       <VerificationInitialState
         isDarkMode={isDarkMode}
@@ -96,9 +107,9 @@ export function VerificationCenter({
         showHeader={showHeader}
       />
     </div>
-  )
+  );
 }
 
-export const Verifier = VerificationCenter
+export const Verifier = VerificationCenter;
 
-export default VerificationCenter
+export default VerificationCenter;
