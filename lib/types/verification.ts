@@ -2,44 +2,44 @@
  * Attestation measurement containing type and register values
  */
 export interface AttestationMeasurement {
-  type: string
-  registers: string[]
+  type: string;
+  registers: string[];
 }
 
 /**
  * Attestation response from the enclave
  */
 export interface AttestationResponse {
-  measurement: AttestationMeasurement
-  tlsPublicKeyFingerprint?: string
-  hpkePublicKey?: string
+  measurement: AttestationMeasurement;
+  tlsPublicKeyFingerprint?: string;
+  hpkePublicKey?: string;
 }
 
 /**
  * State of an intermediate verification step
  */
 export interface VerificationStepState {
-  status: 'pending' | 'success' | 'failed'
-  error?: string
+  status: "pending" | "success" | "failed";
+  error?: string;
 }
 
 /**
  * Overall verification summary status for the banner
  */
-export type VerificationSummaryStatus = 'error' | 'success' | 'progress'
+export type VerificationSummaryStatus = "error" | "success" | "progress";
 
 /**
  * Verification flow status for the flow diagram
  */
-export type VerificationFlowStatus = 'idle' | 'verifying' | 'success' | 'error'
+export type VerificationFlowStatus = "idle" | "verifying" | "success" | "error";
 
 /**
  * Hardware measurement from TDX platform verification
  */
 export interface HardwareMeasurement {
-  ID: string
-  MRTD: string
-  RTMR0: string
+  ID?: string;
+  MRTD?: string;
+  RTMR0?: string;
 }
 
 /**
@@ -48,37 +48,36 @@ export interface HardwareMeasurement {
  */
 export interface VerificationDocument {
   /** GitHub repository path (e.g., "owner/repo") for source code links */
-  configRepo: string
+  configRepo: string;
   /** Host address of the enclave being verified */
-  enclaveHost: string
+  enclaveHost: string;
   /** Release digest hash for Sigstore verification links */
-  releaseDigest: string
+  releaseDigest: string;
   /** Code measurement from GitHub and Sigstore */
-  codeMeasurement: AttestationMeasurement
+  codeMeasurement: AttestationMeasurement;
   /** Enclave measurement and attestation data */
-  enclaveMeasurement: AttestationResponse
+  enclaveMeasurement: AttestationResponse;
   /** TLS public key */
-  tlsPublicKey: string
+  tlsPublicKey: string;
   /** HPKE public key */
-  hpkePublicKey: string
+  hpkePublicKey: string;
   /** Hardware measurement from TDX platform verification (optional) */
-  hardwareMeasurement?: HardwareMeasurement
+  hardwareMeasurement?: HardwareMeasurement;
   /** Code fingerprint for display */
-  codeFingerprint: string
+  codeFingerprint: string;
   /** Enclave fingerprint for display */
-  enclaveFingerprint: string
+  enclaveFingerprint: string;
   /** Selected router endpoint */
-  selectedRouterEndpoint: string
+  selectedRouterEndpoint: string;
   /** Whether measurements match (security verification passed) */
-  securityVerified: boolean
+  securityVerified: boolean;
   /** Individual verification step states */
   steps: {
-    fetchDigest: VerificationStepState
-    verifyCode: VerificationStepState
-    verifyEnclave: VerificationStepState
-    compareMeasurements: VerificationStepState
-    createTransport?: VerificationStepState
-    verifyHPKEKey?: VerificationStepState
-    otherError?: VerificationStepState
-  }
+    fetchDigest: VerificationStepState;
+    verifyCode: VerificationStepState;
+    verifyEnclave: VerificationStepState;
+    compareMeasurements: VerificationStepState;
+    verifyCertificate?: VerificationStepState;
+    otherError?: VerificationStepState;
+  };
 }
