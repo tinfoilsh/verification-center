@@ -16,7 +16,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.4.0",
-    "tinfoil": "^0.9.1"
+    "tinfoil": "^1.0.5"
   },
   "devDependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
