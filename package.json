@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postbuild": "node scripts/list-files.js"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
