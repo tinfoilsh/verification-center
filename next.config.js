@@ -5,7 +5,10 @@ const nextConfig = {
   generateBuildId: async () => {
     return "build-repro";
   },
-  output: "export"
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
 }
 
 module.exports = nextConfig
