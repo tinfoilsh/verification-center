@@ -4,7 +4,8 @@ const nextConfig = {
   outputFileTracingRoot: require('path').join(__dirname),
   generateBuildId: async () => {
     return "build-repro";
-  }
+  },
+  output: "export"
 }
 
 module.exports = nextConfig
