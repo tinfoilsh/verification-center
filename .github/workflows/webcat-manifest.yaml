@@ -68,11 +68,14 @@ jobs:
             --argjson files "$(cat file-list.json)" \
             --arg hashes "${{ steps.hashes.outputs.hash_string }}" \
             '
-              .files = $files
-              | .default_csp = (
-                  .default_csp
-                  | gsub("\\$\\{HASHES_PLACEHOLDER\\}"; $hashes)
-                )
+              (
+                .files = $files
+                | .default_csp = (
+                    .default_csp
+                    | gsub("\\$\\{HASHES_PLACEHOLDER\\}"; $hashes)
+                  )
+              )
+              | { manifest: . }
             ' webcat.config.json > .well-known/webcat/manifest.json
 
           if grep -q "\${HASHES_PLACEHOLDER}" .well-known/webcat/manifest.json; then
