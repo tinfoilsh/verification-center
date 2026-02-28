@@ -62,7 +62,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          mkdir -p .well-known/webcat
+          mkdir -p public/.well-known/webcat
 
           jq \
             --argjson files "$(cat file-list.json)" \
@@ -76,9 +76,9 @@ jobs:
                   )
               )
               | { manifest: . }
-            ' webcat.config.json > .well-known/webcat/manifest.json
+            ' webcat.config.json > public/.well-known/webcat/manifest.json
 
-          if grep -q "\${HASHES_PLACEHOLDER}" .well-known/webcat/manifest.json; then
+          if grep -q "\${HASHES_PLACEHOLDER}" public/.well-known/webcat/manifest.json; then
             echo "CSP placeholder not replaced!"
             exit 1
           fi
@@ -132,8 +132,8 @@ jobs:
 
           npx tsx webcat-cli/src/cli.ts manifest sign \
             --type sigstore \
-            --input ".well-known/webcat/manifest.json" \
-            --output ".well-known/webcat/manifest.json" \
+            --input "public/.well-known/webcat/manifest.json" \
+            --output "public/.well-known/webcat/manifest.json" \
             --oidc-token "${{ steps.oidc.outputs.token }}"
 
       # 8. Assemble the bundle
@@ -142,9 +142,9 @@ jobs:
           set -euo pipefail
 
           npx tsx webcat-cli/src/cli.ts bundle create \
-            -e ".well-known/webcat/enrollment.json" \
-            -m ".well-known/webcat/manifest.json" \
-            -o ".well-known/webcat/bundle.json"
+            -e "public/.well-known/webcat/enrollment.json" \
+            -m "public/.well-known/webcat/manifest.json" \
+            -o "public/.well-known/webcat/bundle.json"
 
       # 9. Create PR with everything
       - name: Create Pull Request
@@ -164,6 +164,6 @@ jobs:
           branch: "chore/update-webcat-manifest"
           delete-branch: false
           add-paths: |
-            .well-known/webcat/manifest.json
-            .well-known/webcat/bundle.json
+            public/.well-known/webcat/manifest.json
+            public/.well-known/webcat/bundle.json
             vercel.json
