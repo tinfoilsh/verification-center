@@ -132,7 +132,7 @@
     "1.3.6.1.4.1.57264.1.9": "https://github.com/tinfoilsh/verification-center/.github/workflows/webcat-manifest.yaml@refs/heads/main",
     "1.3.6.1.4.1.57264.1.11": "github-hosted",
     "1.3.6.1.4.1.57264.1.12": "https://github.com/tinfoilsh/verification-center",
-    "1.3.6.1.4.1.57264.1.14": "refs/heads/main"
+    "1.3.6.1.4.1.57264.1.14": "refs/heads/webcat-test"
   },
   "max_age": 15552000
 }
