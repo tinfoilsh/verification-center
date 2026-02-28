@@ -1,0 +1,31 @@
+name: Update WEBCAT enrollment.json
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  sync:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    # this workflow just assembles the JSON file and pulls the latest
+    # Sigstore trusted_root, then makes a pr
+    uses: freedomofpress/webcat-cli/.github/workflows/sigstore-enrollment-sync.yml@main
+
+    with:
+      source-repository-uri: "https://github.com/${{ github.repository }}"
+      source-repository-ref: "${{ github.ref }}"
+      # a year
+      max_age: "31556926"
+      # we don't use the default signing script because of custom building steps
+      # necessary for deployment on VErcel
+      build-signer-uri: "https://github.com/tinfoilsh/verification-center/.github/workflows/webcat-manifest.yml@refs/heads/main"
+      # in next.js the static public assets go to /public/
+      enrollment_path: "public/.well-known/webcat/enrollment.json"
+      enrollment_prev_path: "public/.well-known/webcat/enrollment-prev.json"
+      bundle_path: "public/.well-known/webcat/bundle.json"
+      bundle_prev_path: "public/.well-known/webcat/bundle-prev.json"
