@@ -39,7 +39,14 @@ const manifest = {};
 
 for (const rel of files) {
   const full = path.join(outDir, rel);
-  manifest[rel] = sha256Base64Url(full);
+
+  let normalized = "/" + rel.replace(/\\/g, "/");
+
+  if (normalized.endsWith(".html")) {
+    normalized = normalized.slice(0, -5);
+  }
+
+  manifest[normalized] = sha256Base64Url(full);
 }
 
 fs.writeFileSync(

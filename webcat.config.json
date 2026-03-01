@@ -2,7 +2,7 @@
   "app": "https://github.com/tinfoilsh/verification-center",
   "version": "1.0.0",
   "default_csp": "default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' ${HASHES_PLACEHOLDER}; img-src 'self' data:; font-src 'self';",
-  "default_index": "index.html",
-  "default_fallback": "/404.html",
+  "default_index": "index",
+  "default_fallback": "/404",
   "extra_csp": {}
 }
