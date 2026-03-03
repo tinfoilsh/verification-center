@@ -1,0 +1,178 @@
+name: Vercel + WEBCAT
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["*"]
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ENV: ${{ startsWith(github.ref, 'refs/tags/') && 'production' || 'preview' }}
+  VERCEL_OUTPUT: ".vercel/output"
+  PROD_FLAG: ${{ startsWith(github.ref, 'refs/tags/') && '--prod' || '' }}
+  VERSION: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || github.sha }}
+
+# Possible improvements:
+# WEBCAT supports different CSPS for different paths. As different HTMl files
+# have their own inline scripts, we could pin each CSP hash to its own
+# page only.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show mode
+        run: echo "VERCEL_ENV=${{ env.VERCEL_ENV }}"
+
+      - name: Install WEBCAT CLI
+        run: npm install --global @freedomofpress/webcat-cli
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=${{ env.VERCEL_ENV }} --token=${{ secrets.VERCEL_TOKEN }} --local-config=webcat/vercel.config.json
+
+      - name: Build Project Artifacts
+        run: vercel build ${{ env.PROD_FLAG }} --token=${{ secrets.VERCEL_TOKEN }}  --local-config=webcat/vercel.config.json
+
+      - name: List Project Artifacts
+        run: find ${{ env.VERCEL_OUTPUT }}
+
+      # This is because Vercel builds always have generated inline scripts
+      # and WEBCAT allows inline scripts only via hashes
+      - name: Generate inline CSP hashes
+        id: csp
+        run: |
+          HASHES=$(node webcat/gen-csp-hashes.js ${{ env.VERCEL_OUTPUT }}/static/)
+          echo "CSP hashes: $HASHES"
+          echo "hashes=$HASHES" >> $GITHUB_OUTPUT
+
+      # We should then populate the config for deployment with the generated hashes
+      - name: Populate CSP in Vercel config.json
+        run: |
+          sed -i "s|\${HASHES_PLACEHOLDER}|${{ steps.csp.outputs.hashes }}|g" ${{ env.VERCEL_OUTPUT }}/config.json
+
+      # And the WEBCAT config to generate the manifest
+      - name: Populate CSP in webcat.config.json
+        run: |
+          sed -i "s|\${HASHES_PLACEHOLDER}|${{ steps.csp.outputs.hashes }}|g" webcat/webcat.config.json
+
+      - name: Populate version in webcat.config.json
+        run: sed -i "s|\${VERSION_PLACEHOLDER}|${{ env.VERSION }}|g" webcat/webcat.config.json
+
+      - name: Generate WEBCAT manifest
+        run: |
+          webcat manifest generate \
+            --type sigstore \
+            --config "webcat/webcat.config.json" \
+            --directory ${{ env.VERCEL_OUTPUT }}/static/ \
+            --output "webcat/manifest_unsigned.json"
+
+      - name: Get GitHub OIDC token
+        id: oidc
+        run: |
+          set -euo pipefail
+
+          TOKEN="$(curl -s \
+            -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sigstore" \
+            | jq -r .value)"
+
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
+
+      # Vercel deploys with a url rewrite that strips the .html
+      - name: Normalize WEBCAT manifest
+        run: |
+          sed 's/\.html"/"/g' webcat/manifest_unsigned.json > tmp.json
+          mv tmp.json webcat/manifest_unsigned.json
+
+      # The idea is that both the preview and the production website are enrolled separately
+      # however the preview does not pin a branch, so that any branch can pass validation
+      - name: Remove branch restriction in preview
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          jq 'del(
+                .claims["1.3.6.1.4.1.57264.1.9"],
+                .claims["1.3.6.1.4.1.57264.1.14"]
+              )' webcat/enrollment.json > tmp.json
+          mv tmp.json webcat/enrollment.json
+
+      - name: Sign manifest with Sigstore
+        run: |
+          webcat manifest sign \
+            --type sigstore \
+            --input "webcat/manifest_unsigned.json" \
+            --output "webcat/manifest.json" \
+            --oidc-token "${{ steps.oidc.outputs.token }}"
+
+      - name: Assemble WEBCAT bundle
+        run: | 
+          webcat bundle create \
+            -e "webcat/enrollment.json" \
+            -m "webcat/manifest.json" \
+            -o "webcat/bundle.json"
+
+      - name: Copy WEBCAT metadata
+        run: |
+          mkdir -p ${{ env.VERCEL_OUTPUT }}/static/.well-known/webcat/
+          cp webcat/enrollment.json ${{ env.VERCEL_OUTPUT }}/static/.well-known/webcat/
+          cp webcat/manifest.json ${{ env.VERCEL_OUTPUT }}/static/.well-known/webcat/
+          cp webcat/bundle.json ${{ env.VERCEL_OUTPUT }}/static/.well-known/webcat/
+
+      - name: List Project Upload
+        run: find ${{ env.VERCEL_OUTPUT }}
+
+      - name: Create release archive
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          mkdir release
+          cp -r ${{ env.VERCEL_OUTPUT }}/static/* release/
+          tar -czf site-${{ env.VERSION }}.tar.gz -C release .
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ github.ref_name }} \
+            site-${{ env.VERSION }}.tar.gz \
+            --title "Release ${{ github.ref_name }}" \
+            --notes "Static site build with WEBCAT metadata."
+
+      - name: Deploy Project Artifacts to Vercel
+        id: deploy
+        run: |
+          DEPLOY_JSON=$(vercel deploy --prebuilt ${{ env.PROD_FLAG }} --token=${{ secrets.VERCEL_TOKEN }} --json)
+
+          DEPLOY_ID=$(echo "$DEPLOY_JSON" | jq -r '.id')
+          DEPLOY_URL=$(echo "$DEPLOY_JSON" | jq -r '.url')
+
+          echo "Deployment ID: $DEPLOY_ID"
+          echo "Deployment URL: https://$DEPLOY_URL"
+
+          echo "deploy_id=$DEPLOY_ID" >> $GITHUB_OUTPUT
+          echo "deploy_url=https://$DEPLOY_URL" >> $GITHUB_OUTPUT
+
+      # See https://github.com/vercel/community/discussions/953
+      - name: Attach preview domain
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          curl -X POST "https://api.vercel.com/v2/deployments/${{ steps.deploy.outputs.deploy_id }}/aliases" \
+            -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "alias": "verification-center-preview.tinfoil.sh"
+            }'
+
+        #run: |
+        #  vercel alias \
+        #    ${{ steps.deploy.outputs.deploy_url }} \
+        #    verification-center-preview.tinfoil.sh \
+        #    --token=${{ secrets.VERCEL_TOKEN }}
