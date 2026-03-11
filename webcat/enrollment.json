@@ -129,8 +129,9 @@
   "claims": {
     "1.3.6.1.4.1.57264.1.8": "https://token.actions.githubusercontent.com",
     "1.3.6.1.4.1.57264.1.1": "https://token.actions.githubusercontent.com",
+    "1.3.6.1.4.1.57264.1.9": "^https://github.com/tinfoilsh/verification-center/.github/workflows/vercel.yaml@refs/tags/",
     "1.3.6.1.4.1.57264.1.11": "github-hosted",
-    "1.3.6.1.4.1.57264.1.14": "refs/heads/main",
+    "1.3.6.1.4.1.57264.1.14": "^refs/tags/",
     "1.3.6.1.4.1.57264.1.12": "https://github.com/tinfoilsh/verification-center"
   },
   "max_age": 15552000
