@@ -11,6 +11,7 @@ type KeyTabProps = {
   verificationDocument?: VerificationDocument
   stepStatus: StepStatus
   errorMessage?: string
+  type?: 'chat' | 'default'
 }
 
 export function KeyTab({
@@ -18,6 +19,7 @@ export function KeyTab({
   verificationDocument,
   stepStatus,
   errorMessage,
+  type = 'chat',
 }: KeyTabProps) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false)
 
@@ -88,13 +90,15 @@ export function KeyTab({
           }`}
           style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
-          Chat is encrypted
+          {type === 'chat' ? 'Chat is encrypted' : 'Data is encrypted'}
         </h3>
         <p
           className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
           style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
         >
-          Your chat is encrypted using a unique key generated inside the secure hardware enclave and verified on your device.
+          {type === 'chat'
+            ? 'Your chat is encrypted using a unique key generated inside the secure hardware enclave and verified on your device.'
+            : 'Your data is encrypted using a unique key generated inside the secure hardware enclave and verified on your device.'}
         </p>
       </div>
       <div
