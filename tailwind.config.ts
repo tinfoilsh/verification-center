@@ -72,8 +72,8 @@ const config: Config = {
         },
         surface: {
           background: 'hsl(var(--surface-background) / <alpha-value>)',
-          chat: 'hsl(var(--surface-chat) / <alpha-value>)',
-          'chat-background': 'hsl(var(--surface-chat-background) / <alpha-value>)',
+          secondary: 'hsl(var(--surface-secondary) / <alpha-value>)',
+          'secondary-background': 'hsl(var(--surface-secondary-background) / <alpha-value>)',
           sidebar: 'hsl(var(--surface-sidebar) / <alpha-value>)',
           'sidebar-button': 'hsl(var(--surface-sidebar-button) / <alpha-value>)',
           'sidebar-button-hover': 'hsl(var(--surface-sidebar-button-hover) / <alpha-value>)',

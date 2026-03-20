@@ -40,7 +40,7 @@ export function MeasurementTab({
           <div
             className={`relative flex items-center gap-3 rounded-xl border p-3 ${
               isDarkMode
-                ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                 : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
             }`}
           >
@@ -116,7 +116,7 @@ export function MeasurementTab({
         <div
           className={`rounded-xl border p-3 ${
             isDarkMode
-              ? 'border-border-subtle bg-surface-chat/50'
+              ? 'border-border-subtle bg-surface-secondary/50'
               : 'border-border-subtle bg-gray-50'
           }`}
         >

@@ -30,8 +30,8 @@
     --color-accent-light-darker: 163 37% 53%;
 
     --surface-background: 0 0% 100%;
-    --surface-chat-background: 0 0% 100%;
-    --surface-chat: 240 23.8% 95.9%;
+    --surface-secondary-background: 0 0% 100%;
+    --surface-secondary: 240 23.8% 95.9%;
     --surface-card: 0 0% 100%;
     --surface-sidebar: 0 0% 100%;
     --surface-sidebar-button: 0 0% 100%;
@@ -65,7 +65,7 @@
     --gray-100: var(--surface-card);
     --gray-50: var(--surface-settings);
 
-    --background: var(--surface-chat-background);
+    --background: var(--surface-secondary-background);
     --foreground: var(--content-primary);
     --card: var(--surface-card);
     --card-foreground: var(--content-primary);
@@ -75,7 +75,7 @@
     --primary-foreground: 0 0% 100%;
     --secondary: var(--surface-sidebar-button);
     --secondary-foreground: var(--content-primary);
-    --muted: var(--surface-chat);
+    --muted: var(--surface-secondary);
     --muted-foreground: var(--content-secondary);
     --accent: var(--color-accent-light);
     --accent-foreground: var(--color-accent-dark);
@@ -97,8 +97,8 @@
     color-scheme: dark;
 
     --surface-background: 0 0% 7.1%;
-    --surface-chat-background: 0 0% 7.1%;
-    --surface-chat: 240 2.2% 17.6%;
+    --surface-secondary-background: 0 0% 7.1%;
+    --surface-secondary: 240 2.2% 17.6%;
     --surface-card: 240 3.4% 11.4%;
     --surface-sidebar: 0 0% 7.1%;
     --surface-sidebar-button: 240 2.2% 17.6%;
@@ -132,9 +132,9 @@
     --gray-300: 240 3.7% 26%;
     --gray-200: 240 3.7% 20%;
     --gray-100: var(--surface-card);
-    --gray-50: var(--surface-chat);
+    --gray-50: var(--surface-secondary);
 
-    --background: var(--surface-chat-background);
+    --background: var(--surface-secondary-background);
     --foreground: var(--content-primary);
     --card: var(--surface-card);
     --card-foreground: var(--content-primary);
@@ -144,7 +144,7 @@
     --primary-foreground: var(--color-brand-dark);
     --secondary: var(--surface-sidebar-button);
     --secondary-foreground: var(--content-primary);
-    --muted: var(--surface-chat);
+    --muted: var(--surface-secondary);
     --muted-foreground: var(--content-secondary);
     --accent: var(--color-accent-light);
     --accent-foreground: var(--color-brand-dark);
