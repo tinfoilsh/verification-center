@@ -29,7 +29,7 @@ export const getInvertClass = (isDarkMode: boolean, invertInLight = false) =>
  */
 export const getMeasurementBorderClasses = (isDarkMode: boolean, isVerified?: boolean) => {
   const baseClasses = isDarkMode
-    ? 'border-border-subtle bg-surface-chat text-content-primary'
+    ? 'border-border-subtle bg-surface-secondary text-content-primary'
     : 'border-border-subtle bg-surface-card text-content-primary'
 
   const statusBorder = isVerified === true

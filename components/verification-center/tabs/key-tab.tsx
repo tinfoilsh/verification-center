@@ -44,7 +44,7 @@ export function KeyTab({
         <div
           className={`relative flex items-center gap-3 rounded-xl border p-3 ${
             isDarkMode
-              ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+              ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
               : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
           }`}
         >
@@ -100,7 +100,7 @@ export function KeyTab({
       <div
         className={`relative flex items-center gap-3 rounded-xl border p-3 ${
           isDarkMode
-            ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+            ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
         }`}
       >
@@ -140,7 +140,7 @@ export function KeyTab({
         onClick={() => setShowAdditionalInfo(!showAdditionalInfo)}
         className={`w-full rounded-xl border px-4 py-2.5 font-medium transition-all ${
           isDarkMode
-            ? 'border-border-subtle bg-surface-chat text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
+            ? 'border-border-subtle bg-surface-secondary text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
             : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
         }`}
         style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
@@ -163,7 +163,7 @@ export function KeyTab({
             <div
               className={`rounded-xl border p-3 ${
                 isDarkMode
-                  ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                  ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
               }`}
             >
@@ -200,7 +200,7 @@ export function KeyTab({
               <div
                 className={`rounded-xl border p-3 ${
                   isDarkMode
-                    ? 'border-border-subtle bg-surface-chat shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
+                    ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
