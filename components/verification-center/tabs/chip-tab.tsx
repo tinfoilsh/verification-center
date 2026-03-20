@@ -236,7 +236,7 @@ export function ChipTab({
               </div>
             </div>
 
-            {verificationDocument?.selectedRouterEndpoint && (
+            {verificationDocument?.selectedEnclaveEndpoint && (
               <div
                 className={`rounded-xl border p-3 ${
                   isDarkMode
@@ -245,10 +245,10 @@ export function ChipTab({
                 }`}
               >
                 <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                  Router Endpoint
+                  Enclave Endpoint
                 </div>
                 <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
-                  {verificationDocument.selectedRouterEndpoint}
+                  {verificationDocument.selectedEnclaveEndpoint}
                 </div>
               </div>
             )}

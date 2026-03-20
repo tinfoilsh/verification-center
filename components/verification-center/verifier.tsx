@@ -23,7 +23,7 @@ const placeholderDocument: VerificationDocument = {
   hpkePublicKey: "",
   codeFingerprint: "",
   enclaveFingerprint: "",
-  selectedRouterEndpoint: "",
+  selectedEnclaveEndpoint: "",
   securityVerified: false,
   steps: {
     fetchDigest: { status: "pending" },
