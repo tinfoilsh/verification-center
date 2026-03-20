@@ -67,8 +67,8 @@ export interface VerificationDocument {
   codeFingerprint: string;
   /** Enclave fingerprint for display */
   enclaveFingerprint: string;
-  /** Selected router endpoint */
-  selectedRouterEndpoint: string;
+  /** Selected enclave endpoint */
+  selectedEnclaveEndpoint: string;
   /** Whether measurements match (security verification passed) */
   securityVerified: boolean;
   /** Individual verification step states */

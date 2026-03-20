@@ -47,7 +47,7 @@ export const mockSuccessDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:886a7e94bbf06e25550cbd2f29d78ad441e205fe84c60c383ffddcb814a81898",
-  selectedRouterEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
   securityVerified: true,
   steps: {
     fetchDigest: { status: "success" },
@@ -80,7 +80,7 @@ export const mockFailureDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:1111111111111111111111111111111111111111111111111111111111111111",
-  selectedRouterEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
   securityVerified: false,
   steps: {
     fetchDigest: { status: "success" },
@@ -110,7 +110,7 @@ export const mockCertificateFailureDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:886a7e94bbf06e25550cbd2f29d78ad441e205fe84c60c383ffddcb814a81898",
-  selectedRouterEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
   securityVerified: false,
   steps: {
     fetchDigest: { status: "success" },
@@ -142,7 +142,7 @@ export const mockCertificateHashFailureDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:886a7e94bbf06e25550cbd2f29d78ad441e205fe84c60c383ffddcb814a81898",
-  selectedRouterEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
   securityVerified: false,
   steps: {
     fetchDigest: { status: "success" },
@@ -174,7 +174,7 @@ export const mockOtherErrorDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:886a7e94bbf06e25550cbd2f29d78ad441e205fe84c60c383ffddcb814a81898",
-  selectedRouterEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
   securityVerified: false,
   steps: {
     fetchDigest: { status: "success" },
@@ -206,7 +206,7 @@ export const mockEnclaveFailureDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:886a7e94bbf06e25550cbd2f29d78ad441e205fe84c60c383ffddcb814a81898",
-  selectedRouterEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.demo.tinfoil.sh/v1/chat",
   securityVerified: false,
   steps: {
     fetchDigest: { status: "success" },
@@ -243,7 +243,7 @@ export const mockTDXSuccessDocument: VerificationDocument = {
     "sha256:74e1b91b4867d4b0fc3a1e9bc82a999aa1dd96c7fa968eefc8c9a7bd403f2f00",
   enclaveFingerprint:
     "sha256:a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2",
-  selectedRouterEndpoint: "https://router.tdx-demo.tinfoil.sh/v1/chat",
+  selectedEnclaveEndpoint: "https://router.tdx-demo.tinfoil.sh/v1/chat",
   securityVerified: true,
   steps: {
     fetchDigest: { status: "success" },
