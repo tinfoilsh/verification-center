@@ -36,7 +36,7 @@ export function VerificationInitialState({
   errorMessage,
   stepStatuses,
   showHeader = true,
-  type = 'chat'
+  type = 'default'
 }: VerificationInitialStateProps) {
   const getFirstErrorTab = (): TabType => {
     if (!stepStatuses) return null

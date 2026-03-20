@@ -32,7 +32,7 @@ export default function DevPage() {
     typeof mockSuccessDocument | undefined
   >(undefined);
   const [showHeader, setShowHeader] = useState(true);
-  const [type, setType] = useState<'chat' | 'default'>('chat');
+  const [type, setType] = useState<'chat' | 'default'>('default');
 
   useEffect(() => {
     if (mockOutcome === "loading") {

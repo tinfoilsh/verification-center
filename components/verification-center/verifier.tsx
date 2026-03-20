@@ -39,7 +39,7 @@ export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
   showHeader = true,
-  type = 'chat',
+  type = 'default',
 }: VerificationCenterProps) {
   const [isLoading, setIsLoading] = useState(!verificationDocument);
   const [currentDocument, setCurrentDocument] = useState(
