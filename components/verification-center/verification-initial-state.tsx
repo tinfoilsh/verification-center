@@ -136,6 +136,10 @@ export function VerificationInitialState({
     }
   }
 
+  const typeString = verificationDocument?.enclaveMeasurement?.measurement?.type?.toLowerCase() || ''
+  const isSEV = /sev/.test(typeString)
+  const isTDX = /tdx/.test(typeString)
+
   const lineColor = isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)'
 
   return (
@@ -175,7 +179,7 @@ export function VerificationInitialState({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2">
             <p
               style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
             >
@@ -187,6 +191,64 @@ export function VerificationInitialState({
                     ? 'Your conversations are encrypted end-to-end to an AI model running inside a secure hardware enclave.'
                     : 'Your data is encrypted end-to-end to a server running inside a secure hardware enclave.'}
             </p>
+            {status === 'success' && (
+              <div
+                className="flex items-center gap-2 flex-wrap"
+                style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+              >
+                <span>Hardware attested by</span>
+                {isSEV && (
+                  <span
+                    className="inline-block h-3 w-12"
+                    aria-label="AMD"
+                    style={{
+                      backgroundColor: 'currentColor',
+                      maskImage: 'url(/icons/amd.svg)',
+                      maskSize: 'contain',
+                      maskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskImage: 'url(/icons/amd.svg)',
+                      WebkitMaskSize: 'contain',
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                    }}
+                  />
+                )}
+                {isTDX && (
+                  <span
+                    className="inline-block h-3.5 w-8"
+                    aria-label="Intel"
+                    style={{
+                      backgroundColor: 'currentColor',
+                      maskImage: 'url(/icons/intel.svg)',
+                      maskSize: 'contain',
+                      maskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskImage: 'url(/icons/intel.svg)',
+                      WebkitMaskSize: 'contain',
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                    }}
+                  />
+                )}
+                {(isSEV || isTDX) && <span>and</span>}
+                <span
+                  className="inline-block h-4 w-16"
+                  aria-label="NVIDIA"
+                  style={{
+                    backgroundColor: 'currentColor',
+                    maskImage: 'url(/icons/nvidia.svg)',
+                    maskSize: 'contain',
+                    maskRepeat: 'no-repeat',
+                    maskPosition: 'center',
+                    WebkitMaskImage: 'url(/icons/nvidia.svg)',
+                    WebkitMaskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                  }}
+                />
+              </div>
+            )}
           </div>
         </motion.div>
 
