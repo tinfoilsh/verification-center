@@ -32,6 +32,7 @@ export default function DevPage() {
     typeof mockSuccessDocument | undefined
   >(undefined);
   const [showHeader, setShowHeader] = useState(true);
+  const [type, setType] = useState<'chat' | 'default'>('chat');
 
   useEffect(() => {
     if (mockOutcome === "loading") {
@@ -95,6 +96,30 @@ export default function DevPage() {
             />
             Show header
           </label>
+
+          <div className="app__group">
+            <p>Type</p>
+            <label>
+              <input
+                type="radio"
+                name="type"
+                value="chat"
+                checked={type === "chat"}
+                onChange={() => setType("chat")}
+              />
+              Chat
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="type"
+                value="default"
+                checked={type === "default"}
+                onChange={() => setType("default")}
+              />
+              Default
+            </label>
+          </div>
 
           <div className="app__group">
             <p>Mock outcome</p>
@@ -259,6 +284,7 @@ export default function DevPage() {
                 verificationDocument={verificationDocument}
                 isDarkMode={isDarkMode}
                 showHeader={showHeader}
+                type={type}
               />
             )}
           </div>
@@ -310,6 +336,7 @@ export default function DevPage() {
                 verificationDocument={verificationDocument}
                 isDarkMode={isDarkMode}
                 showHeader={showHeader}
+                type={type}
               />
             )}
           </div>
