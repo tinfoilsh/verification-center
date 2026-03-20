@@ -19,7 +19,7 @@ export function KeyTab({
   verificationDocument,
   stepStatus,
   errorMessage,
-  type = 'chat',
+  type = 'default',
 }: KeyTabProps) {
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false)
 
