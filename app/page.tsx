@@ -7,12 +7,15 @@ export default function VerificationCenterPage() {
   const [verificationDocument, setVerificationDocument] = useState<VerificationDocument | null>(null)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
+  const [type, setType] = useState<'chat' | 'default'>('chat')
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
 
     setIsDarkMode(params.get('darkMode') === 'true')
     setShowHeader(params.get('showHeader') !== 'false')
+    const typeParam = params.get('type')
+    if (typeParam === 'default') setType('default')
 
     const handleMessage = (event: MessageEvent) => {
       if (event.data.type === 'TINFOIL_VERIFICATION_DOCUMENT') {
@@ -36,6 +39,7 @@ export default function VerificationCenterPage() {
         verificationDocument={verificationDocument ?? undefined}
         isDarkMode={isDarkMode}
         showHeader={showHeader}
+        type={type}
       />
     </div>
   )

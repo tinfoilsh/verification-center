@@ -24,6 +24,7 @@ type VerificationInitialStateProps = {
     other?: StepStatus
   }
   showHeader?: boolean
+  type?: 'chat' | 'default'
 }
 
 type TabType = 'key' | 'code' | 'chip' | 'measurement' | 'other' | null
@@ -34,7 +35,8 @@ export function VerificationInitialState({
   status = 'success',
   errorMessage,
   stepStatuses,
-  showHeader = true
+  showHeader = true,
+  type = 'chat'
 }: VerificationInitialStateProps) {
   const getFirstErrorTab = (): TabType => {
     if (!stepStatuses) return null
@@ -77,7 +79,7 @@ export function VerificationInitialState({
   const tabs = [
     {
       id: 'key' as const,
-      prefix: 'Chat is',
+      prefix: type === 'chat' ? 'Chat is' : 'Data is',
       label: 'Encrypted',
       icon: <LockIcon className="w-4 h-4" />
     },
@@ -120,7 +122,7 @@ export function VerificationInitialState({
 
     switch (tabId) {
       case 'key':
-        return <KeyTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
+        return <KeyTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} type={type} />
       case 'code':
         return <CodeTab isDarkMode={isDarkMode} verificationDocument={verificationDocument} stepStatus={stepStatus} errorMessage={errorMessage} />
       case 'chip':
@@ -181,7 +183,9 @@ export function VerificationInitialState({
                 ? 'An error occurred during initialization.'
                 : status === 'verifying'
                   ? 'Verifying secure enclave...'
-                  : 'Your conversations are encrypted end-to-end to an AI model running inside a secure hardware enclave.'}
+                  : type === 'chat'
+                    ? 'Your conversations are encrypted end-to-end to an AI model running inside a secure hardware enclave.'
+                    : 'Your data is encrypted end-to-end to a server running inside a secure hardware enclave.'}
             </p>
           </div>
         </motion.div>

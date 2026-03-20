@@ -11,6 +11,8 @@ export type VerificationCenterProps = {
   isDarkMode?: boolean;
   /** Whether to show the header */
   showHeader?: boolean;
+  /** Display type: 'chat' for AI chat, 'default' for generic containers/servers */
+  type?: 'chat' | 'default';
 };
 
 const placeholderDocument: VerificationDocument = {
@@ -37,6 +39,7 @@ export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
   showHeader = true,
+  type = 'chat',
 }: VerificationCenterProps) {
   const [isLoading, setIsLoading] = useState(!verificationDocument);
   const [currentDocument, setCurrentDocument] = useState(
@@ -105,6 +108,7 @@ export function VerificationCenter({
         errorMessage={errorMsg}
         stepStatuses={stepStatuses}
         showHeader={showHeader}
+        type={type}
       />
     </div>
   );
