@@ -38,7 +38,7 @@ export function MeasurementTab({
 
         <div className="space-y-3">
           <div
-            className={`relative flex items-center gap-3 rounded-xl border p-3 ${
+            className={`relative flex items-start gap-3 rounded-xl border p-3 ${
               isDarkMode
                 ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                 : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -73,7 +73,7 @@ export function MeasurementTab({
           </div>
 
           <div
-            className={`relative flex items-center gap-3 rounded-xl border p-3 ${
+            className={`relative flex items-start gap-3 rounded-xl border p-3 ${
               isDarkMode
                 ? 'border-red-500/30 bg-red-500/10'
                 : 'border-red-300 bg-red-50'

@@ -44,7 +44,7 @@ export function KeyTab({
         </div>
 
         <div
-          className={`relative flex items-center gap-3 rounded-xl border p-3 ${
+          className={`relative flex items-start gap-3 rounded-xl border p-3 ${
             isDarkMode
               ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
               : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -102,7 +102,7 @@ export function KeyTab({
         </p>
       </div>
       <div
-        className={`relative flex items-center gap-3 rounded-xl border p-3 ${
+        className={`relative flex items-start gap-3 rounded-xl border p-3 ${
           isDarkMode
             ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -110,11 +110,12 @@ export function KeyTab({
       >
         {stepStatus === 'success' && (
           <div
-            className="absolute top-2 right-2 flex items-center gap-1 font-medium"
+            className="absolute top-2 right-2 flex items-center gap-1 rounded-full px-2 py-0.5 font-medium"
             style={{
               fontFamily: FONT_FAMILIES.AEONIK,
               fontSize: '12px',
-              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER
+              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
+              backgroundColor: isDarkMode ? 'rgba(104, 199, 172, 0.15)' : 'rgba(0, 68, 68, 0.08)'
             }}
           >
             Attested <span>✓</span>
