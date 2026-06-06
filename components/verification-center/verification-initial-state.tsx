@@ -350,8 +350,8 @@ export function VerificationInitialState({
                         ? 'border-[#68C7AC] bg-surface-card'
                         : 'border-[#004444] bg-white'
                     : isDarkMode
-                      ? 'border-border-subtle bg-surface-card hover:border-border-subtle hover:bg-surface-card/80'
-                      : 'border-border-subtle bg-surface-card hover:bg-gray-50'
+                      ? `border-border-subtle bg-surface-card ${isVerifying ? '' : 'hover:border-border-subtle hover:bg-surface-card/80'}`
+                      : `border-border-subtle bg-surface-card ${isVerifying ? '' : 'hover:bg-gray-50'}`
                 }`}
                 style={{
                   width: visibleTabs.length > 3 ? '70px' : '80px',
@@ -379,9 +379,11 @@ export function VerificationInitialState({
                         ? isDarkMode
                           ? 'bg-gray-700/50 text-gray-400'
                           : 'bg-gray-200 text-gray-500'
-                        : 'text-white'
+                        : activeTab === tab.id
+                          ? 'text-white'
+                          : 'bg-border-subtle text-white'
                   }`}
-                  style={getStepStatus(tab.id) === 'success' ? {
+                  style={getStepStatus(tab.id) === 'success' && activeTab === tab.id ? {
                     backgroundColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
                   } : {}}
                 >
