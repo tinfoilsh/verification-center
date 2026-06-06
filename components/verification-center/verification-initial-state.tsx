@@ -78,6 +78,12 @@ export function VerificationInitialState({
 
   const tabs = [
     {
+      id: 'chip' as const,
+      prefix: 'Runtime is',
+      label: 'Isolated',
+      icon: <CpuCheckIcon className="w-[18px] h-[18px]" />
+    },
+    {
       id: 'key' as const,
       prefix: type === 'chat' ? 'Chat is' : 'Data is',
       label: 'Encrypted',
@@ -88,12 +94,6 @@ export function VerificationInitialState({
       prefix: 'Code is',
       label: 'Auditable',
       icon: <TerminalIcon className="w-4 h-4" />
-    },
-    {
-      id: 'chip' as const,
-      prefix: 'Runtime is',
-      label: 'Isolated',
-      icon: <CpuCheckIcon className="w-[18px] h-[18px]" />
     },
     {
       id: 'measurement' as const,
@@ -142,6 +142,9 @@ export function VerificationInitialState({
 
   const lineColor = isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)'
 
+  const isVerifying = status === 'verifying'
+  const activeTab = isVerifying ? null : selectedTab
+
   return (
     <div className="relative flex h-full w-full flex-col bg-surface-background">
       {showHeader && <VerifierHeader isDarkMode={isDarkMode} status={status} />}
@@ -154,7 +157,7 @@ export function VerificationInitialState({
         <div className="relative z-10 space-y-3 px-3 pb-6 pt-3 sm:space-y-4 sm:px-4 sm:pt-4">
         {/* Status Banner */}
         <motion.div
-          className={`flex min-h-[88px] flex-col justify-center gap-3 rounded-xl border p-4 ${
+          className={`flex min-h-[128px] flex-col justify-center gap-3 rounded-xl border p-4 ${
             status === 'error'
               ? isDarkMode
                 ? 'text-red-400'
@@ -298,8 +301,8 @@ export function VerificationInitialState({
           })}
 
           {/* Vertical line from selected card down to expanded content */}
-          {selectedTab && (() => {
-            const selectedIndex = visibleTabs.findIndex(t => t.id === selectedTab)
+          {activeTab && (() => {
+            const selectedIndex = visibleTabs.findIndex(t => t.id === activeTab)
             if (selectedIndex === -1) return null
             const cardWidth = visibleTabs.length > 3 ? 70 : 80
             const totalCards = visibleTabs.length
@@ -333,9 +336,12 @@ export function VerificationInitialState({
             {visibleTabs.map((tab, index) => (
               <motion.button
                 key={tab.id}
-                onClick={() => setSelectedTab(selectedTab === tab.id ? null : tab.id)}
+                onClick={() => !isVerifying && setSelectedTab(selectedTab === tab.id ? null : tab.id)}
+                disabled={isVerifying}
                 className={`group relative z-10 flex flex-col items-center justify-center rounded-xl border transition-all duration-150 ${
-                  selectedTab === tab.id
+                  isVerifying ? 'cursor-default' : ''
+                } ${
+                  activeTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode
                         ? 'border-red-500 bg-surface-card'
@@ -350,7 +356,7 @@ export function VerificationInitialState({
                 style={{
                   width: visibleTabs.length > 3 ? '70px' : '80px',
                   height: visibleTabs.length > 3 ? '70px' : '80px',
-                  ...(selectedTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
+                  ...(activeTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
                     backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)'
                   } : {})
                 }}
@@ -376,7 +382,7 @@ export function VerificationInitialState({
                         : 'text-white'
                   }`}
                   style={getStepStatus(tab.id) === 'success' ? {
-                    backgroundColor: TINFOIL_ACCENT_LIGHT
+                    backgroundColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
                   } : {}}
                 >
                   {getStepStatus(tab.id) === 'error' ? (
@@ -421,7 +427,7 @@ export function VerificationInitialState({
                   </span>
                   <span
                     className={`${
-                      selectedTab === tab.id
+                      activeTab === tab.id
                         ? getStepStatus(tab.id) === 'error'
                           ? isDarkMode ? 'text-red-400' : 'text-red-600'
                           : isDarkMode ? 'text-[#68C7AC]' : 'text-[#004444]'
@@ -433,7 +439,7 @@ export function VerificationInitialState({
                 </div>
 
                 <div className={`flex items-center justify-center ${
-                  selectedTab === tab.id
+                  activeTab === tab.id
                     ? getStepStatus(tab.id) === 'error'
                       ? isDarkMode ? 'text-red-400' : 'text-red-600'
                       : isDarkMode ? 'text-[#68C7AC]' : 'text-[#004444]'
@@ -448,9 +454,9 @@ export function VerificationInitialState({
 
         {/* Expanded Content */}
         <AnimatePresence mode="wait">
-          {selectedTab && (
+          {activeTab && (
             <motion.div
-              key={selectedTab}
+              key={activeTab}
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -467,7 +473,7 @@ export function VerificationInitialState({
                     : 'border-border-subtle bg-surface-card'
                 }`}
               >
-                {renderTabContent(selectedTab)}
+                {renderTabContent(activeTab)}
               </div>
             </motion.div>
           )}
