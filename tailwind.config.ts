@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import { radius } from './lib/radius'
 
 const config: Config = {
   darkMode: ['class'],
@@ -11,7 +12,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: [
-          'var(--font-sans, Inter)',
+          'Aeonik Fono',
           'ui-sans-serif',
           'system-ui',
           '-apple-system',
@@ -21,12 +22,21 @@ const config: Config = {
           'Arial',
           'sans-serif',
         ],
+        aeonik: ['Aeonik', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        'aeonik-fono': ['Aeonik Fono', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['Aeonik Fono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       borderRadius: {
         '4xl': '2rem',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        'site-sm': radius.sm,
+        'site-md': radius.md,
+        'site-lg': radius.lg,
+        'site-base': radius.base,
+        'site-control': radius.control,
+        'site-tab': radius.tab,
       },
       colors: {
         background: 'hsl(var(--background) / <alpha-value>)',

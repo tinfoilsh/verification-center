@@ -33,30 +33,30 @@ export function ChipTab({
             className={`mb-2 font-semibold ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
           >
             An error occurred
           </h3>
           <p
             className={isDarkMode ? 'text-red-400' : 'text-red-600'}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
           >
             {errorMessage || 'Failed to verify runtime isolation.'}
           </p>
         </div>
 
         <div
-          className={`relative flex items-start gap-3 rounded-xl border p-3 ${
+          className={`relative flex items-start gap-3 rounded-site-lg border p-3 ${
             isDarkMode
               ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
               : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
           }`}
         >
           <div
-            className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
+            className={`absolute top-2 right-2 flex items-center gap-1 font-medium ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}
           >
             Unverified <span>✗</span>
           </div>
@@ -66,11 +66,11 @@ export function ChipTab({
             }`}
           />
           <div className="flex-1 overflow-hidden pr-20">
-            <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
+            <div className="mb-1 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
               Enclave code fingerprint
             </div>
             <div
-              className={`font-mono truncate ${
+              className={`truncate font-mono ${
                 isDarkMode ? 'text-content-primary' : 'text-gray-900'
               }`}
               style={{ fontSize: '12px' }}
@@ -90,13 +90,13 @@ export function ChipTab({
           className={`mb-2 font-semibold ${
             isDarkMode ? 'text-content-primary' : 'text-gray-900'
           }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
         >
           Runtime is isolated
         </h3>
         <p
           className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
         >
           The secure hardware enclave that processes your data has been attested and is verified.
           The code it is running matches the auditable open-source repository.
@@ -104,7 +104,7 @@ export function ChipTab({
       </div>
 
       <div
-        className={`relative flex items-start gap-3 rounded-xl border p-3 ${
+        className={`relative flex items-start gap-3 rounded-site-lg border p-3 ${
           isDarkMode
             ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -112,9 +112,10 @@ export function ChipTab({
       >
         {stepStatus === 'success' && (
           <div
-            className={`absolute top-2 right-2 flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium`}
+            className="absolute top-2 right-2 flex items-center gap-1 rounded-full px-2 py-0.5 font-medium"
             style={{
-              fontFamily: FONT_FAMILIES.AEONIK,
+              fontFamily: FONT_FAMILIES.AEONIK_FONO,
+              fontSize: '12px',
               color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
               backgroundColor: isDarkMode ? 'rgba(104, 199, 172, 0.15)' : 'rgba(0, 68, 68, 0.08)'
             }}
@@ -128,11 +129,11 @@ export function ChipTab({
           }`}
         />
         <div className="flex-1 overflow-hidden pr-20">
-          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
+          <div className="mb-1 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
             Enclave code fingerprint
           </div>
           <div
-            className={`font-mono truncate ${
+            className={`truncate font-mono ${
               isDarkMode ? 'text-content-primary' : 'text-gray-900'
             }`}
             style={{ fontSize: '12px' }}
@@ -144,12 +145,12 @@ export function ChipTab({
 
       <button
         onClick={() => setShowAdditionalInfo(!showAdditionalInfo)}
-        className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
+        className={`w-full rounded-site-control border px-4 py-2.5 font-medium transition-all ${
           isDarkMode
             ? 'border-border-subtle bg-surface-secondary text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
             : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
         }`}
-        style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+        style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
       >
         {showAdditionalInfo ? 'Hide additional info' : 'Show additional info'}
       </button>
@@ -167,20 +168,20 @@ export function ChipTab({
             className="overflow-hidden space-y-3"
           >
             <div
-              className={`rounded-xl border p-3 ${
+              className={`rounded-site-lg border p-3 ${
                 isDarkMode
                   ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
               }`}
             >
-              <div className="mb-2 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                Hardware Attestation
+              <div className="mb-2 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
+                Hardware attestation
               </div>
               <p
-                className={`text-xs mb-3 ${
+                className={`mb-3 ${
                   isDarkMode ? 'text-content-secondary' : 'text-gray-600'
                 }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}
               >
                 The verifier receives a signed measurement from NVIDIA{isSEV ? ', AMD' : ''}{isTDX ? ', Intel' : ''} certifying the enclave environment and the digest of the binary actively running inside it.
               </p>
@@ -189,13 +190,14 @@ export function ChipTab({
                   href="https://docs.nvidia.com/attestation/index.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors"
+                  className="inline-flex items-center gap-1.5 font-medium transition-colors"
                   style={{
                     color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-                    fontFamily: FONT_FAMILIES.AEONIK
+                    fontFamily: FONT_FAMILIES.AEONIK_FONO,
+                    fontSize: '12px'
                   }}
                 >
-                  NVIDIA Attestation
+                  NVIDIA attestation
                   <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
@@ -205,10 +207,11 @@ export function ChipTab({
                     href="https://www.amd.com/en/developer/sev.html"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors"
+                    className="inline-flex items-center gap-1.5 font-medium transition-colors"
                     style={{
                       color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-                      fontFamily: FONT_FAMILIES.AEONIK
+                      fontFamily: FONT_FAMILIES.AEONIK_FONO,
+                      fontSize: '12px'
                     }}
                   >
                     AMD SEV
@@ -222,10 +225,11 @@ export function ChipTab({
                     href="https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors"
+                    className="inline-flex items-center gap-1.5 font-medium transition-colors"
                     style={{
                       color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-                      fontFamily: FONT_FAMILIES.AEONIK
+                      fontFamily: FONT_FAMILIES.AEONIK_FONO,
+                      fontSize: '12px'
                     }}
                   >
                     Intel TDX
@@ -239,16 +243,16 @@ export function ChipTab({
 
             {verificationDocument?.selectedEnclaveEndpoint && (
               <div
-                className={`rounded-xl border p-3 ${
+                className={`rounded-site-lg border p-3 ${
                   isDarkMode
                     ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
-                <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                  Enclave Endpoint
+                <div className="mb-1.5 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
+                  Enclave endpoint
                 </div>
-                <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                <div className={`break-all font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                   {verificationDocument.selectedEnclaveEndpoint}
                 </div>
               </div>
@@ -256,16 +260,16 @@ export function ChipTab({
 
             {verificationDocument?.enclaveMeasurement?.tlsPublicKeyFingerprint && (
               <div
-                className={`rounded-xl border p-3 ${
+                className={`rounded-site-lg border p-3 ${
                   isDarkMode
                     ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
-                <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                  TLS Public Key Fingerprint
+                <div className="mb-1.5 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
+                  TLS public key fingerprint
                 </div>
-                <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                <div className={`break-all font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                   {verificationDocument.enclaveMeasurement.tlsPublicKeyFingerprint}
                 </div>
               </div>
@@ -273,20 +277,20 @@ export function ChipTab({
 
             {verificationDocument?.enclaveMeasurement?.measurement && (
               <div
-                className={`rounded-xl border p-3 ${
+                className={`rounded-site-lg border p-3 ${
                   isDarkMode
                     ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
-                <div className="mb-3 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                  Hardware Measurements
+                <div className="mb-3 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
+                  Hardware measurements
                 </div>
                 <div className="space-y-3">
                   {verificationDocument.enclaveMeasurement.measurement.type && (
                     <div>
-                      <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>Type</div>
-                      <div className={`font-mono text-xs ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                      <div className="mb-1 opacity-60" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>Type</div>
+                      <div className={`font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                         {verificationDocument.enclaveMeasurement.measurement.type}
                       </div>
                     </div>
@@ -296,8 +300,8 @@ export function ChipTab({
                     <div className="space-y-3">
                       {verificationDocument.enclaveMeasurement.measurement.registers.map((reg: any, idx: number) => (
                         <div key={idx}>
-                          <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>Register {idx}</div>
-                          <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                           <div className="mb-1 opacity-60" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>Register {idx}</div>
+                           <div className={`break-all font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                             {typeof reg === 'object' ? JSON.stringify(reg) : reg}
                           </div>
                         </div>
@@ -310,36 +314,36 @@ export function ChipTab({
 
             {verificationDocument?.hardwareMeasurement && (
               <div
-                className={`rounded-xl border p-3 ${
+                className={`rounded-site-lg border p-3 ${
                   isDarkMode
                     ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
-                <div className="mb-3 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
-                  Hardware Measurements
+                <div className="mb-3 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
+                  Hardware measurements
                 </div>
                 <div className="space-y-3">
                   {verificationDocument.hardwareMeasurement.ID && (
                     <div>
-                      <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>Platform ID</div>
-                      <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                      <div className="mb-1 opacity-60" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>Platform ID</div>
+                      <div className={`break-all font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                         {verificationDocument.hardwareMeasurement.ID}
                       </div>
                     </div>
                   )}
                   {verificationDocument.hardwareMeasurement.MRTD && (
                     <div>
-                      <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>MRTD</div>
-                      <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                      <div className="mb-1 opacity-60" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>MRTD</div>
+                      <div className={`break-all font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                         {verificationDocument.hardwareMeasurement.MRTD}
                       </div>
                     </div>
                   )}
                   {verificationDocument.hardwareMeasurement.RTMR0 && (
                     <div>
-                      <div className="text-xs opacity-60 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>RTMR0</div>
-                      <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
+                      <div className="mb-1 opacity-60" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>RTMR0</div>
+                      <div className={`break-all font-mono ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} style={{ fontSize: '12px' }}>
                         {verificationDocument.hardwareMeasurement.RTMR0}
                       </div>
                     </div>
