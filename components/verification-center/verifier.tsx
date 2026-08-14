@@ -99,7 +99,6 @@ export function VerificationCenter({
         isDarkMode ? "dark" : ""
       }`}
       data-theme={isDarkMode ? "dark" : "light"}
-      style={{ fontFamily: "inherit" }}
     >
       <VerificationInitialState
         isDarkMode={isDarkMode}

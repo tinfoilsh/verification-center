@@ -18,7 +18,10 @@ export function VerifierFooter({
       } ${className}`}
     >
       <div className="flex items-center justify-center gap-2">
-        <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`} style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+        <span
+          className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}
+        >
           Powered by
         </span>
         <a

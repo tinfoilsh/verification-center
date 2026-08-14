@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PiSpinner } from 'react-icons/pi'
+import { PiCaretDown, PiCheckBold, PiSpinner, PiXBold } from 'react-icons/pi'
 import { TfShieldX as ShieldXIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon } from '@tinfoilsh/tinfoil-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
@@ -28,6 +28,7 @@ type VerificationInitialStateProps = {
 }
 
 type TabType = 'key' | 'code' | 'chip' | 'measurement' | 'other' | null
+type TabId = NonNullable<TabType>
 
 export function VerificationInitialState({
   isDarkMode = true,
@@ -48,11 +49,11 @@ export function VerificationInitialState({
     return null
   }
 
-  const [selectedTab, setSelectedTab] = useState<TabType>(getFirstErrorTab() ?? 'key')
+  const [selectedTabs, setSelectedTabs] = useState<TabId[]>([getFirstErrorTab() ?? 'key'])
 
   useEffect(() => {
     const errorTab = getFirstErrorTab()
-    setSelectedTab(errorTab ?? 'key')
+    setSelectedTabs([errorTab ?? 'key'])
   }, [stepStatuses?.encryption, stepStatuses?.code, stepStatuses?.hardware, stepStatuses?.measurement, stepStatuses?.other])
 
   const getStepStatus = (tabId: TabType): StepStatus => {
@@ -140,10 +141,8 @@ export function VerificationInitialState({
   const isSEV = /sev/.test(typeString)
   const isTDX = /tdx/.test(typeString)
 
-  const lineColor = isDarkMode ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)'
-
   const isVerifying = status === 'verifying'
-  const activeTab = isVerifying ? null : selectedTab
+  const activeTabs = isVerifying ? [] : selectedTabs
 
   return (
     <div className="relative flex h-full w-full flex-col bg-surface-background">
@@ -154,10 +153,10 @@ export function VerificationInitialState({
 
 
         {/* Main content - z-10, above circuit lines */}
-        <div className="relative z-10 space-y-3 px-3 pb-6 pt-3 sm:space-y-4 sm:px-4 sm:pt-4">
+        <div className="relative z-10 space-y-3 px-3 pb-6 pt-6 sm:space-y-4 sm:px-4 sm:pt-7">
         {/* Status Banner */}
         <motion.div
-          className={`flex min-h-[128px] flex-col justify-center gap-3 rounded-xl border p-4 ${
+          className={`flex flex-col justify-center gap-3 rounded-site-lg border p-4 ${
             status === 'error'
               ? isDarkMode
                 ? 'text-red-400'
@@ -184,7 +183,7 @@ export function VerificationInitialState({
         >
           <div className="flex flex-col gap-2">
             <p
-              style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+              style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
             >
               {status === 'error'
                 ? 'An error occurred during initialization.'
@@ -197,7 +196,7 @@ export function VerificationInitialState({
             {status === 'success' && (
               <div
                 className="flex items-center gap-2 flex-wrap"
-                style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+                style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
               >
                 <span>Hardware attested by</span>
                 {isSEV && (
@@ -255,231 +254,117 @@ export function VerificationInitialState({
           </div>
         </motion.div>
 
-        {/* Three Step Cards */}
+        {/* Verification Steps */}
         <motion.div
-          className="relative flex items-center justify-center py-4"
+          className="overflow-hidden rounded-site-lg border border-border-subtle bg-surface-card"
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, delay: 0.05, ease: [0.4, 0, 0.2, 1] }}
         >
-          {/* Horizontal line through cards center */}
-          <div
-            className="absolute pointer-events-none -z-10"
-            style={{
-              left: visibleTabs.length > 3 ? '35px' : '40px',
-              right: visibleTabs.length > 3 ? '35px' : '40px',
-              top: '50%',
-              height: '2px',
-              background: lineColor
-            }}
-          />
-
-          {/* Vertical lines from each card up to status banner - dynamically positioned */}
-          {visibleTabs.map((_, index) => {
-            const cardWidth = visibleTabs.length > 3 ? 70 : 80
-            const totalCards = visibleTabs.length
-            const padding = visibleTabs.length > 3 ? 0 : 0
-            // For justify-between with padding: calculate position within the padded area
-            const position = totalCards === 1
-              ? '50%'
-              : `calc(${padding}px + ${(index / (totalCards - 1)) * 100}% - ${(index / (totalCards - 1)) * padding * 2}px + ${cardWidth / 2 - (index / (totalCards - 1)) * cardWidth}px)`
-
-            return (
-              <div
-                key={`line-${index}`}
-                className="absolute pointer-events-none -z-10"
-                style={{
-                  left: position,
-                  top: '-16px',
-                  width: '2px',
-                  height: 'calc(50% + 16px)',
-                  background: lineColor,
-                  transform: 'translateX(-50%)'
-                }}
-              />
-            )
-          })}
-
-          {/* Vertical line from selected card down to expanded content */}
-          {activeTab && (() => {
-            const selectedIndex = visibleTabs.findIndex(t => t.id === activeTab)
-            if (selectedIndex === -1) return null
-            const cardWidth = visibleTabs.length > 3 ? 70 : 80
-            const totalCards = visibleTabs.length
-            const padding = visibleTabs.length > 3 ? 0 : 0
-            const position = totalCards === 1
-              ? '50%'
-              : `calc(${padding}px + ${(selectedIndex / (totalCards - 1)) * 100}% - ${(selectedIndex / (totalCards - 1)) * padding * 2}px + ${cardWidth / 2 - (selectedIndex / (totalCards - 1)) * cardWidth}px)`
+          {visibleTabs.map((tab, index) => {
+            const stepStatus = getStepStatus(tab.id)
+            const isActive = activeTabs.includes(tab.id)
+            const successColor = isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
 
             return (
               <motion.div
-                key="connector-down"
+                key={tab.id}
+                className={index === 0 ? '' : 'border-t border-border-subtle'}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-                className="absolute pointer-events-none -z-10"
-                style={{
-                  left: position,
-                  top: '50%',
-                  width: '2px',
-                  height: 'calc(50% + 20px)',
-                  background: lineColor,
-                  transform: 'translateX(-50%)'
-                }}
-              />
-            )
-          })()}
-
-          {/* Cards */}
-          <div className="relative z-10 flex w-full items-center justify-between">
-            {visibleTabs.map((tab, index) => (
-              <motion.button
-                key={tab.id}
-                onClick={() => !isVerifying && setSelectedTab(selectedTab === tab.id ? null : tab.id)}
-                disabled={isVerifying}
-                className={`group relative z-10 flex flex-col items-center justify-center rounded-xl border transition-all duration-150 ${
-                  isVerifying ? 'cursor-default' : ''
-                } ${
-                  activeTab === tab.id
-                    ? getStepStatus(tab.id) === 'error'
-                      ? isDarkMode
-                        ? 'border-red-500 bg-surface-card'
-                        : 'border-red-300 bg-red-50'
-                      : isDarkMode
-                        ? 'border-[#68C7AC] bg-surface-card'
-                        : 'border-[#004444] bg-white'
-                    : isDarkMode
-                      ? `border-border-subtle bg-surface-card ${isVerifying ? '' : 'hover:border-border-subtle hover:bg-surface-card/80'}`
-                      : `border-border-subtle bg-surface-card ${isVerifying ? '' : 'hover:bg-gray-50'}`
-                }`}
-                style={{
-                  width: visibleTabs.length > 3 ? '70px' : '80px',
-                  height: visibleTabs.length > 3 ? '70px' : '80px',
-                  ...(activeTab === tab.id && getStepStatus(tab.id) !== 'error' ? {
-                    backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)'
-                  } : {})
-                }}
-                initial={tab.id === 'other' ? { opacity: 0, x: 20 } : { opacity: 0 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  duration: 0.15,
-                  delay: tab.id === 'other' ? 0 : 0.08 + (index * 0.03),
-                  ease: [0.4, 0, 0.2, 1]
-                }}
+                transition={{ duration: 0.15, delay: 0.08 + (index * 0.03) }}
               >
-                {/* Status Badge */}
-                <div
-                  className={`absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full ${
-                    getStepStatus(tab.id) === 'error'
-                      ? isDarkMode
-                        ? 'bg-red-500 text-white'
-                        : 'bg-red-100 text-red-600'
-                      : getStepStatus(tab.id) === 'pending'
-                        ? isDarkMode
-                          ? 'bg-gray-700/50 text-gray-400'
-                          : 'bg-gray-200 text-gray-500'
-                        : activeTab === tab.id
-                          ? 'text-white'
-                          : 'bg-border-subtle text-white'
-                  }`}
-                  style={getStepStatus(tab.id) === 'success' && activeTab === tab.id ? {
-                    backgroundColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
-                  } : {}}
-                >
-                  {getStepStatus(tab.id) === 'error' ? (
-                    <svg
-                      className="h-3 w-3"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  ) : getStepStatus(tab.id) === 'pending' ? (
-                    <PiSpinner className="w-3 h-3 animate-spin" />
-                  ) : (
-                    <svg
-                      className="h-3 w-3"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                <button
+                  type="button"
+                  onClick={() => !isVerifying && setSelectedTabs(currentTabs =>
+                    currentTabs.includes(tab.id)
+                      ? currentTabs.filter(tabId => tabId !== tab.id)
+                      : [...currentTabs, tab.id]
                   )}
-                </div>
-
-                <div
-                  className="flex flex-col items-center mb-1"
-                  style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}
+                  disabled={isVerifying}
+                  aria-expanded={isActive}
+                  aria-controls={`verification-step-${tab.id}`}
+                  className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-150 ${
+                    isVerifying ? 'cursor-default' : isDarkMode ? 'hover:bg-white/[0.03]' : 'hover:bg-gray-50'
+                  }`}
                 >
-                  <span className={isDarkMode ? 'text-content-muted' : 'text-gray-400'}>
-                    {tab.prefix}
+                  <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-site-control ${
+                    stepStatus === 'error'
+                      ? isDarkMode ? 'bg-red-500/15 text-red-400' : 'bg-red-50 text-red-600'
+                      : stepStatus === 'success'
+                        ? isDarkMode ? 'bg-white/[0.04]' : 'bg-gray-100'
+                        : isDarkMode ? 'bg-white/[0.04] text-content-secondary' : 'bg-gray-100 text-gray-500'
+                  }`} style={stepStatus === 'success' ? { color: successColor } : {}}>
+                    {tab.icon}
                   </span>
+
                   <span
-                    className={`${
-                      activeTab === tab.id
-                        ? getStepStatus(tab.id) === 'error'
-                          ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                          : isDarkMode ? 'text-[#68C7AC]' : 'text-[#004444]'
-                        : isDarkMode ? 'text-content-secondary' : 'text-gray-500'
-                    } transition-colors`}
+                    className={`min-w-0 flex-1 ${
+                      stepStatus === 'error'
+                        ? isDarkMode ? 'text-red-400' : 'text-red-600'
+                        : stepStatus === 'success'
+                          ? ''
+                          : isDarkMode ? 'text-content-primary' : 'text-gray-900'
+                    }`}
+                    style={{
+                      fontFamily: FONT_FAMILIES.AEONIK_FONO,
+                      fontSize: '14px',
+                      ...(stepStatus === 'success' ? { color: successColor } : {})
+                    }}
                   >
-                    {tab.label}
+                    <span className={stepStatus === 'success' ? '' : isDarkMode ? 'text-content-muted' : 'text-gray-500'}>{tab.prefix}</span>{' '}
+                    <span className="font-medium">{tab.label}</span>
                   </span>
-                </div>
 
-                <div className={`flex items-center justify-center ${
-                  activeTab === tab.id
-                    ? getStepStatus(tab.id) === 'error'
-                      ? isDarkMode ? 'text-red-400' : 'text-red-600'
-                      : isDarkMode ? 'text-[#68C7AC]' : 'text-[#004444]'
-                    : isDarkMode ? 'text-content-secondary' : 'text-gray-400'
-                } transition-colors`}>
-                  {tab.icon}
-                </div>
-              </motion.button>
-            ))}
-          </div>
+                  <span className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
+                    stepStatus === 'error'
+                      ? isDarkMode ? 'bg-red-500 text-white' : 'bg-red-100 text-red-600'
+                      : stepStatus === 'pending'
+                        ? isDarkMode ? 'bg-gray-700/50 text-gray-400' : 'bg-gray-200 text-gray-500'
+                        : '!text-white'
+                  }`} style={stepStatus === 'success' ? {
+                    backgroundColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
+                  } : {}}>
+                    {stepStatus === 'error' ? (
+                      <PiXBold className="h-3 w-3" />
+                    ) : stepStatus === 'pending' ? (
+                      <PiSpinner className="h-3 w-3 animate-spin" />
+                    ) : (
+                      <PiCheckBold className="h-3 w-3" />
+                    )}
+                  </span>
+
+                  <PiCaretDown
+                    className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
+                      isActive ? 'rotate-180' : ''
+                    } ${stepStatus === 'success' ? '' : isDarkMode ? 'text-content-muted' : 'text-gray-400'}`}
+                    style={stepStatus === 'success' ? { color: successColor } : {}}
+                  />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      id={`verification-step-${tab.id}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{
+                        height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+                        opacity: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <div className="border-t border-border-subtle p-4">
+                        {renderTabContent(tab.id)}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
         </motion.div>
-
-        {/* Expanded Content */}
-        <AnimatePresence mode="wait">
-          {activeTab && (
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{
-                height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
-                opacity: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
-              }}
-              className="relative z-10 overflow-hidden"
-            >
-              <div
-                className={`rounded-xl border p-4 ${
-                  isDarkMode
-                    ? 'border-border-subtle bg-surface-card'
-                    : 'border-border-subtle bg-surface-card'
-                }`}
-              >
-                {renderTabContent(activeTab)}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
         </div>
       </div>
     </div>

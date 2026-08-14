@@ -30,20 +30,20 @@ export function CodeTab({
             className={`mb-2 font-semibold ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
           >
             An error occurred
           </h3>
           <p
             className={isDarkMode ? 'text-red-400' : 'text-red-600'}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
           >
             {errorMessage || 'Failed to verify code.'}
           </p>
         </div>
 
         <div
-          className={`relative flex items-start gap-3 rounded-xl border p-3 ${
+          className={`relative flex items-start gap-3 rounded-site-lg border p-3 ${
             isDarkMode
               ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
               : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -53,7 +53,7 @@ export function CodeTab({
             className={`absolute top-2 right-2 flex items-center gap-1 text-xs font-medium ${
               isDarkMode ? 'text-red-400' : 'text-red-600'
             }`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}
           >
             Unverified <span>✗</span>
           </div>
@@ -63,7 +63,7 @@ export function CodeTab({
             }`}
           />
           <div className="flex-1 overflow-hidden pr-20">
-            <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
+            <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
               Source code fingerprint
             </div>
             <div
@@ -87,19 +87,19 @@ export function CodeTab({
           className={`mb-2 font-semibold ${
             isDarkMode ? 'text-content-primary' : 'text-gray-900'
           }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
         >
           Code is auditable
         </h3>
         <p
           className={isDarkMode ? 'text-content-secondary' : 'text-gray-600'}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '14px' }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
         >
           All the code that is processing your data comes from a trusted open-source repository and is auditable through the Sigstore transparency log.
         </p>
       </div>
       <div
-        className={`relative flex items-start gap-3 rounded-xl border p-3 ${
+        className={`relative flex items-start gap-3 rounded-site-lg border p-3 ${
           isDarkMode
             ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -109,7 +109,7 @@ export function CodeTab({
           <div
             className="absolute top-2 right-2 flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium"
             style={{
-              fontFamily: FONT_FAMILIES.AEONIK,
+              fontFamily: FONT_FAMILIES.AEONIK_FONO,
               color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
               backgroundColor: isDarkMode ? 'rgba(104, 199, 172, 0.15)' : 'rgba(0, 68, 68, 0.08)'
             }}
@@ -123,7 +123,7 @@ export function CodeTab({
           }`}
         />
         <div className="flex-1 overflow-hidden pr-20">
-          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK, fontSize: '12px' }}>
+          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
             Source code fingerprint
           </div>
           <div
@@ -139,12 +139,12 @@ export function CodeTab({
 
       <button
         onClick={() => setShowAdditionalInfo(!showAdditionalInfo)}
-        className={`w-full rounded-xl border px-4 py-2.5 text-sm font-medium transition-all ${
+        className={`w-full rounded-site-control border px-4 py-2.5 text-sm font-medium transition-all ${
           isDarkMode
             ? 'border-border-subtle bg-surface-secondary text-content-primary shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:bg-surface-card'
             : 'border-border-subtle bg-gray-100 text-gray-900 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:bg-gray-200'
         }`}
-        style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+        style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}
       >
         {showAdditionalInfo ? 'Hide additional info' : 'Show additional info'}
       </button>
@@ -163,13 +163,13 @@ export function CodeTab({
           >
             {verificationDocument?.codeFingerprint && (
               <div
-                className={`rounded-xl border p-3 ${
+                className={`rounded-site-lg border p-3 ${
                   isDarkMode
                     ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
-                <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                <div className="mb-1.5 text-xs font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}>
                   Full Code Fingerprint
                 </div>
                 <div className={`font-mono text-xs break-all ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`}>
@@ -179,21 +179,21 @@ export function CodeTab({
             )}
             {verificationDocument?.configRepo && (
               <div
-                className={`relative rounded-xl border p-3 ${
+                className={`relative rounded-site-lg border p-3 ${
                   isDarkMode
                     ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                     : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
                 }`}
               >
                 <FaGithub className={`absolute top-3 right-3 h-6 w-6 ${isDarkMode ? 'text-content-primary' : 'text-gray-900'}`} />
-                <div className="mb-2 text-xs font-medium opacity-70 pr-8" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+                <div className="mb-2 text-xs font-medium opacity-70 pr-8" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}>
                   Configuration Repository
                 </div>
                 <p
                   className={`text-xs mb-3 pr-8 ${
                     isDarkMode ? 'text-content-secondary' : 'text-gray-600'
                   }`}
-                  style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                  style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}
                 >
                   The configuration repository specifies exactly what code is running inside the secure enclave, including dependencies and build instructions.
                 </p>
@@ -204,7 +204,7 @@ export function CodeTab({
                   className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors"
                   style={{
                     color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-                    fontFamily: FONT_FAMILIES.AEONIK
+                    fontFamily: FONT_FAMILIES.AEONIK_FONO
                   }}
                 >
                   {verificationDocument.configRepo}
@@ -216,7 +216,7 @@ export function CodeTab({
             )}
 
             <div
-              className={`relative rounded-xl border p-3 ${
+              className={`relative rounded-site-lg border p-3 ${
                 isDarkMode
                   ? 'border-border-subtle bg-surface-secondary shadow-[0_1px_3px_rgba(0,0,0,0.08)]'
                   : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
@@ -227,14 +227,14 @@ export function CodeTab({
                 alt="Sigstore"
                 className="absolute top-3 right-3 h-6 w-6"
               />
-              <div className="mb-2 text-xs font-medium opacity-70 pr-8" style={{ fontFamily: FONT_FAMILIES.AEONIK }}>
+              <div className="mb-2 text-xs font-medium opacity-70 pr-8" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}>
                 Sigstore Transparency Log
               </div>
               <p
                 className={`text-xs mb-3 pr-8 ${
                   isDarkMode ? 'text-content-secondary' : 'text-gray-600'
                 }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}
               >
                 Verifies that the source code published on GitHub was correctly built through GitHub Actions and that the resulting binary is available on the Sigstore transparency log.
               </p>
@@ -250,7 +250,7 @@ export function CodeTab({
                     ? 'text-emerald-400 hover:text-emerald-300'
                     : 'text-emerald-600 hover:text-emerald-700'
                 }`}
-                style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+                style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}
               >
                 View on Sigstore
                 <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">

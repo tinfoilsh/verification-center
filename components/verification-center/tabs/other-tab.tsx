@@ -13,18 +13,18 @@ export function OtherTab({
     <div className="space-y-4">
       <div>
         <h3
-          className={`mb-2 text-lg font-semibold ${
+          className={`mb-2 font-semibold ${
             isDarkMode ? 'text-red-400' : 'text-red-600'
           }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
         >
-          Error Details
+          Error details
         </h3>
         <p
-          className={`text-sm ${
+          className={
             isDarkMode ? 'text-red-400' : 'text-red-600'
-          }`}
-          style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+          }
+          style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
         >
           {errorMessage || 'An unexpected error occurred during verification.'}
         </p>

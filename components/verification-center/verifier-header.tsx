@@ -1,6 +1,7 @@
 import { LuX } from 'react-icons/lu'
 import { TfTin, TfTinSad } from '@tinfoilsh/tinfoil-icons'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
+import { TINFOIL_DIVIDER_BAND, TINFOIL_DIVIDER_MOTIF_DARK, TINFOIL_DIVIDER_MOTIF_LIGHT } from '@/lib/constants/colors'
 
 type VerifierHeaderProps = {
   isDarkMode?: boolean
@@ -23,12 +24,11 @@ export function VerifierHeader({
 }: VerifierHeaderProps) {
   return (
     <div
-      className={`relative flex items-center justify-center px-4 bg-surface-card ${className}`}
+      className={`relative z-20 flex flex-shrink-0 items-center justify-center px-4 bg-surface-card ${className}`}
       style={{
         minHeight: '72px',
         paddingTop: '12px',
         paddingBottom: '12px',
-        borderBottom: `1px solid ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
       }}
     >
       {/* Left side - Tin icon */}
@@ -43,7 +43,7 @@ export function VerifierHeader({
       {/* Center - Title and Powered by */}
       <div className="flex flex-col items-center">
         <span
-          className={`font-medium ${
+          className={`font-semibold tracking-[-0.02em] ${
             isDarkMode ? 'text-white' : 'text-content-primary'
           }`}
           style={{
@@ -56,7 +56,7 @@ export function VerifierHeader({
         <div className="flex items-center gap-1.5 mt-0.5">
           <span
             className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
-            style={{ fontFamily: FONT_FAMILIES.AEONIK }}
+            style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO }}
           >
             Powered by
           </span>
@@ -79,7 +79,7 @@ export function VerifierHeader({
       {/* Right side - Close button */}
       {onClose && (
         <button
-          className={`absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-lg p-2 transition-colors ${
+          className={`absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-site-control p-2 transition-colors ${
             isDarkMode
               ? 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -92,6 +92,27 @@ export function VerifierHeader({
           <LuX className="h-5 w-5" style={{ color: 'inherit' }} />
         </button>
       )}
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 -bottom-3 h-3"
+        style={{ backgroundColor: isDarkMode ? 'hsl(var(--surface-card))' : TINFOIL_DIVIDER_BAND }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: isDarkMode ? TINFOIL_DIVIDER_MOTIF_LIGHT : TINFOIL_DIVIDER_MOTIF_DARK,
+            maskImage: 'url(/icons/chevron-band-divider.svg)',
+            maskPosition: 'left top',
+            maskRepeat: 'repeat-x',
+            maskSize: '20px 12px',
+            WebkitMaskImage: 'url(/icons/chevron-band-divider.svg)',
+            WebkitMaskPosition: 'left top',
+            WebkitMaskRepeat: 'repeat-x',
+            WebkitMaskSize: '20px 12px',
+          }}
+        />
+      </div>
     </div>
   )
 }
