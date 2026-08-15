@@ -62,7 +62,7 @@ export function MeasurementTab({
                 Source code fingerprint
               </div>
               <div
-                className={`truncate font-mono ${
+                className={`break-all font-mono ${
                   isDarkMode ? 'text-content-primary' : 'text-gray-900'
                 }`}
                 style={{ fontSize: '12px' }}
@@ -102,7 +102,7 @@ export function MeasurementTab({
                 Enclave code fingerprint
               </div>
               <div
-                className={`truncate font-mono ${
+                className={`break-all font-mono ${
                   isDarkMode ? 'text-red-300' : 'text-red-700'
                 }`}
                 style={{ fontSize: '12px' }}

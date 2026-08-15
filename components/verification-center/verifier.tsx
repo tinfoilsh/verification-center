@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { PiSpinner } from "react-icons/pi";
 import type { VerificationDocument } from "@/lib/types/verification";
 export type { VerificationDocument } from "@/lib/types/verification";
@@ -13,6 +14,12 @@ const VerificationInitialState = dynamic(
     ),
   { loading: () => <VerificationLoadingState /> },
 );
+
+const CONTENT_ASSET_PATHS = [
+  "/icons/amd.svg",
+  "/icons/intel.svg",
+  "/icons/nvidia.svg",
+];
 
 export type VerificationCenterProps = {
   /** The verification document to display */
@@ -57,14 +64,40 @@ function VerificationLoadingState() {
   );
 }
 
+function preloadImage(src: string) {
+  return new Promise<void>((resolve) => {
+    const image = new Image();
+    image.onload = () => resolve();
+    image.onerror = () => resolve();
+    image.src = src;
+  });
+}
+
 export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
   showHeader = true,
   type = 'default',
 }: VerificationCenterProps) {
+  const [areContentAssetsReady, setAreContentAssetsReady] = useState(false);
   const isLoading = !verificationDocument;
   const currentDocument = verificationDocument || placeholderDocument;
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    Promise.allSettled([
+      document.fonts.load('14px "Aeonik Fono"'),
+      document.fonts.load('500 14px "Aeonik Fono"'),
+      ...CONTENT_ASSET_PATHS.map(preloadImage),
+    ]).then(() => {
+      if (!isCancelled) setAreContentAssetsReady(true);
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   const { allSuccess, hasError, firstErrorMessage } = getVerificationStatus(
     currentDocument,
@@ -78,6 +111,7 @@ export function VerificationCenter({
       : allSuccess
         ? "success"
         : "verifying";
+  const isContentReady = status !== "verifying" && areContentAssetsReady;
 
   const errorMsg = hasError ? firstErrorMessage : undefined;
 
@@ -119,7 +153,7 @@ export function VerificationCenter({
           status={isLoading ? "verifying" : status}
         />
       )}
-      {isLoading ? (
+      {!isContentReady ? (
         <VerificationLoadingState />
       ) : (
         <VerificationInitialState

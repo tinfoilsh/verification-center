@@ -19,6 +19,9 @@ export default function RootLayout({
         <link rel="preload" href="/icons/chevron-band-divider.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/icons/logo-green.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/icons/logo-white.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/icons/amd.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/icons/intel.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/icons/nvidia.svg" as="image" type="image/svg+xml" />
       </head>
       <body>{children}</body>
     </html>
