@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { PiCaretDown, PiCheckBold, PiSpinner, PiXBold } from 'react-icons/pi'
 import { TfShieldX as ShieldXIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon } from '@tinfoilsh/tinfoil-icons'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -39,22 +39,7 @@ export function VerificationInitialState({
   showHeader = true,
   type = 'default'
 }: VerificationInitialStateProps) {
-  const getFirstErrorTab = (): TabType => {
-    if (!stepStatuses) return null
-    if (stepStatuses.encryption === 'error') return 'key'
-    if (stepStatuses.code === 'error') return 'code'
-    if (stepStatuses.hardware === 'error') return 'chip'
-    if (stepStatuses.measurement === 'error') return 'measurement'
-    if (stepStatuses.other === 'error') return 'other'
-    return null
-  }
-
-  const [selectedTabs, setSelectedTabs] = useState<TabId[]>([getFirstErrorTab() ?? 'key'])
-
-  useEffect(() => {
-    const errorTab = getFirstErrorTab()
-    setSelectedTabs([errorTab ?? 'key'])
-  }, [stepStatuses?.encryption, stepStatuses?.code, stepStatuses?.hardware, stepStatuses?.measurement, stepStatuses?.other])
+  const [selectedTabs, setSelectedTabs] = useState<TabId[]>([])
 
   const getStepStatus = (tabId: TabType): StepStatus => {
     if (status === 'verifying') return 'pending'

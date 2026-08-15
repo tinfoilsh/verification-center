@@ -1,8 +1,18 @@
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { PiSpinner } from "react-icons/pi";
 import type { VerificationDocument } from "@/lib/types/verification";
 export type { VerificationDocument } from "@/lib/types/verification";
-import { VerificationInitialState } from "./verification-initial-state";
 import { getVerificationStatus } from "@/lib/utils/verification-status";
+import { VerifierHeader } from "./verifier-header";
+import { TextureGrid } from "./texture-grid";
+
+const VerificationInitialState = dynamic(
+  () =>
+    import("./verification-initial-state").then(
+      (module) => module.VerificationInitialState,
+    ),
+  { loading: () => <VerificationLoadingState /> },
+);
 
 export type VerificationCenterProps = {
   /** The verification document to display */
@@ -35,23 +45,26 @@ const placeholderDocument: VerificationDocument = {
   },
 };
 
+function VerificationLoadingState() {
+  return (
+    <div className="relative flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden bg-surface-background">
+      <TextureGrid className="z-0" />
+      <div className="relative z-10 flex items-center gap-2 font-sans text-sm text-content-secondary">
+        <PiSpinner className="h-4 w-4 animate-spin" />
+        <span>Loading...</span>
+      </div>
+    </div>
+  );
+}
+
 export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
   showHeader = true,
   type = 'default',
 }: VerificationCenterProps) {
-  const [isLoading, setIsLoading] = useState(!verificationDocument);
-  const [currentDocument, setCurrentDocument] = useState(
-    verificationDocument || placeholderDocument,
-  );
-
-  useEffect(() => {
-    if (verificationDocument) {
-      setCurrentDocument(verificationDocument);
-      setIsLoading(false);
-    }
-  }, [verificationDocument]);
+  const isLoading = !verificationDocument;
+  const currentDocument = verificationDocument || placeholderDocument;
 
   const { allSuccess, hasError, firstErrorMessage } = getVerificationStatus(
     currentDocument,
@@ -100,15 +113,25 @@ export function VerificationCenter({
       }`}
       data-theme={isDarkMode ? "dark" : "light"}
     >
-      <VerificationInitialState
-        isDarkMode={isDarkMode}
-        verificationDocument={currentDocument}
-        status={status}
-        errorMessage={errorMsg}
-        stepStatuses={stepStatuses}
-        showHeader={showHeader}
-        type={type}
-      />
+      {showHeader && (
+        <VerifierHeader
+          isDarkMode={isDarkMode}
+          status={isLoading ? "verifying" : status}
+        />
+      )}
+      {isLoading ? (
+        <VerificationLoadingState />
+      ) : (
+        <VerificationInitialState
+          isDarkMode={isDarkMode}
+          verificationDocument={currentDocument}
+          status={status}
+          errorMessage={errorMsg}
+          stepStatuses={stepStatuses}
+          showHeader={false}
+          type={type}
+        />
+      )}
     </div>
   );
 }
