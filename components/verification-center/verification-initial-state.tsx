@@ -140,7 +140,7 @@ export function VerificationInitialState({
         {/* Main content - z-10, above circuit lines */}
         <div className="relative z-10 space-y-3 px-3 pb-6 pt-6 sm:space-y-4 sm:px-4 sm:pt-7">
         {/* Status Banner */}
-        <motion.div
+        <div
           className={`flex flex-col justify-center gap-3 rounded-site-lg border p-4 ${
             status === 'error'
               ? isDarkMode
@@ -162,9 +162,6 @@ export function VerificationInitialState({
               backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
             } : {}
           }
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
         >
           <div className="flex flex-col gap-2">
             <p
@@ -237,14 +234,11 @@ export function VerificationInitialState({
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Verification Steps */}
-        <motion.div
+        <div
           className="overflow-hidden rounded-site-lg border border-border-subtle bg-surface-card"
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, delay: 0.05, ease: [0.4, 0, 0.2, 1] }}
         >
           {visibleTabs.map((tab, index) => {
             const stepStatus = getStepStatus(tab.id)
@@ -252,12 +246,9 @@ export function VerificationInitialState({
             const successColor = isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
 
             return (
-              <motion.div
+              <div
                 key={tab.id}
                 className={index === 0 ? '' : 'border-t border-border-subtle'}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.15, delay: 0.08 + (index * 0.03) }}
               >
                 <button
                   type="button"
@@ -346,10 +337,10 @@ export function VerificationInitialState({
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
         </div>
       </div>
     </div>

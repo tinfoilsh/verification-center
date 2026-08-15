@@ -70,6 +70,7 @@ export function VerifierHeader({
               alt="Tinfoil"
               width={45}
               height={20}
+              fetchPriority="high"
               className={`${isDarkMode ? '' : 'opacity-80'} hover:opacity-70 transition-opacity`}
             />
           </a>
