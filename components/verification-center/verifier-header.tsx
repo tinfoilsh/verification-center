@@ -106,11 +106,11 @@ export function VerifierHeader({
             maskImage: 'url(/icons/chevron-band-divider.svg)',
             maskPosition: 'left top',
             maskRepeat: 'repeat-x',
-            maskSize: '20px 9px',
+            maskSize: '20px 12px',
             WebkitMaskImage: 'url(/icons/chevron-band-divider.svg)',
             WebkitMaskPosition: 'left top',
             WebkitMaskRepeat: 'repeat-x',
-            WebkitMaskSize: '20px 9px',
+            WebkitMaskSize: '20px 12px',
           }}
         />
       </div>
