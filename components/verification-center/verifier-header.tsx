@@ -96,7 +96,7 @@ export function VerifierHeader({
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -bottom-3 h-3"
+        className="pointer-events-none absolute inset-x-0 -bottom-[9px] h-[9px]"
         style={{ backgroundColor: isDarkMode ? 'hsl(var(--surface-card))' : TINFOIL_DIVIDER_BAND }}
       >
         <div
@@ -106,11 +106,11 @@ export function VerifierHeader({
             maskImage: 'url(/icons/chevron-band-divider.svg)',
             maskPosition: 'left top',
             maskRepeat: 'repeat-x',
-            maskSize: '20px 12px',
+            maskSize: '20px 9px',
             WebkitMaskImage: 'url(/icons/chevron-band-divider.svg)',
             WebkitMaskPosition: 'left top',
             WebkitMaskRepeat: 'repeat-x',
-            WebkitMaskSize: '20px 12px',
+            WebkitMaskSize: '20px 9px',
           }}
         />
       </div>
