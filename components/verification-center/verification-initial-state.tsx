@@ -215,7 +215,6 @@ export function VerificationInitialState({
                     }}
                   />
                 )}
-                {(isSEV || isTDX) && <span>and</span>}
                 <span
                   className="inline-block h-4 w-16"
                   aria-label="NVIDIA"
