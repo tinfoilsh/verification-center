@@ -40,5 +40,5 @@ export function LogoLoading({ size = 80 }: { size?: number }) {
     }
   }, [])
 
-  return <div ref={containerRef} style={{ width: size, height: size }} />
+  return <div ref={containerRef} className="tinfoil-logo-loading" style={{ width: size, height: size }} />
 }
