@@ -55,8 +55,8 @@ const placeholderDocument: VerificationDocument = {
 function VerificationLoadingState() {
   return (
     <div className="relative flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden bg-surface-background">
-      <TextureGrid className="z-0" />
-      <div className="relative z-10" role="status" aria-label="Loading">
+      <TextureGrid className="z-10" />
+      <div className="relative z-0 opacity-20" role="status" aria-label="Loading">
         <LogoLoading />
       </div>
     </div>
