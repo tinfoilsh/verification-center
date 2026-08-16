@@ -1,10 +1,11 @@
 import dynamic from "next/dynamic";
-import { PiSpinner } from "react-icons/pi";
+import { useEffect, useState } from "react";
 import type { VerificationDocument } from "@/lib/types/verification";
 export type { VerificationDocument } from "@/lib/types/verification";
 import { getVerificationStatus } from "@/lib/utils/verification-status";
 import { VerifierHeader } from "./verifier-header";
 import { TextureGrid } from "./texture-grid";
+import { LogoLoading } from "./logo-loading";
 
 const VerificationInitialState = dynamic(
   () =>
@@ -13,6 +14,12 @@ const VerificationInitialState = dynamic(
     ),
   { loading: () => <VerificationLoadingState /> },
 );
+
+const CONTENT_ASSET_PATHS = [
+  "/icons/amd.svg",
+  "/icons/intel.svg",
+  "/icons/nvidia.svg",
+];
 
 export type VerificationCenterProps = {
   /** The verification document to display */
@@ -48,13 +55,21 @@ const placeholderDocument: VerificationDocument = {
 function VerificationLoadingState() {
   return (
     <div className="relative flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden bg-surface-background">
-      <TextureGrid className="z-0" />
-      <div className="relative z-10 flex items-center gap-2 font-sans text-sm text-content-secondary">
-        <PiSpinner className="h-4 w-4 animate-spin" />
-        <span>Loading...</span>
+      <TextureGrid className="z-10" />
+      <div className="relative z-0 opacity-20" role="status" aria-label="Loading">
+        <LogoLoading />
       </div>
     </div>
   );
+}
+
+function preloadImage(src: string) {
+  return new Promise<void>((resolve) => {
+    const image = new Image();
+    image.onload = () => resolve();
+    image.onerror = () => resolve();
+    image.src = src;
+  });
 }
 
 export function VerificationCenter({
@@ -63,8 +78,25 @@ export function VerificationCenter({
   showHeader = true,
   type = 'default',
 }: VerificationCenterProps) {
+  const [areContentAssetsReady, setAreContentAssetsReady] = useState(false);
   const isLoading = !verificationDocument;
   const currentDocument = verificationDocument || placeholderDocument;
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    Promise.allSettled([
+      document.fonts.load('14px "Aeonik Fono"'),
+      document.fonts.load('500 14px "Aeonik Fono"'),
+      ...CONTENT_ASSET_PATHS.map(preloadImage),
+    ]).then(() => {
+      if (!isCancelled) setAreContentAssetsReady(true);
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   const { allSuccess, hasError, firstErrorMessage } = getVerificationStatus(
     currentDocument,
@@ -78,6 +110,7 @@ export function VerificationCenter({
       : allSuccess
         ? "success"
         : "verifying";
+  const isContentReady = status !== "verifying" && areContentAssetsReady;
 
   const errorMsg = hasError ? firstErrorMessage : undefined;
 
@@ -119,7 +152,7 @@ export function VerificationCenter({
           status={isLoading ? "verifying" : status}
         />
       )}
-      {isLoading ? (
+      {!isContentReady ? (
         <VerificationLoadingState />
       ) : (
         <VerificationInitialState

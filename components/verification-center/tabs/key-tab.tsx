@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FONT_FAMILIES } from '@/lib/constants/verification'
+import { FONT_FAMILIES, STATUS_BADGE_FONT_SIZE } from '@/lib/constants/verification'
 import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
 import { TfKey as KeyIcon } from '@tinfoilsh/tinfoil-icons'
 import type { VerificationDocument } from '@/lib/types/verification'
@@ -68,7 +68,7 @@ export function KeyTab({
               Your unique encryption key
             </div>
             <div
-              className={`font-mono truncate ${
+              className={`break-all font-mono ${
                 isDarkMode ? 'text-content-primary' : 'text-gray-900'
               }`}
               style={{ fontSize: '12px' }}
@@ -108,30 +108,32 @@ export function KeyTab({
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
         }`}
       >
-        {stepStatus === 'success' && (
-          <div
-            className="absolute top-2 right-2 flex items-center gap-1 rounded-full px-2 py-0.5 font-medium"
-            style={{
-              fontFamily: FONT_FAMILIES.AEONIK_FONO,
-              fontSize: '12px',
-              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-              backgroundColor: isDarkMode ? 'rgba(104, 199, 172, 0.15)' : 'rgba(0, 68, 68, 0.08)'
-            }}
-          >
-            Attested <span>✓</span>
-          </div>
-        )}
         <KeyIcon
           className={`w-5 h-5 flex-shrink-0 ${
             isDarkMode ? 'text-content-secondary' : 'text-gray-400'
           }`}
         />
-        <div className="flex-1 overflow-hidden pr-20">
-          <div className="font-medium opacity-70 mb-1" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
-            Your unique encryption key
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 flex items-start justify-between gap-2">
+            <div className="min-w-0 font-medium opacity-70" style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '12px' }}>
+              Your unique encryption key
+            </div>
+            {stepStatus === 'success' && (
+              <div
+                className="flex flex-shrink-0 items-center gap-0.5 rounded-site-control px-1.5 py-0.5 font-medium"
+                style={{
+                  fontFamily: FONT_FAMILIES.AEONIK_FONO,
+                  fontSize: STATUS_BADGE_FONT_SIZE,
+                  color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
+                  backgroundColor: isDarkMode ? 'rgba(104, 199, 172, 0.15)' : 'rgba(0, 68, 68, 0.08)'
+                }}
+              >
+                Attested <span>✓</span>
+              </div>
+            )}
           </div>
           <div
-            className={`font-mono truncate ${
+            className={`break-all font-mono ${
               isDarkMode ? 'text-content-primary' : 'text-gray-900'
             }`}
             style={{ fontSize: '12px' }}

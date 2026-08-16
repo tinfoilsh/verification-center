@@ -96,7 +96,7 @@ export function VerifierHeader({
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -bottom-3 h-3"
+        className="pointer-events-none absolute inset-x-0 -bottom-[9px] h-[9px]"
         style={{ backgroundColor: isDarkMode ? 'hsl(var(--surface-card))' : TINFOIL_DIVIDER_BAND }}
       >
         <div

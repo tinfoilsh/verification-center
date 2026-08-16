@@ -196,4 +196,16 @@
   .tinfoil-verification-theme .font-mono {
     font-family: 'Aeonik Fono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   }
+
+  .tinfoil-verification-theme .tinfoil-logo-loading {
+    color: hsl(var(--color-accent-dark));
+  }
+
+  .tinfoil-verification-theme.dark .tinfoil-logo-loading {
+    color: hsl(var(--color-accent-light));
+  }
+
+  .tinfoil-verification-theme .tinfoil-logo-loading svg path {
+    fill: currentColor !important;
+  }
 }

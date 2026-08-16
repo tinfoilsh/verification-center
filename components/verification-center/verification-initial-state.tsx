@@ -180,7 +180,7 @@ export function VerificationInitialState({
                 className="flex items-center gap-2 flex-wrap"
                 style={{ fontFamily: FONT_FAMILIES.AEONIK_FONO, fontSize: '14px' }}
               >
-                <span>Hardware attested by</span>
+                <span className="font-medium">Hardware attested by:</span>
                 {isSEV && (
                   <span
                     className="inline-block h-3 w-12"
@@ -215,7 +215,6 @@ export function VerificationInitialState({
                     }}
                   />
                 )}
-                {(isSEV || isTDX) && <span>and</span>}
                 <span
                   className="inline-block h-4 w-16"
                   aria-label="NVIDIA"
