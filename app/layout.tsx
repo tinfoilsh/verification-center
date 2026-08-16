@@ -22,6 +22,7 @@ export default function RootLayout({
         <link rel="preload" href="/icons/amd.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/icons/intel.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/icons/nvidia.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/logo-loading-loop.json" as="fetch" crossOrigin="anonymous" />
       </head>
       <body>{children}</body>
     </html>

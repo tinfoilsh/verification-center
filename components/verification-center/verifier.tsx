@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { PiSpinner } from "react-icons/pi";
 import type { VerificationDocument } from "@/lib/types/verification";
 export type { VerificationDocument } from "@/lib/types/verification";
 import { getVerificationStatus } from "@/lib/utils/verification-status";
 import { VerifierHeader } from "./verifier-header";
 import { TextureGrid } from "./texture-grid";
+import { LogoLoading } from "./logo-loading";
 
 const VerificationInitialState = dynamic(
   () =>
@@ -56,9 +56,8 @@ function VerificationLoadingState() {
   return (
     <div className="relative flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden bg-surface-background">
       <TextureGrid className="z-0" />
-      <div className="relative z-10 flex items-center gap-2 font-sans text-sm text-content-secondary">
-        <PiSpinner className="h-4 w-4 animate-spin" />
-        <span>Loading...</span>
+      <div className="relative z-10" role="status" aria-label="Loading">
+        <LogoLoading />
       </div>
     </div>
   );

@@ -12,6 +12,7 @@
     "@headlessui/react": "^2.1.7",
     "@tinfoilsh/tinfoil-icons": "^2.1.0",
     "framer-motion": "^11.11.17",
+    "lottie-web": "^5.13.0",
     "next": "^15.3.3",
     "react": "^18",
     "react-dom": "^18",
