@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { PiCaretDown, PiCheckBold, PiSpinner, PiXBold } from 'react-icons/pi'
-import { TfShieldX as ShieldXIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon } from '@tinfoilsh/tinfoil-icons'
+import { PiCaretDown, PiSpinner } from 'react-icons/pi'
+import { TfShieldX as ShieldXIcon, TfLock as LockIcon, TfTerminal as TerminalIcon, TfCpuCheck as CpuCheckIcon, TfWarning as WarningIcon, TfBoxCheckmark as CheckmarkIcon, TfBoxX as XIcon } from '@tinfoilsh/tinfoil-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
 import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_DARK } from '@/lib/constants/colors'
@@ -67,24 +67,28 @@ export function VerificationInitialState({
       id: 'chip' as const,
       prefix: 'Runtime is',
       label: 'Isolated',
+      failureLabel: 'Not Isolated',
       icon: <CpuCheckIcon className="w-[18px] h-[18px]" />
     },
     {
       id: 'key' as const,
       prefix: type === 'chat' ? 'Chat is' : 'Data is',
       label: 'Encrypted',
+      failureLabel: 'Not Encrypted',
       icon: <LockIcon className="w-4 h-4" />
     },
     {
       id: 'code' as const,
       prefix: 'Code is',
       label: 'Auditable',
+      failureLabel: 'Not Auditable',
       icon: <TerminalIcon className="w-4 h-4" />
     },
     {
       id: 'measurement' as const,
       prefix: 'Fingerprint',
       label: 'Mismatch',
+      failureLabel: 'Mismatch',
       icon: <ShieldXIcon className="w-4 h-4" />,
       showOnlyOnError: true
     },
@@ -92,6 +96,7 @@ export function VerificationInitialState({
       id: 'other' as const,
       prefix: 'Unexpected',
       label: 'Error',
+      failureLabel: 'Error',
       icon: <WarningIcon className="w-4 h-4" />,
       showOnlyOnError: true
     }
@@ -288,24 +293,24 @@ export function VerificationInitialState({
                     }}
                   >
                     <span className={stepStatus === 'success' ? '' : isDarkMode ? 'text-content-muted' : 'text-gray-500'}>{tab.prefix}</span>{' '}
-                    <span className="font-medium">{tab.label}</span>
+                    <span className="font-medium">{stepStatus === 'error' ? tab.failureLabel : tab.label}</span>
                   </span>
 
-                  <span className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
-                    stepStatus === 'error'
-                      ? isDarkMode ? 'bg-red-500 text-white' : 'bg-red-100 text-red-600'
-                      : stepStatus === 'pending'
-                        ? isDarkMode ? 'bg-gray-700/50 text-gray-400' : 'bg-gray-200 text-gray-500'
-                        : '!text-white'
-                  }`} style={stepStatus === 'success' ? {
-                    backgroundColor: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
-                  } : {}}>
+                  <span className={`flex h-5 w-5 flex-shrink-0 items-center justify-center ${
+                     stepStatus === 'error'
+                       ? isDarkMode ? 'text-red-400' : 'text-red-600'
+                       : stepStatus === 'pending'
+                         ? isDarkMode ? 'rounded-full bg-gray-700/50 text-gray-400' : 'rounded-full bg-gray-200 text-gray-500'
+                         : ''
+                   }`} style={stepStatus === 'success' ? {
+                     color: successColor
+                   } : {}}>
                     {stepStatus === 'error' ? (
-                      <PiXBold className="h-3 w-3" />
+                      <XIcon className="h-5 w-5" />
                     ) : stepStatus === 'pending' ? (
                       <PiSpinner className="h-3 w-3 animate-spin" />
                     ) : (
-                      <PiCheckBold className="h-3 w-3" />
+                      <CheckmarkIcon className="h-5 w-5" />
                     )}
                   </span>
 
