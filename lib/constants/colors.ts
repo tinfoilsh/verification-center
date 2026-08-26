@@ -58,10 +58,6 @@ export const TINFOIL_ACCENT_DARK_DARKER = colors['tinfoil-accent-dark'].darker
 export const TINFOIL_ACCENT_LIGHT = colors['tinfoil-accent-light'].DEFAULT
 export const TINFOIL_ACCENT_LIGHT_HOVER = colors['tinfoil-accent-light'].hover
 export const TINFOIL_ACCENT_LIGHT_DARKER = colors['tinfoil-accent-light'].darker
-export const TINFOIL_DIVIDER_BAND = '#F0F4F4'
-export const TINFOIL_DIVIDER_MOTIF_DARK = 'rgba(6, 24, 32, 0.32)'
-export const TINFOIL_DIVIDER_MOTIF_LIGHT = 'rgba(249, 248, 246, 0.36)'
-
 // Legacy exports for backward compatibility (will be phased out)
 export const EMERALD_500 = colors['tinfoil-accent-light'].DEFAULT
 export const EMERALD_600 = colors['tinfoil-accent-light'].darker

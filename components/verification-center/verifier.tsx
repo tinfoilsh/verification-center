@@ -1,25 +1,8 @@
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 import type { VerificationDocument } from "@/lib/types/verification";
 export type { VerificationDocument } from "@/lib/types/verification";
 import { getVerificationStatus } from "@/lib/utils/verification-status";
 import { VerifierHeader } from "./verifier-header";
-import { TextureGrid } from "./texture-grid";
-import { LogoLoading } from "./logo-loading";
-
-const VerificationInitialState = dynamic(
-  () =>
-    import("./verification-initial-state").then(
-      (module) => module.VerificationInitialState,
-    ),
-  { loading: () => <VerificationLoadingState /> },
-);
-
-const CONTENT_ASSET_PATHS = [
-  "/icons/amd.svg",
-  "/icons/intel.svg",
-  "/icons/nvidia.svg",
-];
+import { VerificationInitialState } from "./verification-initial-state";
 
 export type VerificationCenterProps = {
   /** The verification document to display */
@@ -52,51 +35,14 @@ const placeholderDocument: VerificationDocument = {
   },
 };
 
-function VerificationLoadingState() {
-  return (
-    <div className="relative flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden bg-surface-background">
-      <TextureGrid className="z-10" />
-      <div className="relative z-0 opacity-20" role="status" aria-label="Loading">
-        <LogoLoading />
-      </div>
-    </div>
-  );
-}
-
-function preloadImage(src: string) {
-  return new Promise<void>((resolve) => {
-    const image = new Image();
-    image.onload = () => resolve();
-    image.onerror = () => resolve();
-    image.src = src;
-  });
-}
-
 export function VerificationCenter({
   verificationDocument,
   isDarkMode = true,
   showHeader = true,
   type = 'default',
 }: VerificationCenterProps) {
-  const [areContentAssetsReady, setAreContentAssetsReady] = useState(false);
   const isLoading = !verificationDocument;
   const currentDocument = verificationDocument || placeholderDocument;
-
-  useEffect(() => {
-    let isCancelled = false;
-
-    Promise.allSettled([
-      document.fonts.load('14px "Aeonik Fono"'),
-      document.fonts.load('500 14px "Aeonik Fono"'),
-      ...CONTENT_ASSET_PATHS.map(preloadImage),
-    ]).then(() => {
-      if (!isCancelled) setAreContentAssetsReady(true);
-    });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, []);
 
   const { allSuccess, hasError, firstErrorMessage } = getVerificationStatus(
     currentDocument,
@@ -110,8 +56,6 @@ export function VerificationCenter({
       : allSuccess
         ? "success"
         : "verifying";
-  const isContentReady = status !== "verifying" && areContentAssetsReady;
-
   const errorMsg = hasError ? firstErrorMessage : undefined;
 
   const getStepStatusValue = (
@@ -141,7 +85,7 @@ export function VerificationCenter({
 
   return (
     <div
-      className={`tinfoil-verification-theme flex h-full w-full flex-col bg-background text-foreground ${
+      className={`tinfoil-verification-theme flex h-full min-h-0 w-full flex-col overflow-hidden bg-background text-foreground ${
         isDarkMode ? "dark" : ""
       }`}
       data-theme={isDarkMode ? "dark" : "light"}
@@ -152,19 +96,15 @@ export function VerificationCenter({
           status={isLoading ? "verifying" : status}
         />
       )}
-      {!isContentReady ? (
-        <VerificationLoadingState />
-      ) : (
-        <VerificationInitialState
-          isDarkMode={isDarkMode}
-          verificationDocument={currentDocument}
-          status={status}
-          errorMessage={errorMsg}
-          stepStatuses={stepStatuses}
-          showHeader={false}
-          type={type}
-        />
-      )}
+      <VerificationInitialState
+        isDarkMode={isDarkMode}
+        verificationDocument={currentDocument}
+        status={status}
+        errorMessage={errorMsg}
+        stepStatuses={stepStatuses}
+        showHeader={false}
+        type={type}
+      />
     </div>
   );
 }

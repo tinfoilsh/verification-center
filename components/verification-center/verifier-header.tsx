@@ -1,7 +1,6 @@
 import { LuX } from 'react-icons/lu'
 import { TfTin, TfTinSad } from '@tinfoilsh/tinfoil-icons'
 import { FONT_FAMILIES } from '@/lib/constants/verification'
-import { TINFOIL_DIVIDER_BAND, TINFOIL_DIVIDER_MOTIF_DARK, TINFOIL_DIVIDER_MOTIF_LIGHT } from '@/lib/constants/colors'
 
 type VerifierHeaderProps = {
   isDarkMode?: boolean
@@ -24,10 +23,10 @@ export function VerifierHeader({
 }: VerifierHeaderProps) {
   return (
     <div
-      className={`relative z-20 flex flex-shrink-0 items-center justify-center px-4 bg-surface-card ${className}`}
+      className={`relative z-20 flex flex-none items-center justify-center bg-surface-card px-16 ${className}`}
       style={{
         minHeight: '72px',
-        paddingTop: '12px',
+        paddingTop: 'max(12px, env(safe-area-inset-top))',
         paddingBottom: '12px',
       }}
     >
@@ -96,24 +95,8 @@ export function VerifierHeader({
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -bottom-[9px] h-[9px]"
-        style={{ backgroundColor: isDarkMode ? 'hsl(var(--surface-card))' : TINFOIL_DIVIDER_BAND }}
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundColor: isDarkMode ? TINFOIL_DIVIDER_MOTIF_LIGHT : TINFOIL_DIVIDER_MOTIF_DARK,
-            maskImage: 'url(/icons/chevron-band-divider.svg)',
-            maskPosition: 'left top',
-            maskRepeat: 'repeat-x',
-            maskSize: '20px 12px',
-            WebkitMaskImage: 'url(/icons/chevron-band-divider.svg)',
-            WebkitMaskPosition: 'left top',
-            WebkitMaskRepeat: 'repeat-x',
-            WebkitMaskSize: '20px 12px',
-          }}
-        />
-      </div>
+        className="pointer-events-none absolute inset-x-0 -bottom-[9px] h-[9px] bg-gray-200"
+      />
     </div>
   )
 }
