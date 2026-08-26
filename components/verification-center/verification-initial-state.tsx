@@ -135,10 +135,10 @@ export function VerificationInitialState({
   const activeTabs = isVerifying ? [] : selectedTabs
 
   return (
-    <div className="relative flex h-full w-full flex-col bg-surface-background">
+    <div className="relative flex min-h-0 w-full flex-1 flex-col overflow-hidden bg-surface-background">
       {showHeader && <VerifierHeader isDarkMode={isDarkMode} status={status} />}
 
-      <div className="relative w-full flex-1 overflow-y-auto">
+      <div className="relative min-h-0 w-full flex-1 touch-pan-y overflow-y-auto overscroll-y-contain">
         <TextureGrid className="z-0" />
 
 
