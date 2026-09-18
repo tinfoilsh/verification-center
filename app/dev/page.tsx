@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { VerificationCenter } from "@/components/verification-center/verifier";
 import { TinfoilBadge } from "@/components/tinfoil-badge";
+import { radius } from "@/lib/radius";
 import {
   mockFailureDocument,
   mockSuccessDocument,
@@ -319,7 +320,7 @@ export default function DevPage() {
               position: "relative",
               width: "min(540px, 90vw)",
               height: "min(80vh, 680px)",
-              borderRadius: 8,
+              borderRadius: radius.base,
               overflow: "hidden",
               background: isDarkMode ? "#0b0f16" : "#ffffff",
               boxShadow:
@@ -348,7 +349,7 @@ export default function DevPage() {
           style={{
             width: "min(720px, 100%)",
             height: "100%",
-            borderRadius: 8,
+            borderRadius: radius.base,
             overflow: "hidden",
           }}
         >

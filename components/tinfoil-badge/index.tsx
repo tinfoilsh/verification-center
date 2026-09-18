@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import { PiSpinner } from 'react-icons/pi'
 import { TfLock as LockIcon } from '@tinfoilsh/tinfoil-icons'
+import { radius } from '@/lib/radius'
 import type { VerificationDocument } from '@/lib/types/verification'
 
 type BadgeState = 'idle' | 'loading' | 'success' | 'error'
@@ -108,7 +109,7 @@ export function TinfoilBadge({
           boxSizing: 'border-box',
           borderWidth: '1px',
           borderStyle: 'solid',
-          borderRadius: '6px',
+          borderRadius: radius.control,
           fontSize: '13px',
           fontWeight: 'normal',
           backgroundColor,
@@ -205,7 +206,7 @@ export function TinfoilBadge({
         boxSizing: 'border-box',
         borderWidth: '1px',
         borderStyle: 'solid',
-        borderRadius: '6px',
+        borderRadius: radius.control,
         fontSize: '12px',
         fontWeight: 'normal',
         backgroundColor,

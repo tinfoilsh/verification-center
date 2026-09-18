@@ -35,6 +35,10 @@
 }
 
 @layer base {
+  :root {
+    --radius: 0.75rem;
+  }
+
   .tinfoil-verification-theme {
     color-scheme: light;
 
@@ -44,12 +48,15 @@
     --color-accent-dark-darker: 180 100% 10%;
     --color-accent-light: 163 45.9% 59.4%;
     --color-accent-light-darker: 163 37% 53%;
+    --color-accent-blue: 16 52 125;
+    --color-accent-blue-hover: 31 69 143;
 
     --surface-background: 0 0% 100%;
     --surface-secondary-background: 0 0% 100%;
     --surface-secondary: 240 23.8% 95.9%;
     --surface-card: 0 0% 100%;
     --surface-sidebar: 0 0% 100%;
+    --surface-sidebar-panel: 40 15% 92%;
     --surface-sidebar-button: 0 0% 100%;
     --surface-sidebar-button-hover: 218 12% 92%;
     --surface-settings: 240 23.8% 95.9%;
@@ -105,18 +112,20 @@
     --chart-3: 198 68.4% 40%;
     --chart-4: 210 34% 18%;
     --chart-5: 221 39.3% 11%;
-    --radius: 0.5rem;
   }
 
   .tinfoil-verification-theme[data-theme='dark'],
   .tinfoil-verification-theme.dark {
     color-scheme: dark;
+    --color-accent-blue: 147 197 253;
+    --color-accent-blue-hover: 191 219 254;
 
     --surface-background: 0 0% 7.1%;
     --surface-secondary-background: 0 0% 7.1%;
     --surface-secondary: 240 2.2% 17.6%;
     --surface-card: 240 3.4% 11.4%;
     --surface-sidebar: 0 0% 7.1%;
+    --surface-sidebar-panel: 0 0% 11.7%;
     --surface-sidebar-button: 240 2.2% 17.6%;
     --surface-sidebar-button-hover: 240 2.2% 22%;
     --surface-settings: 0 0% 7.1%;

@@ -127,6 +127,14 @@ import { VerificationCenter } from '@/components/verification-center/verifier'
 - `isDarkMode?: boolean` - Dark mode toggle (default: `true`)
 - `showHeader?: boolean` - Whether to show the header (default: `true`)
 
+## Browser tests
+
+Run `npx playwright install chromium` once, then `npm test`. The tests start an
+isolated development server on port 3003 with its own `.next-playwright` build
+directory, leaving any running development server's `.next` cache untouched.
+To use an existing Chrome installation,
+run `PLAYWRIGHT_CHROMIUM_CHANNEL=chrome npm test` instead.
+
 ## Deployment
 
 Production: <https://verification-center.tinfoil.sh>

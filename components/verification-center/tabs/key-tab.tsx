@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_FAMILIES, STATUS_BADGE_FONT_SIZE } from '@/lib/constants/verification'
-import { TINFOIL_ACCENT_LIGHT, TINFOIL_ACCENT_LIGHT_DARKER } from '@/lib/constants/colors'
 import { TfKey as KeyIcon } from '@tinfoilsh/tinfoil-icons'
 import type { VerificationDocument } from '@/lib/types/verification'
 import type { StepStatus } from './types'
@@ -120,12 +119,10 @@ export function KeyTab({
             </div>
             {stepStatus === 'success' && (
               <div
-                className="flex flex-shrink-0 items-center gap-0.5 rounded-site-control px-1.5 py-0.5 font-medium"
+                className="flex flex-shrink-0 items-center gap-0.5 rounded-site-control bg-brand-accent-blue/10 px-1.5 py-0.5 font-medium text-brand-accent-blue"
                 style={{
                   fontFamily: FONT_FAMILIES.AEONIK_FONO,
                   fontSize: STATUS_BADGE_FONT_SIZE,
-                  color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
-                  backgroundColor: isDarkMode ? 'rgba(104, 199, 172, 0.15)' : 'rgba(0, 68, 68, 0.08)'
                 }}
               >
                 Attested <span>✓</span>
@@ -189,9 +186,8 @@ export function KeyTab({
                 href="https://docs.tinfoil.sh/resources/ehbp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 font-medium text-brand-accent-blue transition-colors hover:text-brand-accent-blue-hover"
                 style={{
-                  color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_LIGHT_DARKER,
                   fontFamily: FONT_FAMILIES.AEONIK_FONO,
                   fontSize: '12px'
                 }}
