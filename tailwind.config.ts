@@ -79,6 +79,8 @@ const config: Config = {
           'accent-dark-darker': 'hsl(var(--color-accent-dark-darker) / <alpha-value>)',
           'accent-light': 'hsl(var(--color-accent-light) / <alpha-value>)',
           'accent-light-darker': 'hsl(var(--color-accent-light-darker) / <alpha-value>)',
+          'accent-blue': 'rgb(var(--color-accent-blue) / <alpha-value>)',
+          'accent-blue-hover': 'rgb(var(--color-accent-blue-hover) / <alpha-value>)',
         },
         surface: {
           background: 'hsl(var(--surface-background) / <alpha-value>)',

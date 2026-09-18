@@ -264,8 +264,8 @@ export function VerificationInitialState({
                   disabled={isVerifying}
                   aria-expanded={isActive}
                   aria-controls={`verification-step-${tab.id}`}
-                  className={`relative z-10 mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-xl border bg-surface-sidebar px-4 py-3 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-strong ${
-                    isVerifying ? 'cursor-default border-transparent' : isActive ? 'border-border-subtle' : 'border-transparent hover:border-border-subtle'
+                  className={`relative z-10 mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-site-lg border border-border-subtle bg-surface-sidebar px-4 py-3 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-strong ${
+                    isVerifying ? 'cursor-default' : 'hover:border-border-strong'
                   }`}
                 >
                   <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-site-control ${
@@ -332,7 +332,7 @@ export function VerificationInitialState({
                       transition={{
                         height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
                       }}
-                      className="-mt-3 overflow-hidden rounded-t-xl bg-surface-sidebar-panel pt-3"
+                      className="-mt-3 overflow-hidden rounded-t-site-lg bg-surface-sidebar-panel pt-3"
                     >
                       <div className="p-4">
                         {renderTabContent(tab.id)}

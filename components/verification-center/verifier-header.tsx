@@ -23,7 +23,7 @@ export function VerifierHeader({
 }: VerifierHeaderProps) {
   return (
     <div
-      className={`relative z-20 flex flex-none items-center justify-center bg-surface-card px-16 ${className}`}
+      className={`relative z-20 flex flex-none items-center justify-center border-b border-border-subtle bg-surface-card px-16 ${className}`}
       style={{
         minHeight: '72px',
         paddingTop: 'max(12px, env(safe-area-inset-top))',
@@ -93,10 +93,6 @@ export function VerifierHeader({
         </button>
       )}
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -bottom-[9px] h-[9px] bg-gray-200"
-      />
     </div>
   )
 }

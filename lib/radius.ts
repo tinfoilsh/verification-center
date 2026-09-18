@@ -1,4 +1,4 @@
-const BASE_RADIUS = '0.25rem'
+const BASE_RADIUS = 'var(--radius)'
 
 export const radius = {
   sm: BASE_RADIUS,
