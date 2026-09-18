@@ -1,6 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
 const TEST_PORT = 3003;
+const TEST_BUILD_DIR = ".next-playwright";
 const baseURL = `http://127.0.0.1:${TEST_PORT}`;
 
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   webServer: {
+    env: { NEXT_BUILD_DIR: TEST_BUILD_DIR },
     command: `npx next dev --port ${TEST_PORT}`,
     url: baseURL,
     reuseExistingServer: false,
