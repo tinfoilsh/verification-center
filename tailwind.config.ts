@@ -85,6 +85,7 @@ const config: Config = {
           secondary: 'hsl(var(--surface-secondary) / <alpha-value>)',
           'secondary-background': 'hsl(var(--surface-secondary-background) / <alpha-value>)',
           sidebar: 'hsl(var(--surface-sidebar) / <alpha-value>)',
+          'sidebar-panel': 'hsl(var(--surface-sidebar-panel) / <alpha-value>)',
           'sidebar-button': 'hsl(var(--surface-sidebar-button) / <alpha-value>)',
           'sidebar-button-hover': 'hsl(var(--surface-sidebar-button-hover) / <alpha-value>)',
           settings: 'hsl(var(--surface-settings) / <alpha-value>)',

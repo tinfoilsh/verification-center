@@ -143,10 +143,10 @@ export function VerificationInitialState({
 
 
         {/* Main content - z-10, above circuit lines */}
-        <div className="relative z-10 space-y-3 px-3 pb-6 pt-6 sm:space-y-4 sm:px-4 sm:pt-7">
+        <div className="relative z-10 space-y-3 pb-6 pt-6 sm:space-y-4 sm:pt-7">
         {/* Status Banner */}
         <div
-          className={`flex flex-col justify-center gap-3 rounded-site-lg border p-4 ${
+          className={`mx-3 flex flex-col justify-center gap-3 rounded-site-lg border p-4 sm:mx-4 ${
             status === 'error'
               ? isDarkMode
                 ? 'text-red-400'
@@ -242,9 +242,9 @@ export function VerificationInitialState({
 
         {/* Verification Steps */}
         <div
-          className="overflow-hidden rounded-site-lg border border-border-subtle bg-surface-card"
+          className="space-y-2"
         >
-          {visibleTabs.map((tab, index) => {
+          {visibleTabs.map((tab) => {
             const stepStatus = getStepStatus(tab.id)
             const isActive = activeTabs.includes(tab.id)
             const successColor = isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
@@ -252,7 +252,7 @@ export function VerificationInitialState({
             return (
               <div
                 key={tab.id}
-                className={index === 0 ? '' : 'border-t border-border-subtle'}
+                className="relative"
               >
                 <button
                   type="button"
@@ -264,8 +264,8 @@ export function VerificationInitialState({
                   disabled={isVerifying}
                   aria-expanded={isActive}
                   aria-controls={`verification-step-${tab.id}`}
-                  className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors duration-150 ${
-                    isVerifying ? 'cursor-default' : isDarkMode ? 'hover:bg-white/[0.03]' : 'hover:bg-gray-50'
+                  className={`relative z-10 mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-xl border bg-surface-sidebar px-4 py-3 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-strong ${
+                    isVerifying ? 'cursor-default border-transparent' : isActive ? 'border-border-subtle' : 'border-transparent hover:border-border-subtle'
                   }`}
                 >
                   <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-site-control ${
@@ -326,16 +326,15 @@ export function VerificationInitialState({
                   {isActive && (
                     <motion.div
                       id={`verification-step-${tab.id}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                      initial={{ height: 0 }}
+                      animate={{ height: 'auto' }}
+                      exit={{ height: 0 }}
                       transition={{
-                        height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
-                        opacity: { duration: 0.15, ease: [0.4, 0, 0.2, 1] }
+                        height: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
                       }}
-                      className="overflow-hidden"
+                      className="-mt-3 overflow-hidden rounded-t-xl bg-surface-sidebar-panel pt-3"
                     >
-                      <div className="border-t border-border-subtle p-4">
+                      <div className="p-4">
                         {renderTabContent(tab.id)}
                       </div>
                     </motion.div>
