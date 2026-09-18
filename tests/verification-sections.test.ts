@@ -31,6 +31,10 @@ const PANEL_BACKGROUNDS = {
   dark: "rgb(30, 30, 30)",
 };
 const VIEWPORT_HEIGHT = 800;
+const EXPANDED_TYPOGRAPHY = {
+  body: { size: "14px", lineHeight: "21px" },
+  detail: { size: "12px", lineHeight: "18px" },
+};
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -312,4 +316,61 @@ for (const mode of ["Modal", "Embedded"]) {
     await expect(container).toHaveCSS("border-radius", OVERRIDE_RADIUS);
     await expect(badge).toHaveCSS("border-radius", OVERRIDE_RADIUS);
   });
+}
+
+async function expectTypography(
+  locator: Locator,
+  role: keyof typeof EXPANDED_TYPOGRAPHY,
+) {
+  await expect(locator).toHaveCSS("font-size", EXPANDED_TYPOGRAPHY[role].size);
+  await expect(locator).toHaveCSS(
+    "line-height",
+    EXPANDED_TYPOGRAPHY[role].lineHeight,
+  );
+}
+
+for (const theme of ["light", "dark"] as const) {
+  for (const rootSize of [14, 16]) {
+    test(`uses matching typography across expanded sections in ${theme} mode with a ${rootSize}px root`, async ({
+      page,
+    }) => {
+      await showDocument(page, mockSuccessDocument, theme === "dark");
+      await page.evaluate((size) => {
+        document.documentElement.style.fontSize = `${size}px`;
+      }, rootSize);
+
+      for (const section of [
+        { id: "chip", fullValueLabel: "TLS public key fingerprint" },
+        { id: "key", fullValueLabel: "Full HPKE Public Key" },
+        { id: "code", fullValueLabel: "Full Code Fingerprint" },
+      ]) {
+        await page
+          .locator(`button[aria-controls="verification-step-${section.id}"]`)
+          .click();
+        const panel = page.locator(`#verification-step-${section.id}`);
+        await expectTypography(panel.locator("h3"), "body");
+        await expectTypography(panel.locator("h3 + p"), "body");
+        await expectTypography(
+          panel.getByRole("button", { name: "Show additional info" }),
+          "body",
+        );
+        await expectTypography(panel.locator(".font-mono").first(), "detail");
+
+        await expandAdditionalInfo(panel);
+        const fullValueLabel = panel.getByText(section.fullValueLabel, {
+          exact: true,
+        });
+        await expectTypography(fullValueLabel, "detail");
+        await expectTypography(
+          fullValueLabel.locator("..").locator(".font-mono"),
+          "detail",
+        );
+        for (const detail of await panel
+          .locator(".overflow-hidden.space-y-3 p, .overflow-hidden.space-y-3 a")
+          .all()) {
+          await expectTypography(detail, "detail");
+        }
+      }
+    });
+  }
 }

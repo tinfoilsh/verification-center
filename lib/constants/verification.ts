@@ -3,4 +3,9 @@ export const FONT_FAMILIES = {
   AEONIK_FONO: 'Aeonik Fono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
 } as const
 
+export const VERIFICATION_FONT_SIZES = {
+  body: '14px',
+  detail: '12px',
+} as const
+
 export const STATUS_BADGE_FONT_SIZE = '10px'
