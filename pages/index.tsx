@@ -1,9 +1,9 @@
-'use client'
-
+import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { VerificationCenter, type VerificationDocument } from '@/components/verification-center/verifier'
 
-export default function VerificationCenterPage() {
+function VerificationCenterPage() {
   const [verificationDocument, setVerificationDocument] = useState<VerificationDocument | null>(null)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
@@ -34,6 +34,10 @@ export default function VerificationCenterPage() {
   }, [])
 
   return (
+    <>
+    <Head>
+      <title>Tinfoil Verification Center</title>
+    </Head>
     <div className="h-screen h-[100dvh] w-full overflow-hidden">
       <VerificationCenter
         verificationDocument={verificationDocument ?? undefined}
@@ -42,5 +46,12 @@ export default function VerificationCenterPage() {
         type={type}
       />
     </div>
+    </>
   )
 }
+
+// Rendered on the client only. Components set styles through React style
+// props, which the browser applies via the CSSOM. Server-rendering them
+// would put style="" attributes in the HTML, which style-src 'self'
+// blocks and hydration never re-applies.
+export default dynamic(() => Promise.resolve(VerificationCenterPage), { ssr: false })

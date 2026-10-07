@@ -1,15 +1,7 @@
-:root {
-  color-scheme: light;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #ffffff;
-  color: #111827;
-}
-
+/* Dev page only. Every rule is scoped under .app so nothing leaks into the embed at /. */
 .app {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   display: flex;
   min-height: 100vh;
   background: #ffffff;
@@ -58,7 +50,7 @@ body {
   font-weight: 600;
 }
 
-label {
+.app label {
   display: flex;
   align-items: center;
   gap: 8px;

@@ -3,7 +3,6 @@ const child_process = require('child_process');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  distDir: process.env.NEXT_BUILD_DIR || '.next',
   outputFileTracingRoot: require('path').join(__dirname),
   output: 'export',
 
