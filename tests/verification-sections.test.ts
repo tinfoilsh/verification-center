@@ -4,7 +4,7 @@ import {
   mockFailureDocument,
   mockSuccessDocument,
   mockTDXSuccessDocument,
-} from "../app/dev/fake-document";
+} from "../dev/fake-document";
 import type { VerificationDocument } from "../lib/types/verification";
 
 const HEADER_INSET_PX = 8;
@@ -36,6 +36,12 @@ const EXPANDED_TYPOGRAPHY = {
   detail: { size: "12px", lineHeight: "18px" },
 };
 
+declare global {
+  interface Window {
+    __cspViolations: string[];
+  }
+}
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     window.addEventListener("message", (event) => {
@@ -43,7 +49,19 @@ test.beforeEach(async ({ page }) => {
         document.documentElement.dataset.verifierReady = "true";
       }
     });
+    // The pages are served with the production CSP (scripts/serve-export.js).
+    // Any inline script or style the policy blocks lands here and fails the test.
+    window.__cspViolations = [];
+    document.addEventListener("securitypolicyviolation", (event) => {
+      window.__cspViolations.push(
+        `${event.violatedDirective} blocked ${event.blockedURI} at ${event.sourceFile}:${event.lineNumber} ${event.sample}`,
+      );
+    });
   });
+});
+
+test.afterEach(async ({ page }) => {
+  await expect(page.evaluate(() => window.__cspViolations)).resolves.toEqual([]);
 });
 
 async function showDocument(
@@ -67,6 +85,12 @@ async function showDocument(
     page.locator('button[aria-controls="verification-step-chip"]'),
   ).toBeEnabled();
 }
+
+test("serves the 404 page under the CSP", async ({ page }) => {
+  const response = await page.goto("/missing");
+  expect(response?.status()).toBe(404);
+  await expect(page.locator("main")).toContainText("404");
+});
 
 for (const theme of ["light", "dark"] as const) {
   for (const width of [320, 420]) {

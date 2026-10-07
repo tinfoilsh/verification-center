@@ -1,5 +1,4 @@
-"use client";
-
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
 import { VerificationCenter } from "@/components/verification-center/verifier";
 import { TinfoilBadge } from "@/components/tinfoil-badge";
@@ -11,8 +10,7 @@ import {
   mockCertificateHashFailureDocument,
   mockOtherErrorDocument,
   mockEnclaveFailureDocument,
-} from "./fake-document";
-import "./app.css";
+} from "../dev/fake-document";
 
 type DisplayMode = "sidebar" | "modal" | "embedded";
 type MockOutcome =
@@ -24,7 +22,7 @@ type MockOutcome =
   | "enclave-failure"
   | "loading";
 
-export default function DevPage() {
+function DevPage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [displayMode, setDisplayMode] = useState<DisplayMode>("sidebar");
   const [isVerifierOpen, setIsVerifierOpen] = useState(true);
@@ -363,3 +361,6 @@ export default function DevPage() {
     </div>
   );
 }
+
+// Client-only for the same reason as pages/index.tsx.
+export default dynamic(() => Promise.resolve(DevPage), { ssr: false });

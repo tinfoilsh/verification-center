@@ -6,14 +6,17 @@ Next.js application for the Tinfoil verification center, providing an iframe-emb
 
 ```text
 tinfoil-verification-center/
-├── app/                          # Next.js app directory
-│   ├── page.tsx                  # Main iframe page
-│   ├── dev/                      # Development playground
-│   │   ├── page.tsx             # Interactive demo page
-│   │   ├── fake-document.ts     # Mock verification data
-│   │   └── app.css              # Demo page styles
-│   ├── globals.css              # Global styles and theme
-│   └── layout.tsx               # Root layout
+├── pages/                        # Next.js Pages Router (static export, no inline scripts)
+│   ├── index.tsx                 # Main iframe page
+│   ├── dev.tsx                   # Interactive demo page
+│   ├── 404.tsx                   # Not-found page without inline styles
+│   ├── _app.tsx                  # Global stylesheet imports
+│   └── _document.tsx             # HTML shell and preloads
+├── dev/                          # Demo page assets
+│   ├── fake-document.ts          # Mock verification data
+│   └── dev.css                   # Demo page styles, scoped under .app
+├── styles/
+│   └── globals.css               # Global styles and theme
 ├── components/                   # React components
 │   ├── verification-center/     # Verification center components
 │   │   ├── verifier.tsx         # Main component

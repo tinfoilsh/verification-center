@@ -13,13 +13,23 @@ env:
   PROD_FLAG: ${{ startsWith(github.ref, 'refs/tags/') && '--prod' || '' }}
   VERSION: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || github.sha }}
 
-# Possible improvements:
-# WEBCAT supports different CSPS for different paths. As different HTMl files
-# have their own inline scripts, we could pin each CSP hash to its own
-# page only.
-
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # Builds the export and runs the suite against it under the production
+      # CSP from webcat/webcat.config.json; any inline script or style fails.
+      - run: npm test
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -44,25 +54,6 @@ jobs:
 
       - name: List Project Artifacts
         run: find ${{ env.VERCEL_OUTPUT }}
-
-      # This is because Vercel builds always have generated inline scripts
-      # and WEBCAT allows inline scripts only via hashes
-      - name: Generate inline CSP hashes
-        id: csp
-        run: |
-          HASHES=$(node webcat/gen-csp-hashes.js ${{ env.VERCEL_OUTPUT }}/static/)
-          echo "CSP hashes: $HASHES"
-          echo "hashes=$HASHES" >> $GITHUB_OUTPUT
-
-      # We should then populate the config for deployment with the generated hashes
-      - name: Populate CSP in Vercel config.json
-        run: |
-          sed -i "s|\${HASHES_PLACEHOLDER}|${{ steps.csp.outputs.hashes }}|g" ${{ env.VERCEL_OUTPUT }}/config.json
-
-      # And the WEBCAT config to generate the manifest
-      - name: Populate CSP in webcat.config.json
-        run: |
-          sed -i "s|\${HASHES_PLACEHOLDER}|${{ steps.csp.outputs.hashes }}|g" webcat/webcat.config.json
 
       - name: Populate version in webcat.config.json
         run: sed -i "s|\${VERSION_PLACEHOLDER}|${{ env.VERSION }}|g" webcat/webcat.config.json
