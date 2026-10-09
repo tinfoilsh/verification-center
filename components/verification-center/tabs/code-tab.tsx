@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IoMdFingerPrint } from 'react-icons/io'
+import { TfFingerprint as FingerprintIcon } from '@tinfoilsh/tinfoil-icons'
 import { FaGithub } from 'react-icons/fa6'
 import { FONT_FAMILIES, STATUS_BADGE_FONT_SIZE, VERIFICATION_FONT_SIZES } from '@/lib/constants/verification'
 import type { VerificationDocument } from '@/lib/types/verification'
@@ -56,7 +56,7 @@ export function CodeTab({
           >
             Unverified <span>✗</span>
           </div>
-          <IoMdFingerPrint
+          <FingerprintIcon
             className={`h-5 w-5 flex-shrink-0 ${
               isDarkMode ? 'text-content-secondary' : 'text-gray-400'
             }`}
@@ -104,7 +104,7 @@ export function CodeTab({
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
         }`}
       >
-        <IoMdFingerPrint
+        <FingerprintIcon
           className={`h-5 w-5 flex-shrink-0 ${
             isDarkMode ? 'text-content-secondary' : 'text-gray-400'
           }`}
