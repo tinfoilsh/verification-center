@@ -1,7 +1,7 @@
 import { FONT_FAMILIES } from '@/lib/constants/verification'
 import type { VerificationDocument } from '@/lib/types/verification'
 import type { StepStatus } from './types'
-import { IoMdFingerPrint } from 'react-icons/io'
+import { TfFingerprint as FingerprintIcon } from '@tinfoilsh/tinfoil-icons'
 
 type MeasurementTabProps = {
   isDarkMode?: boolean
@@ -52,7 +52,7 @@ export function MeasurementTab({
             >
               Mismatch <span>✗</span>
             </div>
-            <IoMdFingerPrint
+            <FingerprintIcon
               className={`h-5 w-5 flex-shrink-0 ${
                 isDarkMode ? 'text-content-secondary' : 'text-gray-400'
               }`}
@@ -87,7 +87,7 @@ export function MeasurementTab({
             >
               Mismatch <span>✗</span>
             </div>
-            <IoMdFingerPrint
+            <FingerprintIcon
               className={`h-5 w-5 flex-shrink-0 ${
                 isDarkMode ? 'text-red-400' : 'text-red-600'
               }`}

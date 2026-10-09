@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { IoMdFingerPrint } from 'react-icons/io'
+import { TfFingerprint as FingerprintIcon } from '@tinfoilsh/tinfoil-icons'
 import { FONT_FAMILIES, STATUS_BADGE_FONT_SIZE } from '@/lib/constants/verification'
 import type { VerificationDocument } from '@/lib/types/verification'
 import type { StepStatus } from './types'
@@ -59,7 +59,7 @@ export function ChipTab({
           >
             Unverified <span>✗</span>
           </div>
-          <IoMdFingerPrint
+          <FingerprintIcon
             className={`h-5 w-5 flex-shrink-0 ${
               isDarkMode ? 'text-content-secondary' : 'text-gray-400'
             }`}
@@ -109,7 +109,7 @@ export function ChipTab({
             : 'border-border-subtle bg-surface-card shadow-[0_1px_3px_rgba(0,0,0,0.04)]'
         }`}
       >
-        <IoMdFingerPrint
+        <FingerprintIcon
           className={`h-5 w-5 flex-shrink-0 ${
             isDarkMode ? 'text-content-secondary' : 'text-gray-400'
           }`}
