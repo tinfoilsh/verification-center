@@ -1,143 +1,49 @@
 # Tinfoil Verification Center
 
-Next.js application for the Tinfoil verification center, providing an iframe-embeddable verification UI.
+**Live at:** <https://verification-center.tinfoil.sh>
 
-## Project Structure
+An embeddable iframe that shows users the result of Tinfoil's enclave verification. Tinfoil Chat and third-party apps embed it and feed it the verification document produced by a Tinfoil SDK. See the [Verification center UI guide](https://docs.tinfoil.sh/guides/verification-center) for a full integration.
 
-```text
-tinfoil-verification-center/
-├── pages/                        # Next.js Pages Router (static export, no inline scripts)
-│   ├── index.tsx                 # Main iframe page
-│   ├── dev.tsx                   # Interactive demo page
-│   ├── 404.tsx                   # Not-found page without inline styles
-│   ├── _app.tsx                  # Global stylesheet imports
-│   └── _document.tsx             # HTML shell and preloads
-├── dev/                          # Demo page assets
-│   ├── fake-document.ts          # Mock verification data
-│   └── dev.css                   # Demo page styles, scoped under .app
-├── styles/
-│   └── globals.css               # Global styles and theme
-├── components/                   # React components
-│   ├── verification-center/     # Verification center components
-│   │   ├── verifier.tsx         # Main component
-│   │   ├── verifier-header.tsx  # Header component
-│   │   ├── verifier-footer.tsx  # Footer component
-│   │   ├── verification-initial-state.tsx
-│   │   ├── texture-grid.tsx     # Background texture
-│   │   └── tabs/                # Tab components (key, code, chip, etc.)
-│   ├── tinfoil-badge/           # Tinfoil badge component
-│   └── icons/                   # Icon components
-├── lib/                          # Shared utilities
-│   ├── constants/               # Constants (colors, fonts, etc.)
-│   ├── types/                   # TypeScript types
-│   └── utils/                   # Utility functions
-├── public/                       # Static assets
-│   ├── fonts/                   # Custom fonts
-│   └── icons/                   # SVG icons
-└── tailwind.config.ts
-```
+## iframe contract
 
-## Usage
+URL parameters:
 
-### iframe Integration
+- `darkMode`: `true` or `false` (default `false`)
+- `showHeader`: `true` or `false` (default `true`)
+- `type`: `chat` for AI chat wording, otherwise generic container wording (default)
 
-The verification center is designed to be embedded as an iframe in your application.
+Messages to the iframe:
 
-```html
-<iframe
-  id="tinfoil-verification"
-  src="https://verification-center.tinfoil.sh"
-  style="width: 420px; height: 100vh; border: none;"
-></iframe>
-```
+- `{ type: 'TINFOIL_VERIFICATION_DOCUMENT', document }`: displays `document`, a `VerificationDocument` from the SDK
 
-#### URL Parameters
+Messages from the iframe (posted to the parent with target origin `*`, so check `event.origin`):
 
-- `darkMode` - `true` or `false` (default: `false`)
-- `showHeader` - `true` or `false` (default: `true`)
+- `TINFOIL_VERIFICATION_CENTER_READY`: the iframe is ready to receive a document
+- `TINFOIL_REQUEST_VERIFICATION_DOCUMENT`: the iframe asks for a fresh document
 
-Example:
+## React component
 
-```html
-<iframe
-  src="https://verification-center.tinfoil.sh?darkMode=true&showHeader=false"
-  ...
-></iframe>
-```
+`VerificationCenter` in `components/verification-center/verifier.tsx` takes:
 
-#### postMessage API
-
-**Send verification document to iframe:**
-
-```javascript
-const iframe = document.getElementById('tinfoil-verification')
-
-iframe.contentWindow.postMessage({
-  type: 'TINFOIL_VERIFICATION_DOCUMENT',
-  document: verificationDocument
-}, '*')
-```
-
-**Listen for iframe events:**
-
-```javascript
-window.addEventListener('message', (event) => {
-  if (event.data.type === 'TINFOIL_VERIFICATION_CENTER_READY') {
-    // Iframe is ready, send verification document
-  }
-
-  if (event.data.type === 'TINFOIL_REQUEST_VERIFICATION_DOCUMENT') {
-    // Iframe is requesting verification document
-  }
-})
-```
+- `verificationDocument?: VerificationDocument`: shows a loading state while unset
+- `isDarkMode?: boolean` (default `true`)
+- `showHeader?: boolean` (default `true`)
+- `type?: 'chat' | 'default'` (default `'default'`)
 
 ## Development
 
 ```bash
 npm install
-npm run dev
+npm run dev     # http://localhost:3001, demo playground at /dev
+npx playwright install chromium
+npm test        # builds the static export and tests it under the production CSP
 ```
 
-Visit:
+## Reporting Vulnerabilities
 
-- <http://localhost:3001> - Main iframe page
-- <http://localhost:3001/dev> - Interactive development playground
+Please report security vulnerabilities by either:
 
-## Components
+- Emailing [security@tinfoil.sh](mailto:security@tinfoil.sh)
+- Opening an issue on GitHub on this repository
 
-The verification center is built as a pure React component (`VerificationCenter`) that can be:
-
-- Embedded in iframes (via `/` route)
-- Used directly in React applications
-- Tested in the development playground (via `/dev` route)
-
-### Using in React
-
-```tsx
-import { VerificationCenter } from '@/components/verification-center/verifier'
-
-<VerificationCenter
-  verificationDocument={document}
-  isDarkMode={true}
-  showHeader={true}
-/>
-```
-
-#### Props
-
-- `verificationDocument?: VerificationDocument` - The verification document to display
-- `isDarkMode?: boolean` - Dark mode toggle (default: `true`)
-- `showHeader?: boolean` - Whether to show the header (default: `true`)
-
-## Browser tests
-
-Run `npx playwright install chromium` once, then `npm test`. The tests start an
-isolated development server on port 3003 with its own `.next-playwright` build
-directory, leaving any running development server's `.next` cache untouched.
-To use an existing Chrome installation,
-run `PLAYWRIGHT_CHROMIUM_CHANNEL=chrome npm test` instead.
-
-## Deployment
-
-Production: <https://verification-center.tinfoil.sh>
+We aim to respond to (legitimate) security reports within 24 hours.
