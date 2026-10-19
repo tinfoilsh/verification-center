@@ -26,6 +26,13 @@ When in doubt, look at how similar code in the project handles the same situatio
 - Use `<img>` tag with `src="/icons/icon-name.svg"` or mask-based approach
 - Keep SVG definitions separate from component logic for maintainability
 
+## Content Security Policy
+
+**Never add inline scripts or inline styles to the exported HTML.**
+
+- The site ships as a static export under the fixed CSP in `webcat/webcat.config.json` (`script-src 'self'; style-src 'self'`)
+- `npm test` serves the export under that CSP and fails on violations
+
 ## Performance
 
 **Prioritize initial load and perceived speed.**
