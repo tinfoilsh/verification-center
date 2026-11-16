@@ -52,6 +52,8 @@ const config: Config = {
         primary: {
           DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
           foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
+          hover: 'hsl(var(--primary-hover) / <alpha-value>)',
+          active: 'hsl(var(--primary-active) / <alpha-value>)',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
@@ -72,6 +74,10 @@ const config: Config = {
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',
         ring: 'hsl(var(--ring) / <alpha-value>)',
+        link: {
+          DEFAULT: 'hsl(var(--link) / <alpha-value>)',
+          hover: 'hsl(var(--link-hover) / <alpha-value>)',
+        },
         brand: {
           dark: 'hsl(var(--color-brand-dark) / <alpha-value>)',
           light: 'hsl(var(--color-brand-light) / <alpha-value>)',
@@ -79,10 +85,11 @@ const config: Config = {
           'accent-dark-darker': 'hsl(var(--color-accent-dark-darker) / <alpha-value>)',
           'accent-light': 'hsl(var(--color-accent-light) / <alpha-value>)',
           'accent-light-darker': 'hsl(var(--color-accent-light-darker) / <alpha-value>)',
-          'accent-blue': 'rgb(var(--color-accent-blue) / <alpha-value>)',
-          'accent-blue-hover': 'rgb(var(--color-accent-blue-hover) / <alpha-value>)',
         },
         surface: {
+          canvas: 'hsl(var(--surface-canvas) / <alpha-value>)',
+          raised: 'hsl(var(--surface-raised) / <alpha-value>)',
+          muted: 'hsl(var(--surface-muted) / <alpha-value>)',
           background: 'hsl(var(--surface-background) / <alpha-value>)',
           secondary: 'hsl(var(--surface-secondary) / <alpha-value>)',
           'secondary-background': 'hsl(var(--surface-secondary-background) / <alpha-value>)',
