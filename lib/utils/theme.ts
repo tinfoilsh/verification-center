@@ -33,7 +33,7 @@ export const getMeasurementBorderClasses = (isDarkMode: boolean, isVerified?: bo
     : 'border-border-subtle bg-surface-card text-content-primary'
 
   const statusBorder = isVerified === true
-    ? 'border-emerald-500/50'
+    ? 'border-brand-accent-dark/50 dark:border-brand-accent-light/50'
     : isVerified === false
     ? 'border-red-400/50'
     : ''

@@ -67,12 +67,13 @@ export function TinfoilBadge({
   }, [verificationDocument])
 
   const buttonClass = [
-    'transition-all duration-500 w-full h-full',
+    'tinfoil-verification-theme transition-all duration-500 w-full h-full',
+    isDarkMode ? 'dark' : '',
     computedState === 'success' && isDarkMode
-      ? 'border-emerald-600/30 bg-emerald-600/10 text-emerald-600 hover:bg-emerald-600/20'
+      ? 'border-brand-accent-light/30 bg-brand-accent-light/10 text-brand-accent-light hover:bg-brand-accent-light/20'
       : '',
     computedState === 'success' && !isDarkMode
-      ? 'border-[#004444] bg-[#004444]/10 text-[#004444] hover:bg-[#004444]/20'
+      ? 'border-brand-accent-dark/30 bg-brand-accent-light/10 text-brand-accent-dark hover:bg-brand-accent-light/20'
       : '',
     computedState === 'error' && isDarkMode
       ? 'border-red-600/30 bg-red-600/10 text-red-600 hover:bg-red-600/20'
@@ -84,13 +85,11 @@ export function TinfoilBadge({
       ? 'border-gray-600/30 text-gray-400 hover:bg-gray-600/10'
       : '',
     (computedState === 'idle' || computedState === 'loading') && !isDarkMode
-      ? 'border-[#004444] text-[#004444] hover:bg-gray-100'
+      ? 'border-brand-accent-dark text-brand-accent-dark hover:bg-surface-muted'
       : '',
   ]
     .filter(Boolean)
     .join(' ')
-
-  const backgroundColor = isDarkMode ? '#0b0f16' : '#ffffff'
 
   if (compact) {
     return (
@@ -112,7 +111,6 @@ export function TinfoilBadge({
           borderRadius: radius.control,
           fontSize: '13px',
           fontWeight: 'normal',
-          backgroundColor,
           cursor: computedState === 'loading' ? 'default' : 'pointer',
           minHeight: '32px',
         }}
@@ -209,7 +207,6 @@ export function TinfoilBadge({
         borderRadius: radius.control,
         fontSize: '12px',
         fontWeight: 'normal',
-        backgroundColor,
         cursor: computedState === 'loading' ? 'default' : 'pointer',
       }}
     >
@@ -237,9 +234,7 @@ export function TinfoilBadge({
             style={{
               color:
                 computedState === 'success'
-                  ? isDarkMode
-                    ? '#10b981'
-                    : '#059669'
+                  ? 'currentColor'
                   : computedState === 'error'
                   ? '#ef4444'
                   : isDarkMode

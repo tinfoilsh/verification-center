@@ -119,7 +119,7 @@ export function KeyTab({
             </div>
             {stepStatus === 'success' && (
               <div
-                className="flex flex-shrink-0 items-center gap-0.5 rounded-site-control bg-brand-accent-blue/10 px-1.5 py-0.5 font-medium text-brand-accent-blue"
+                className="flex flex-shrink-0 items-center gap-0.5 rounded-site-control bg-brand-accent-light/20 px-1.5 py-0.5 font-medium text-brand-accent-dark dark:bg-brand-accent-light/10 dark:text-brand-accent-light"
                 style={{
                   fontFamily: FONT_FAMILIES.AEONIK_FONO,
                   fontSize: STATUS_BADGE_FONT_SIZE,
@@ -186,7 +186,7 @@ export function KeyTab({
                 href="https://docs.tinfoil.sh/resources/ehbp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-medium text-brand-accent-blue transition-colors hover:text-brand-accent-blue-hover"
+                className="inline-flex items-center gap-1.5 font-medium text-link transition-colors hover:text-link-hover"
                 style={{
                   fontFamily: FONT_FAMILIES.AEONIK_FONO,
                   fontSize: '12px'

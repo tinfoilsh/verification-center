@@ -13,22 +13,24 @@ const SECTION_RADIUS = "12px";
 const OVERRIDE_RADIUS = "16px";
 const HEADER_DIVIDER_WIDTH = "1px";
 const VERIFICATION_BADGE_LABEL = /^(Attested|Verified)\s*✓$/;
-const BLUE_ACCENTS = {
+const BRAND_ACCENTS = {
   light: {
-    text: "rgb(16, 52, 125)",
-    background: "rgba(16, 52, 125, 0.1)",
-    hover: "rgb(31, 69, 143)",
+    verified: "rgb(0, 68, 68)",
+    background: "rgba(168, 199, 209, 0.2)",
+    link: "rgb(0, 68, 68)",
+    hover: "rgb(0, 51, 51)",
   },
   dark: {
-    text: "rgb(147, 197, 253)",
-    background: "rgba(147, 197, 253, 0.1)",
-    hover: "rgb(191, 219, 254)",
+    verified: "rgb(168, 199, 209)",
+    background: "rgba(168, 199, 209, 0.1)",
+    link: "rgb(168, 154, 203)",
+    hover: "rgb(249, 248, 246)",
   },
 };
 const TRANSPARENT_BORDER = "rgba(0, 0, 0, 0)";
 const PANEL_BACKGROUNDS = {
-  light: "rgb(238, 236, 232)",
-  dark: "rgb(30, 30, 30)",
+  light: "rgb(240, 244, 244)",
+  dark: "rgb(44, 44, 46)",
 };
 const VIEWPORT_HEIGHT = 800;
 const EXPANDED_TYPOGRAPHY = {
@@ -252,10 +254,10 @@ for (const theme of ["light", "dark"] as const) {
         .click();
       const panel = page.locator(`#verification-step-${id}`);
       const badge = panel.getByText(VERIFICATION_BADGE_LABEL);
-      await expect(badge).toHaveCSS("color", BLUE_ACCENTS[theme].text);
+      await expect(badge).toHaveCSS("color", BRAND_ACCENTS[theme].verified);
       await expect(badge).toHaveCSS(
         "background-color",
-        BLUE_ACCENTS[theme].background,
+        BRAND_ACCENTS[theme].background,
       );
       const additionalInfo = panel.getByRole("button", {
         name: "Show additional info",
@@ -266,9 +268,9 @@ for (const theme of ["light", "dark"] as const) {
       const links = await panel.getByRole("link").all();
       expect(links.length).toBeGreaterThan(0);
       for (const link of links) {
-        await expect(link).toHaveCSS("color", BLUE_ACCENTS[theme].text);
+        await expect(link).toHaveCSS("color", BRAND_ACCENTS[theme].link);
         await link.hover();
-        await expect(link).toHaveCSS("color", BLUE_ACCENTS[theme].hover);
+        await expect(link).toHaveCSS("color", BRAND_ACCENTS[theme].hover);
         await page.mouse.move(0, 0);
       }
     }
@@ -311,16 +313,16 @@ for (const theme of ["light", "dark"] as const) {
     ).toBe(false);
   });
 
-  test(`uses theme blue for Intel attestation links in ${theme} mode`, async ({
+  test(`uses brand colors for Intel attestation links in ${theme} mode`, async ({
     page,
   }) => {
     await showDocument(page, mockTDXSuccessDocument, theme === "dark");
     await page.getByRole("button", { name: /Runtime is Isolated/ }).click();
     await expandAdditionalInfo(page.locator("#verification-step-chip"));
     const link = page.getByRole("link", { name: "Intel TDX" });
-    await expect(link).toHaveCSS("color", BLUE_ACCENTS[theme].text);
+    await expect(link).toHaveCSS("color", BRAND_ACCENTS[theme].link);
     await link.hover();
-    await expect(link).toHaveCSS("color", BLUE_ACCENTS[theme].hover);
+    await expect(link).toHaveCSS("color", BRAND_ACCENTS[theme].hover);
   });
 }
 
@@ -332,7 +334,7 @@ for (const mode of ["Modal", "Embedded"]) {
     const badge = page.locator(".app__main").getByRole("button");
     await expect(badge).toHaveCSS("border-radius", SECTION_RADIUS);
     await page.getByLabel(mode, { exact: true }).check();
-    const container = page.locator(".tinfoil-verification-theme").locator("..");
+    const container = page.locator("div.tinfoil-verification-theme").locator("..");
     await expect(container).toHaveCSS("border-radius", SECTION_RADIUS);
     await page.evaluate((radius) => {
       document.documentElement.style.setProperty("--radius", radius);

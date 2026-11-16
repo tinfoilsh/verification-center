@@ -148,25 +148,11 @@ export function VerificationInitialState({
         <div
           className={`mx-3 flex flex-col justify-center gap-3 rounded-site-lg border p-4 sm:mx-4 ${
             status === 'error'
-              ? isDarkMode
-                ? 'text-red-400'
-                : 'text-red-600'
+              ? 'border-red-500/30 bg-surface-raised text-red-600 dark:text-red-400'
               : status === 'verifying'
-                ? isDarkMode
-                  ? 'border-border-subtle bg-gray-800/50 text-white'
-                  : 'border-border-subtle bg-gray-100 text-gray-700'
-                : ''
+                ? 'border-border-subtle bg-surface-raised text-content-secondary'
+                : 'border-brand-accent-dark/30 bg-surface-raised text-brand-accent-dark dark:border-brand-accent-light/30 dark:text-brand-accent-light'
           }`}
-          style={
-            status === 'success' ? {
-              borderColor: isDarkMode ? 'rgba(104, 199, 172, 0.3)' : 'rgba(0, 68, 68, 0.3)',
-              backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
-              color: isDarkMode ? TINFOIL_ACCENT_LIGHT : TINFOIL_ACCENT_DARK
-            } : status === 'error' ? {
-              borderColor: isDarkMode ? 'rgba(239, 68, 68, 0.3)' : 'rgba(239, 68, 68, 0.3)',
-              backgroundColor: isDarkMode ? 'hsl(240, 3.4%, 11.4%)' : 'hsl(0, 0%, 100%)',
-            } : {}
-          }
         >
           <div className="flex flex-col gap-2">
             <p
@@ -264,7 +250,7 @@ export function VerificationInitialState({
                   disabled={isVerifying}
                   aria-expanded={isActive}
                   aria-controls={`verification-step-${tab.id}`}
-                  className={`relative z-10 mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-site-lg border border-border-subtle bg-surface-sidebar px-4 py-3 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-strong ${
+                  className={`relative z-10 mx-2 flex w-[calc(100%-1rem)] items-center gap-3 rounded-site-lg border border-border-subtle bg-surface-sidebar px-4 py-3 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     isVerifying ? 'cursor-default' : 'hover:border-border-strong'
                   }`}
                 >

@@ -1,3 +1,14 @@
+## Colors
+
+Use Midnight Petrol (`#05252E`) with Bone (`#F9F8F6`) text for primary actions
+in light mode, and the inverse in dark mode, through the `primary` tokens.
+Use Deep Teal (`#004444`) for verified states on light surfaces and Steel Mist
+(`#A8C7D1`) on dark surfaces. Links and focus indicators use theme-aware `link`
+and `ring` tokens; dark-mode links use light Twilight (`#A89ACB`).
+Use `surface-canvas` (Bone), `surface-raised` (white), and `surface-muted`
+(`#F0F4F4`), mapped to `#121212`, `#1C1C1E`, and `#2C2C2E` in dark mode.
+Keep theme variables scoped to `.tinfoil-verification-theme` for embedding.
+
 ## Code Style Consistency
 
 **Match the existing style of the codebase.**
