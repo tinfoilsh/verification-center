@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 import { radius } from './lib/radius'
 
 const config: Config = {
@@ -142,6 +143,20 @@ const config: Config = {
     },
   },
   plugins: [
+    plugin(({ addBase, addUtilities, e, theme }) => {
+      addBase({
+        '*, ::before, ::after': { cornerShape: 'squircle' },
+        'input[type="radio"]': { cornerShape: 'round' },
+      })
+      addUtilities(
+        Object.fromEntries(
+          Object.keys(theme('borderRadius')).map((name) => [
+            name === 'DEFAULT' ? '.rounded' : `.rounded-${e(name)}`,
+            { cornerShape: name === 'full' ? 'round' : 'squircle' },
+          ]),
+        ),
+      )
+    }),
     require('@tailwindcss/typography'),
     require('@tailwindcss/container-queries'),
     require('tailwindcss-animate'),
