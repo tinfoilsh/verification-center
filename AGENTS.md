@@ -1,7 +1,7 @@
 ## Colors
 
-Use Midnight Petrol (`#05252E`) with Bone (`#F9F8F6`) text for primary actions
-in light mode, and the inverse in dark mode, through the `primary` tokens.
+Use Steel Mist blue (`#A8C7D1`) with Midnight Petrol (`#05252E`) text for primary
+actions in both themes, through the `primary` tokens.
 Use Deep Teal (`#004444`) for verified states on light surfaces and Steel Mist
 (`#A8C7D1`) on dark surfaces. Links and focus indicators use theme-aware `link`
 and `ring` tokens; dark-mode links use light Twilight (`#A89ACB`).
